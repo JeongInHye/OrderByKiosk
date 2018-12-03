@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OBK.Views
 {
-    class BillForm
+    class BillView
     {
     }
 }
