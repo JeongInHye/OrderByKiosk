@@ -33,6 +33,15 @@ namespace OBK.Modules
                     return GetMainLoad;
                 case "bill":
                     return GetBillLoad;
+                case "choice":
+                    return GetChoiceLoad;
+                case "menu":
+                    return GetMenuLoad;
+                case "pay":
+                    return GetPayLoad;
+                case "user":
+                    return GetUserLoad;
+
                 default:
                     return null;
             }
@@ -58,6 +67,46 @@ namespace OBK.Modules
             //parentForm.ControlBox = false;
             parentForm.Text = "영수증";
             new BillView(parentForm);
+        }
+        private void GetChoiceLoad(object o, EventArgs a)
+        {
+            parentForm.IsMdiContainer = true;
+            parentForm.Size = new Size(800, 600);
+            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.MaximizeBox = false;
+            parentForm.MinimizeBox = false;
+            parentForm.Text = "선택화면";
+            new MainView(parentForm);
+        }
+        private void GetMenuLoad(object o, EventArgs a)
+        {
+            parentForm.IsMdiContainer = true;
+            parentForm.Size = new Size(1000, 800);
+            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.MaximizeBox = false;
+            parentForm.MinimizeBox = false;
+            parentForm.Text = "메뉴";
+            new MainView(parentForm);
+        }
+        private void GetPayLoad(object o, EventArgs a)
+        {
+            parentForm.IsMdiContainer = true;
+            parentForm.Size = new Size(1000, 800);
+            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.MaximizeBox = false;
+            parentForm.MinimizeBox = false;
+            parentForm.Text = "결제";
+            new PayView(parentForm);
+        }
+        private void GetUserLoad(object o, EventArgs a)
+        {
+            parentForm.IsMdiContainer = true;
+            parentForm.Size = new Size(1000, 800);
+            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.MaximizeBox = false;
+            parentForm.MinimizeBox = false;
+            parentForm.Text = "사용자화면";
+            new UserView(parentForm);
         }
 
     }
