@@ -13,10 +13,16 @@ namespace OBK.Modules
     {
         private Form parentForm;
         private object oDB;
-
+        private int mNo=0;
         public Load(Form parentForm)
         {
             this.parentForm = parentForm;
+        }
+
+        public Load(Form parentForm,int mNo)
+        {
+            this.parentForm = parentForm;
+            this.mNo = mNo;
         }
 
         public Load(Form parentForm, object oDB)
@@ -46,7 +52,6 @@ namespace OBK.Modules
                     return null;
             }
         }
-
         
         private void GetMainLoad(object o, EventArgs a)
         {
@@ -69,7 +74,6 @@ namespace OBK.Modules
         }
         private void GetChoiceLoad(object o, EventArgs a)
         {
-            parentForm.IsMdiContainer = true;
             parentForm.Size = new Size(800, 600);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.MaximizeBox = false;
@@ -79,13 +83,12 @@ namespace OBK.Modules
         }
         private void GetMenuLoad(object o, EventArgs a)
         {
-            parentForm.IsMdiContainer = true;
             parentForm.Size = new Size(1000, 800);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
             parentForm.Text = "메뉴";
-            new MainView(parentForm);
+            new MenuView(parentForm,mNo);
         }
         private void GetPayLoad(object o, EventArgs a)
         {
@@ -101,6 +104,7 @@ namespace OBK.Modules
         {
             parentForm.Size = new Size(800, 900);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
             parentForm.Text = "사용자화면";

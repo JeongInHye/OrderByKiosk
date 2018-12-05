@@ -13,6 +13,7 @@ namespace OBK.Modules
     {
         public Form getMdiForm(Form parentForm, Form tagetForm, Control parentDomain)
         {
+            parentForm.IsMdiContainer = true;
             tagetForm.MdiParent = parentForm;
             tagetForm.WindowState = FormWindowState.Maximized;
             tagetForm.FormBorderStyle = FormBorderStyle.None;
@@ -36,6 +37,19 @@ namespace OBK.Modules
         {
             Label label = new Label();
             label.AutoSize = true;
+            label.Location = (Point)hashtable["point"];
+            label.Name = hashtable["name"].ToString();
+            label.Text = hashtable["text"].ToString();
+            label.Font = (Font)hashtable["font"];
+            parentDomain.Controls.Add(label);
+            return label;
+        }
+
+        public Label getLabel1(Hashtable hashtable, Control parentDomain)
+        {
+            Label label = new Label();
+            label.Width = (int)hashtable["width"];
+            label.TextAlign = ContentAlignment.MiddleRight;
             label.Location = (Point)hashtable["point"];
             label.Name = hashtable["name"].ToString();
             label.Text = hashtable["text"].ToString();
