@@ -97,6 +97,8 @@ namespace OBK.Views
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "listView");
+            hashtable.Add("point", new Point(5, 5));
+            hashtable.Add("size", new Size(600, 200));
             //hashtable.Add("click", (MouseEventHandler)listView_click);
             lv = draw.getListView(hashtable, bottom);
 
