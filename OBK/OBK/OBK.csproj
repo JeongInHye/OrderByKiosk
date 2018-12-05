@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="SQL\obkDDL.sql" />
+    <Content Include="SQL\obkDML.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

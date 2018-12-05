@@ -51,10 +51,11 @@ namespace OBK.Modules
         }
         private void GetBillLoad(object sender, EventArgs e)
         {
-            parentForm.Size = new Size(500, 400);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-            parentForm.MaximizeBox = false;
-            parentForm.MinimizeBox = false;
+            parentForm.Size = new Size(500, 500);
+            parentForm.FormBorderStyle = FormBorderStyle.None;
+            //parentForm.MaximizeBox = false;
+            //parentForm.MinimizeBox = false;
+            //parentForm.ControlBox = false;
             parentForm.Text = "영수증";
             new BillView(parentForm);
         }

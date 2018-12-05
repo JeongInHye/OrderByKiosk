@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OBK.Modules;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,8 @@ namespace OBK.Forms
         public BillForm()
         {
             InitializeComponent();
+            Load load = new Load(this);
+            Load += load.GetHandler("bill");
         }
     }
 }

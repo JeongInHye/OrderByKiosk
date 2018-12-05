@@ -35,11 +35,11 @@ namespace OBK.Modules
         public Label getLabel(Hashtable hashtable, Control parentDomain)
         {
             Label label = new Label();
-            label.Size = (Size)hashtable["size"];
+            label.AutoSize = true;
             label.Location = (Point)hashtable["point"];
-            label.BackColor = (Color)hashtable["color"];
             label.Name = hashtable["name"].ToString();
             label.Text = hashtable["text"].ToString();
+            label.Font = (Font)hashtable["font"];
             parentDomain.Controls.Add(label);
             return label;
         }
@@ -87,10 +87,11 @@ namespace OBK.Modules
         public ListView getListView(Hashtable hashtable, Control parentDomain)
         {
             ListView listView = new ListView();
-            listView.Dock = DockStyle.Fill;
             listView.View = View.Details;
             listView.GridLines = true;
             listView.FullRowSelect = true;
+            listView.Location = (Point)hashtable["point"];
+            listView.Size = (Size)hashtable["size"];
             listView.BackColor = (Color)hashtable["color"];
             listView.Name = hashtable["name"].ToString();
             listView.MouseClick += (MouseEventHandler)hashtable["click"];
