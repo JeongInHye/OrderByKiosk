@@ -161,10 +161,16 @@ namespace OBK.Views
 
         private void btn13_click(object sender, EventArgs e)
         {
-            BillForm bf = new BillForm();
-            Point p = new Point((parentForm.Width - bf.Width) / 2, (parentForm.Height - bf.Height) / 2);
-            bf.StartPosition = parentForm.StartPosition;
-            bf.ShowDialog();
+            parentForm.Visible = false;
+            PayForm pf = new PayForm();
+            pf.StartPosition = FormStartPosition.CenterParent;
+            pf.FormClosed += new FormClosedEventHandler(exit_click);
+            pf.Show();
+        }
+
+        private void exit_click(object sender, FormClosedEventArgs e)
+        {
+            parentForm.Close();
         }
 
         private void listView_click(object sender, MouseEventArgs e)

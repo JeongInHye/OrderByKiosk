@@ -64,7 +64,7 @@ namespace OBK.Views
             parentForm.Visible = false;
 
             tagetForm = new UserForm();
-            tagetForm.StartPosition = parentForm.StartPosition;
+            tagetForm.StartPosition = FormStartPosition.CenterParent;
             tagetForm.FormClosed += new FormClosedEventHandler(exit_click);
             tagetForm.Show();
         }

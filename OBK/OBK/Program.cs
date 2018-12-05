@@ -17,7 +17,7 @@ namespace OBK
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PayForm());
+            Application.Run(new MainForm());
         }
     }
 }
