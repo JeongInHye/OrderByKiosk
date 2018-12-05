@@ -57,14 +57,10 @@ namespace OBK.Modules
             parentForm.Text = "메인화면";
             new MainView(parentForm);
         }
-        private void GetBillLoad(object sender, EventArgs e)
+        private void GetBillLoad(object sender, EventArgs e)    // 영수증
         {
             parentForm.Size = new Size(500, 500);
             parentForm.FormBorderStyle = FormBorderStyle.None;
-            //parentForm.MaximizeBox = false;
-            //parentForm.MinimizeBox = false;
-            //parentForm.ControlBox = false;
-            parentForm.Text = "영수증";
             new BillView(parentForm);
         }
         private void GetChoiceLoad(object o, EventArgs a)
@@ -87,14 +83,11 @@ namespace OBK.Modules
             parentForm.Text = "메뉴";
             new MainView(parentForm);
         }
-        private void GetPayLoad(object o, EventArgs a)
+        private void GetPayLoad(object o, EventArgs a)      // 결제
         {
-            parentForm.IsMdiContainer = true;
-            parentForm.Size = new Size(1000, 800);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-            parentForm.MaximizeBox = false;
-            parentForm.MinimizeBox = false;
-            parentForm.Text = "결제";
+            parentForm.IsMdiContainer = false;
+            parentForm.Size = new Size(800, 900);
+            parentForm.FormBorderStyle = FormBorderStyle.None;
             new PayView(parentForm);
         }
         private void GetUserLoad(object o, EventArgs a)
