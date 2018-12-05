@@ -50,8 +50,7 @@ namespace OBK.Modules
         
         private void GetMainLoad(object o, EventArgs a)
         {
-            parentForm.IsMdiContainer = true;
-            parentForm.Size = new Size(1000, 800);
+            parentForm.Size = new Size(500, 400);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
@@ -99,8 +98,7 @@ namespace OBK.Modules
         }
         private void GetUserLoad(object o, EventArgs a)
         {
-            parentForm.IsMdiContainer = true;
-            parentForm.Size = new Size(1000, 800);
+            parentForm.Size = new Size(800, 900);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
