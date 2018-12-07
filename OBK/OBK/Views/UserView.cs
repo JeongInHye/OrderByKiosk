@@ -40,12 +40,12 @@ namespace OBK.Views
             head = draw.getPanel(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(900, 500));
+            hashtable.Add("size", new Size(785, 500));
             hashtable.Add("point", new Point(0, 100));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "menus");
             menu = draw.getPanel(hashtable, parentForm);
-            
+
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(900, 300));
             hashtable.Add("point", new Point(0, 600));

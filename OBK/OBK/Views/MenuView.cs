@@ -31,13 +31,20 @@ namespace OBK.Views
             switch (mNo)
             {
                 case 1:
-                    hashtable = new Hashtable();
-                    hashtable.Add("type", "");
-                    hashtable.Add("size", new Size(100, 50));
-                    hashtable.Add("point", new Point(10, 10));
-                    hashtable.Add("color", Color.Black);
-                    hashtable.Add("name", "head");
-                    panel = draw.getPanel(hashtable, parentForm);
+                    for(int i = 0; i < 4; i++)
+                    {
+                        for(int j = 0; j < 20; j++)
+                        {
+                            hashtable = new Hashtable();
+                            hashtable.Add("type", "");
+                            hashtable.Add("size", new Size(170, 140));
+                            hashtable.Add("point", new Point(20+190*i, 20+160*j));
+                            hashtable.Add("color", Color.BurlyWood);
+                            hashtable.Add("name", "i"+i+"j"+j);
+                            hashtable.Add("click",(EventHandler)menu_click);
+                            panel = draw.getPanel(hashtable, parentForm);
+                        }
+                    }
                     break;
                 case 2:
                     parentForm.BackColor = Color.AliceBlue;
@@ -48,15 +55,13 @@ namespace OBK.Views
                 case 4:
                     parentForm.BackColor = Color.Aqua;
                     break;
-
             }
-            //hashtable = new Hashtable();
-            //hashtable.Add("type", "");
-            //hashtable.Add("size", new Size(100, 50));
-            //hashtable.Add("point", new Point(10, 10));
-            //hashtable.Add("color", Color.Black);
-            //hashtable.Add("name", "head");
-            //panel = draw.getPanel(hashtable, parentForm);
+        }
+
+        private void menu_click(object sender, EventArgs e)
+        {
+            Panel panel = (Panel)sender;
+            MessageBox.Show(panel.Name);
         }
     }
 }

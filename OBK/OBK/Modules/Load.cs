@@ -79,10 +79,11 @@ namespace OBK.Modules
         }
         private void GetMenuLoad(object o, EventArgs a)
         {
-            parentForm.Size = new Size(1000, 800);
+            parentForm.Size = new Size(1000, 300);
             parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
+            parentForm.AutoScroll = true;
             parentForm.Text = "메뉴";
             new MenuView(parentForm,mNo);
         }

@@ -29,6 +29,8 @@ namespace OBK.Modules
             panel.Location = (Point)hashtable["point"];
             panel.BackColor = (Color)hashtable["color"];
             panel.Name = hashtable["name"].ToString();
+            panel.Click += (EventHandler)hashtable["click"];
+            panel.AutoScroll = true;
             parentDomain.Controls.Add(panel);
             return panel;
         }
