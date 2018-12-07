@@ -1,6 +1,6 @@
-﻿namespace OBK.Forms
+﻿namespace OBK.Forms.AdminForm
 {
-    partial class StaffForm
+    partial class MenuEditForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "StaffForm";
+            this.Text = "MenuEditForm";
         }
 
         #endregion

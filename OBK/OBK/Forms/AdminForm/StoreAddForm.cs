@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OBK.Forms
+namespace OBK.Forms.AdminForm
 {
-    public partial class StaffForm : Form
+    public partial class StoreAddForm : Form
     {
-        public StaffForm()
+        public StoreAddForm()
         {
             InitializeComponent();
         }

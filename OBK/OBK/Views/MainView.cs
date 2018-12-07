@@ -1,4 +1,6 @@
 ﻿using OBK.Forms;
+using OBK.Forms.AdminForm;
+using OBK.Forms.StaffForm;
 using OBK.Modules;
 using System;
 using System.Collections;
@@ -65,23 +67,34 @@ namespace OBK.Views
 
             tagetForm = new UserForm();
             tagetForm.StartPosition = FormStartPosition.CenterParent;
-            tagetForm.FormClosed += new FormClosedEventHandler(exit_click);
+            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
             tagetForm.Show();
         }
-        private void exit_click(object sender, FormClosedEventArgs e)
-        {
-            parentForm.Close();
-        }
+        
 
         private void btn2_click(object o, EventArgs a)
         {
-            
+            parentForm.Visible = false;
+
+            tagetForm = new StaffForm();
+            tagetForm.StartPosition = FormStartPosition.CenterParent;
+            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
+            tagetForm.Show();
         }
 
         private void btn3_click(object o, EventArgs a)
         {
-            
+            parentForm.Visible = false;
+
+            tagetForm = new LoginForm();
+            tagetForm.StartPosition = FormStartPosition.CenterParent;
+            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
+            tagetForm.Show();
         }
 
+        private void Exit_click(object sender, FormClosedEventArgs e)
+        {
+            parentForm.Close();
+        }
     }
 }

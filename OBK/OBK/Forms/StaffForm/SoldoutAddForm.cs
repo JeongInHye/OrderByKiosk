@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace OBK.Forms
+namespace OBK.Forms.StaffForm
 {
-    public partial class OrderListForm : Form
+    public partial class SoldoutAddForm : Form
     {
-        public OrderListForm()
+        public SoldoutAddForm()
         {
             InitializeComponent();
         }
