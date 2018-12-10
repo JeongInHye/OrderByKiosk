@@ -71,12 +71,13 @@ namespace OBK.Modules
         }
         private void GetChoiceLoad(object o, EventArgs a)
         {
-            parentForm.Size = new Size(800, 600);
+            parentForm.Size = new Size(500, 600);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
             parentForm.Text = "선택화면";
-            new MainView(parentForm);
+            parentForm.BackColor = Color.White;
+            new ChoiceView(parentForm);
         }
         private void GetMenuLoad(object o, EventArgs a)
         {

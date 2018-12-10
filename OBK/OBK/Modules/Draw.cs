@@ -148,6 +148,8 @@ namespace OBK.Modules
             //pictureBox.Image = ()
             pictureBox.Location = (Point)hashtable["point"];
             pictureBox.Size = (Size)hashtable["size"];
+            pictureBox.BackColor = (Color)hashtable["color"];
+            parentDomain.Controls.Add(pictureBox);
             return pictureBox;
         }
     }
