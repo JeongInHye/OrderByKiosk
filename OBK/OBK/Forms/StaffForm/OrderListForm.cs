@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OBK.Modules;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,8 @@ namespace OBK.Forms.StaffForm
         public OrderListForm()
         {
             InitializeComponent();
+            StaffLoad load = new StaffLoad(this);
+            Load += load.GetHandler("OrderList");
         }
     }
 }

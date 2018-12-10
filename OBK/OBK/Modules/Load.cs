@@ -14,6 +14,7 @@ namespace OBK.Modules
         private Form parentForm;
         private object oDB;
         private int mNo=0;
+
         public Load(Form parentForm)
         {
             this.parentForm = parentForm;

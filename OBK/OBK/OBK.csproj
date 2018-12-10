@@ -191,6 +191,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Modules\Load.cs" />
+    <Compile Include="Modules\StaffLoad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AdminView\AdminMenuView.cs" />
@@ -205,10 +206,10 @@
     <Compile Include="Views\AdminView\StoreAddView.cs" />
     <Compile Include="Views\AdminView\StoreDeleteView.cs" />
     <Compile Include="Views\AdminView\StoreView.cs" />
-    <Compile Include="Views\StaffView\OrderListForm.cs" />
-    <Compile Include="Views\StaffView\SoldoutAddForm.cs" />
-    <Compile Include="Views\StaffView\SoldoutDeleteForm.cs" />
-    <Compile Include="Views\StaffView\StaffForm.cs" />
+    <Compile Include="Views\StaffView\OrderListView.cs" />
+    <Compile Include="Views\StaffView\SoldoutAddView.cs" />
+    <Compile Include="Views\StaffView\SoldoutDeleteView.cs" />
+    <Compile Include="Views\StaffView\StaffView.cs" />
     <Compile Include="Views\UserView\BillView.cs" />
     <Compile Include="Views\UserView\ChoiceView.cs" />
     <Compile Include="Views\MainView.cs" />

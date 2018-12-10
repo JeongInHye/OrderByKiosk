@@ -30,7 +30,7 @@ namespace OBK.Modules
             panel.BackColor = (Color)hashtable["color"];
             panel.Name = hashtable["name"].ToString();
             panel.Click += (EventHandler)hashtable["click"];
-            panel.AutoScroll = true;
+            //panel.AutoScroll = true;
             parentDomain.Controls.Add(panel);
             return panel;
         }
@@ -74,6 +74,21 @@ namespace OBK.Modules
             return button;
         }
 
+        public Button getButton1(Hashtable hashtable, Control parentDomain)
+        {
+            Button button = new Button();
+            button.Size = (Size)hashtable["size"];
+            button.Location = (Point)hashtable["point"];
+            button.BackColor = (Color)hashtable["color"];
+            button.Name = hashtable["name"].ToString();
+            button.Text = hashtable["text"].ToString();
+            button.Font = (Font)hashtable["font"];
+            button.Click += (EventHandler)hashtable["click"];
+            button.Cursor = Cursors.Hand;
+            parentDomain.Controls.Add(button);
+            return button;
+        }
+
         public TextBox getTextBox(Hashtable hashtable, Control parentDomain)
         {
             TextBox textBox = new TextBox();
@@ -110,6 +125,7 @@ namespace OBK.Modules
             listView.Size = (Size)hashtable["size"];
             listView.BackColor = (Color)hashtable["color"];
             listView.Name = hashtable["name"].ToString();
+            //listView.CheckBoxes = true;
             listView.MouseClick += (MouseEventHandler)hashtable["click"];
             parentDomain.Controls.Add(listView);
             return listView;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OBK.Views.StaffView
 {
-    class SoldoutAddForm
+    class SoldoutDeleteView
     {
     }
 }

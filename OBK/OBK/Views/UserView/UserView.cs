@@ -17,7 +17,7 @@ namespace OBK.Views
         private Form parentForm, tagetForm;
         private Hashtable hashtable;
         private Draw draw;
-        private Button btn1, btn2, btn3, btn4,btn11,btn12,btn13;
+        private Button btn1, btn2, btn3, btn4, btn11, btn12, btn13;
         private ListView lv;
         private Label label;
         public UserView(Form parentForm)
@@ -62,7 +62,7 @@ namespace OBK.Views
             hashtable.Add("text", "커피");
             hashtable.Add("click", (EventHandler)btn1_click);
             btn1 = draw.getButton(hashtable, head);
-            
+
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 100));
             hashtable.Add("point", new Point(220, 10));
@@ -98,13 +98,13 @@ namespace OBK.Views
             hashtable.Add("click", (MouseEventHandler)listView_click);
             lv = draw.getListView(hashtable, bottom);
             lv.Columns.Add("", 0, HorizontalAlignment.Center);
-            lv.Columns.Add("메뉴이름",200,HorizontalAlignment.Center);
+            lv.Columns.Add("메뉴이름", 200, HorizontalAlignment.Center);
             lv.Columns.Add("가격", 200, HorizontalAlignment.Center);
             lv.Columns.Add("수량", 200, HorizontalAlignment.Center);
 
             hashtable = new Hashtable();
             hashtable.Add("text", "총 가격 : 30,000원");
-            hashtable.Add("width",610);
+            hashtable.Add("width", 610);
             hashtable.Add("point", new Point(0, 230));
             hashtable.Add("name", "totalprice");
             hashtable.Add("font", new Font("고딕", 18, FontStyle.Bold));
@@ -144,19 +144,19 @@ namespace OBK.Views
             // form 호출
             tagetForm = draw.getMdiForm(parentForm, new MenuForm(1), menu);
             tagetForm.Show();
-            ;
+
         }
 
 
-        
+
         private void btn11_click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btn12_click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btn13_click(object sender, EventArgs e)
@@ -196,7 +196,7 @@ namespace OBK.Views
         private void btn2_click(object sender, EventArgs e)
         {
             btn1.BackColor = Color.LightGray;
-            btn2.BackColor = Color.White; 
+            btn2.BackColor = Color.White;
             btn3.BackColor = Color.LightGray;
             btn4.BackColor = Color.LightGray;
             // form 초기화
@@ -210,7 +210,7 @@ namespace OBK.Views
         {
             btn1.BackColor = Color.LightGray;
             btn2.BackColor = Color.LightGray;
-            btn3.BackColor = Color.White; 
+            btn3.BackColor = Color.White;
             btn4.BackColor = Color.LightGray;
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
@@ -224,7 +224,7 @@ namespace OBK.Views
             btn1.BackColor = Color.LightGray;
             btn2.BackColor = Color.LightGray;
             btn3.BackColor = Color.LightGray;
-            btn4.BackColor = Color.White; 
+            btn4.BackColor = Color.White;
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
