@@ -1,4 +1,5 @@
-﻿using OBK.Modules;
+﻿using OBK.Forms;
+using OBK.Modules;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -62,6 +63,17 @@ namespace OBK.Views
         {
             Panel panel = (Panel)sender;
             MessageBox.Show(panel.Name);
+
+            parentForm.Visible = false;
+            ChoiceForm cf = new ChoiceForm();
+            cf.StartPosition = FormStartPosition.CenterParent;
+            cf.FormClosed += new FormClosedEventHandler(exit_click);
+            cf.ShowDialog();
+        }
+
+        private void exit_click(object sender, FormClosedEventArgs e)
+        {
+            getView();
         }
     }
 }
