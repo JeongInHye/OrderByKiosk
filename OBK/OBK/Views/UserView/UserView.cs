@@ -20,6 +20,7 @@ namespace OBK.Views
         private Button btn1, btn2, btn3, btn4, btn11, btn12, btn13;
         private ListView lv;
         private Label label;
+        private int menuclick=1;
         public UserView(Form parentForm)
         {
             this.parentForm = parentForm;
@@ -142,7 +143,7 @@ namespace OBK.Views
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(1), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
             tagetForm.Show();
 
         }
@@ -181,6 +182,8 @@ namespace OBK.Views
         //=====커피 버튼을 눌렀을때 menu패널에 커피에 대한 메뉴들 출력=====
         private void btn1_click(object sender, EventArgs e)
         {
+            menuclick = 1;
+
             btn1.BackColor = Color.White;
             btn2.BackColor = Color.LightGray;
             btn3.BackColor = Color.LightGray;
@@ -189,12 +192,14 @@ namespace OBK.Views
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(1), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
             tagetForm.Show();
         }
         //=====음료 버튼을 눌렀을때 menu패널에 음료에 대한 메뉴들 출력=====
         private void btn2_click(object sender, EventArgs e)
         {
+            menuclick = 2;
+
             btn1.BackColor = Color.LightGray;
             btn2.BackColor = Color.White;
             btn3.BackColor = Color.LightGray;
@@ -202,12 +207,14 @@ namespace OBK.Views
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(2), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
             tagetForm.Show();
         }
         //=====티 버튼을 눌렀을때 menu패널에 티에 대한 메뉴들 출력=====
         private void btn3_click(object sender, EventArgs e)
         {
+            menuclick = 3;
+
             btn1.BackColor = Color.LightGray;
             btn2.BackColor = Color.LightGray;
             btn3.BackColor = Color.White;
@@ -215,12 +222,14 @@ namespace OBK.Views
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(3), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
             tagetForm.Show();
         }
         //=====디저트 버튼을 눌렀을때 menu패널에 디저트에 대한 메뉴들 출력=====
         private void btn4_click(object sender, EventArgs e)
         {
+            menuclick = 4;
+
             btn1.BackColor = Color.LightGray;
             btn2.BackColor = Color.LightGray;
             btn3.BackColor = Color.LightGray;
@@ -228,7 +237,7 @@ namespace OBK.Views
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(4), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
             tagetForm.Show();
         }
     }

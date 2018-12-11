@@ -71,7 +71,7 @@ namespace OBK.Modules
         }
         private void GetChoiceLoad(object o, EventArgs a)
         {
-            parentForm.Size = new Size(500, 600);
+            parentForm.Size = new Size(450, 550);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
