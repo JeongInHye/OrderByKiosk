@@ -93,6 +93,7 @@ namespace OBK.Modules
             comboBox.DropDownWidth = Convert.ToInt32(hashtable["width"].ToString());
             comboBox.Location = (Point)hashtable["point"];
             comboBox.BackColor = (Color)hashtable["color"];
+            comboBox.Font = (Font)hashtable["font"];
             comboBox.Name = hashtable["name"].ToString();
             comboBox.DisplayMember = "value";
             comboBox.ValueMember = "Key";
