@@ -121,12 +121,26 @@ namespace OBK.Modules
             ListView listView = new ListView();
             listView.View = View.Details;
             listView.GridLines = true;
+            listView.Location = (Point)hashtable["point"];
+            listView.Size = (Size)hashtable["size"];
+            listView.BackColor = (Color)hashtable["color"];
+            listView.Name = hashtable["name"].ToString();
+            listView.CheckBoxes = true;
+            listView.MouseClick += (MouseEventHandler)hashtable["click"];
+            parentDomain.Controls.Add(listView);
+            return listView;
+        }
+
+        public ListView getListView1(Hashtable hashtable, Control parentDomain)
+        {
+            ListView listView = new ListView();
+            listView.View = View.Details;
+            listView.GridLines = true;
             listView.FullRowSelect = true;
             listView.Location = (Point)hashtable["point"];
             listView.Size = (Size)hashtable["size"];
             listView.BackColor = (Color)hashtable["color"];
             listView.Name = hashtable["name"].ToString();
-            //listView.CheckBoxes = true;
             listView.MouseClick += (MouseEventHandler)hashtable["click"];
             parentDomain.Controls.Add(listView);
             return listView;

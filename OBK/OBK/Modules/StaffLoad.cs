@@ -49,6 +49,7 @@ namespace OBK.Modules
         private void GetOrderListLoad(object o, EventArgs a)
         {
             parentForm.Size = new Size(684, 341);
+            parentForm.BackColor = Color.White;
             parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             new OrderListView(parentForm);
@@ -57,19 +58,19 @@ namespace OBK.Modules
         private void GetSoldoutAddLoad(object o, EventArgs a)
         {
             parentForm.Size = new Size(684, 341);
-            parentForm.BackColor = Color.Yellow;
+            parentForm.BackColor = Color.White;
             parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
-            new OrderListView(parentForm);
+            new SoldoutAddView(parentForm);
         }
 
         private void GetSoldoutDelete(object o, EventArgs a)
         {
             parentForm.Size = new Size(684, 341);
-            parentForm.BackColor = Color.Orange;
+            parentForm.BackColor = Color.White;
             parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
-            new OrderListView(parentForm);
+            new SoldoutDeleteView(parentForm);
         }
 
     }
