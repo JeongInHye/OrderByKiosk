@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OBK.Modules;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,8 @@ namespace OBK.Forms.AdminForm
         public MenuEditForm()
         {
             InitializeComponent();
+            AdminLoad load = new AdminLoad(this);
+            Load += load.GetHandler("menuedit");
         }
     }
 }
