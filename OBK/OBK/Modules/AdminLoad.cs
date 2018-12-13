@@ -34,6 +34,8 @@ namespace OBK.Modules
                     return GetAdminMenuLoad;
                 case "login":
                     return GetLoginLoad;
+                case "income":
+                    return GetIncomeLoad;
                 case "menuadd":
                     return GetMenuAddLoad;
                 case "menudelete":
@@ -61,7 +63,7 @@ namespace OBK.Modules
 
         private void GetAdminMenuLoad(object o, EventArgs a)      // 관리메인메뉴
         {
-            parentForm.Size = new Size(800, 900);
+            parentForm.Size = new Size(700, 800);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
@@ -78,6 +80,17 @@ namespace OBK.Modules
             parentForm.BackColor = Color.White;
             new LoginView(parentForm);
         }
+
+        private void GetIncomeLoad(object sender, EventArgs e)
+        {
+            parentForm.Size = new Size(900, 600);
+            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.MaximizeBox = false;
+            parentForm.MinimizeBox = false;
+            parentForm.Text = "매출메인화면";
+            new IncomeView(parentForm);
+        }
+
         private void GetMenuAddLoad(object o, EventArgs a)      // 메뉴추가
         {
             parentForm.Size = new Size(450, 550);
@@ -106,7 +119,7 @@ namespace OBK.Modules
         }
         private void GetMenuIncomeLoad(object o, EventArgs a)      // 메뉴매출화면
         {
-            parentForm.Size = new Size(800, 900);
+            parentForm.Size = new Size(900, 600);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;
@@ -117,7 +130,7 @@ namespace OBK.Modules
         
         private void GetMenuSettingLoad(object o, EventArgs a)      // 메뉴관리
         {
-            parentForm.Size = new Size(800, 900);
+            parentForm.Size = new Size(900, 600);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;
@@ -139,7 +152,7 @@ namespace OBK.Modules
 
         private void GetSoldoutListLoad(object o, EventArgs a)      // 품절목록화면
         {
-            parentForm.Size = new Size(800, 900);
+            parentForm.Size = new Size(900, 600);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;
@@ -172,7 +185,7 @@ namespace OBK.Modules
 
         private void GetStoreLoad(object o, EventArgs a)   // 매장관리메인화면
         {
-            parentForm.Size = new Size(800, 900);
+            parentForm.Size = new Size(900, 600);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;

@@ -1,4 +1,5 @@
-﻿using OBK.Modules;
+﻿using OBK.Forms.AdminForm;
+using OBK.Modules;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace OBK.Views.AdminView
     class AdminMenuView
     {
         private Draw draw;
-        private Form parentForm;
+        private Form parentForm, tagetForm;
         private Label label1, label2, label3, label4, label5, label6;
         private ListView list;
         private Button btn1,btn2,btn3,btn4;
@@ -68,18 +69,47 @@ namespace OBK.Views.AdminView
 
         private void btn1_click(object sender, EventArgs e)
         {
+            parentForm.Visible = false;
+
+            tagetForm = new IncomeForm();
+            tagetForm.StartPosition = FormStartPosition.CenterParent;
+            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
+            tagetForm.Show();
         }
 
-        private void btn2_click(object sender, EventArgs e)
+    private void btn2_click(object sender, EventArgs e)
         {
+            parentForm.Visible = false;
+
+            tagetForm = new MenuSettingForm();
+            tagetForm.StartPosition = FormStartPosition.CenterParent;
+            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
+            tagetForm.Show();
         }
 
         private void btn3_click(object sender, EventArgs e)
         {
+            parentForm.Visible = false;
+
+            tagetForm = new SoldoutListForm();
+            tagetForm.StartPosition = FormStartPosition.CenterParent;
+            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
+            tagetForm.Show();
         }
 
         private void btn4_click(object sender, EventArgs e)
         {
+            parentForm.Visible = false;
+
+            tagetForm = new StoreForm();
+            tagetForm.StartPosition = FormStartPosition.CenterParent;
+            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
+            tagetForm.Show();
+        }
+
+        private void Exit_click(object sender, FormClosedEventArgs e)
+        {
+            parentForm.Close();
         }
     }
 }
