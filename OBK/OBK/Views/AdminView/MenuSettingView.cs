@@ -17,7 +17,7 @@ namespace OBK.Views.AdminView
         private Draw draw;
         private Form parentForm, tagetForm;
         private Button btnAdd, btnEdit, btnDelete,btnMain;
-        private Panel contents;
+        private Panel all,contents;
 
         public MenuSettingView(Form parentForm)
         {
@@ -30,6 +30,14 @@ namespace OBK.Views.AdminView
         private void getView()
         {
             hashtable = new Hashtable();
+            hashtable.Add("type", "");
+            hashtable.Add("size", new Size(900, 600));
+            hashtable.Add("point", new Point(0, 0));
+            hashtable.Add("color", Color.White);
+            hashtable.Add("name", "head");
+            all = draw.getPanel(hashtable, parentForm);
+
+            hashtable = new Hashtable();
             hashtable.Add("size", new Size(140, 100));
             hashtable.Add("point", new Point(20, 20));
             hashtable.Add("color", Color.LightGray);
@@ -37,7 +45,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("text", "메뉴추가");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnAdd_Click);
-            btnAdd = draw.getButton1(hashtable, parentForm);
+            btnAdd = draw.getButton1(hashtable, all);
             btnAdd.BackColor = Color.FromArgb(46, 204, 113);
 
             hashtable = new Hashtable();
@@ -47,8 +55,8 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "btnEdit");
             hashtable.Add("text", "메뉴수정");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
-            hashtable.Add("click", (EventHandler)btnAdd_Click);
-            btnEdit = draw.getButton1(hashtable, parentForm);
+            hashtable.Add("click", (EventHandler)btnEdit_Click);
+            btnEdit = draw.getButton1(hashtable, all);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(140, 100));
@@ -57,8 +65,8 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "btnDelete");
             hashtable.Add("text", "메뉴삭제");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
-            hashtable.Add("click", (EventHandler)btnAdd_Click);
-            btnDelete = draw.getButton1(hashtable, parentForm);
+            hashtable.Add("click", (EventHandler)btnDelete_Click);
+            btnDelete = draw.getButton1(hashtable, all);
 
 
             hashtable = new Hashtable();
@@ -69,7 +77,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("text", "메인화면");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnMain_Click);
-            btnMain = draw.getButton1(hashtable, parentForm);
+            btnMain = draw.getButton1(hashtable, all);
 
             hashtable = new Hashtable();
             hashtable.Add("type", "");
@@ -77,19 +85,19 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(180, 20));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "head");
-            contents = draw.getPanel(hashtable, parentForm);
+            contents = draw.getPanel(hashtable, all);
             contents.BorderStyle = BorderStyle.FixedSingle;
 
-
+            if (tagetForm != null) tagetForm.Dispose();
+            tagetForm = draw.getMdiForm(parentForm, new MenuAddForm(), contents);
+            tagetForm.Show();
         }
-
-        
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             btnAdd.BackColor = Color.FromArgb(46, 204, 113);
-            btnAdd.BackColor = Color.LightGray;
-            btnAdd.BackColor = Color.LightGray;
+            btnEdit.BackColor = Color.LightGray;
+            btnDelete.BackColor = Color.LightGray;
 
             if (tagetForm != null) tagetForm.Dispose();
 
@@ -97,9 +105,34 @@ namespace OBK.Views.AdminView
             tagetForm.Show();
         }
 
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            btnAdd.BackColor = Color.LightGray;
+            btnEdit.BackColor = Color.FromArgb(46, 204, 113);
+            btnDelete.BackColor = Color.LightGray;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            btnAdd.BackColor = Color.LightGray;
+            btnEdit.BackColor = Color.LightGray;
+            btnDelete.BackColor = Color.FromArgb(46, 204, 113);
+        }
+
+     
         private void btnMain_Click(object sender, EventArgs e)
         {
+            parentForm.Visible = false;
+            tagetForm = new AdminMenuForm();
+            tagetForm.StartPosition = parentForm.StartPosition;
+            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
 
+            tagetForm.Show();
+        }
+
+        private void Exit_click(object sender, FormClosedEventArgs e)
+        {
+            parentForm.Close();
         }
     }
 }

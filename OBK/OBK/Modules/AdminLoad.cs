@@ -93,12 +93,9 @@ namespace OBK.Modules
 
         private void GetMenuAddLoad(object o, EventArgs a)      // 메뉴추가
         {
-            parentForm.Size = new Size(450, 550);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-            parentForm.MaximizeBox = false;
-            parentForm.MinimizeBox = false;
-            parentForm.Text = "메뉴추가화면";
-            parentForm.BackColor = Color.White;
+            parentForm.Size = new Size(680, 520);
+            parentForm.FormBorderStyle = FormBorderStyle.None;
+            parentForm.BackColor = Color.BlanchedAlmond;
             new MenuAddView(parentForm);
         }
         private void GetMenuDeleteLoad(object o, EventArgs a)        // 메뉴삭제
@@ -107,7 +104,6 @@ namespace OBK.Modules
             parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
-            parentForm.Text = "메뉴";
             new MenuDeleteView(parentForm);
         }
         private void GetMenuEditLoad(object o, EventArgs a)      // 메뉴수정
@@ -131,11 +127,8 @@ namespace OBK.Modules
         private void GetMenuSettingLoad(object o, EventArgs a)      // 메뉴관리
         {
             parentForm.Size = new Size(900, 600);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
-            parentForm.MaximizeBox = false;
-            parentForm.MinimizeBox = false;
-            parentForm.Text = "메뉴설정메인화면";
             new MenuSettingView(parentForm);
         }
 
