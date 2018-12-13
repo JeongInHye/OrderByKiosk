@@ -68,22 +68,18 @@ namespace OBK.Views.AdminView
 
         private void btn1_click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void btn2_click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void btn3_click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void btn4_click(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
         }
     }
 }
