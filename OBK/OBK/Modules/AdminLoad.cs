@@ -119,8 +119,8 @@ namespace OBK.Modules
         }
         private void GetMenuIncomeLoad(object o, EventArgs a)      // 메뉴매출화면
         {
-            parentForm.Size = new Size(900, 600);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.Size = new Size(680, 520);
+            parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
@@ -141,8 +141,8 @@ namespace OBK.Modules
 
         private void GetMonthlyLoad(object o, EventArgs a)      // 월별매출화면
         {
-            parentForm.Size = new Size(800, 900);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.Size = new Size(680, 520);
+            parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
