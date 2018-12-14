@@ -37,9 +37,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "head");
             all = draw.getPanel(hashtable, parentForm);
-
-
-            parentForm.BackColor = Color.Black;
+   
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(140, 100));
             hashtable.Add("point", new Point(20, 20));
