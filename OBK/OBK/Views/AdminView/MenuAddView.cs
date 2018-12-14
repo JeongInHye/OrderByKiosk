@@ -135,7 +135,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(490, 440));
             hashtable.Add("color", Color.FromArgb(246,246,246));
             hashtable.Add("name", "btnAdd");
-            hashtable.Add("text", "메뉴 등록하기");
+            hashtable.Add("text", "메뉴 등록");
             hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnAdd_Click);
             btnAdd = draw.getButton1(hashtable, parentForm);

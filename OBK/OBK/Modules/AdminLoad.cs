@@ -137,17 +137,17 @@ namespace OBK.Modules
         {
             parentForm.Size = new Size(680, 520);
             parentForm.IsMdiContainer = false;
+            parentForm.BackColor = Color.White;
             parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.BackColor = Color.Red;
             new MenuEditView(parentForm);
         }
 
         private void GetMenuDeleteLoad(object o, EventArgs a)   // MenuDeleteForm(메뉴삭제)
         {
             parentForm.Size = new Size(680, 520);
+            parentForm.BackColor = Color.White;
             parentForm.IsMdiContainer = false;
             parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.BackColor = Color.Black;
             new MenuDeleteView(parentForm);
         }
 

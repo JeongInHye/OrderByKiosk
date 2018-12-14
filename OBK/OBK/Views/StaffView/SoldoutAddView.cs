@@ -31,7 +31,8 @@ namespace OBK.Views.StaffView
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("size", new Size(150, 250));
             hashtable.Add("point", new Point(10, 10));
-            hashtable.Add("name", "주문리스트");
+            hashtable.Add("name", "listCategory");
+            hashtable.Add("click", (MouseEventHandler)listCategory_click);
             listCategory = draw.getListView1(hashtable, parentForm);
             listCategory.Columns.Add("", 0, HorizontalAlignment.Center);
             listCategory.Columns.Add("카테고리", 146, HorizontalAlignment.Center);
@@ -46,7 +47,7 @@ namespace OBK.Views.StaffView
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("size", new Size(500, 250));
             hashtable.Add("point", new Point(175, 10));
-            hashtable.Add("name", "주문리스트");
+            hashtable.Add("name", "listMenu");
             listMenu = draw.getListView(hashtable, parentForm);
             listMenu.Columns.Add("", 50, HorizontalAlignment.Center);
             listMenu.Columns.Add("메뉴", 440, HorizontalAlignment.Center);
@@ -81,6 +82,37 @@ namespace OBK.Views.StaffView
                     }
                 }
             }
+        }
+
+        private void listCategory_click(object sender, MouseEventArgs e)
+        {
+            //listView2.Clear();
+
+            //ListView listView = (ListView)sender;
+            //ListView.SelectedListViewItemCollection itemGroup = listView.SelectedItems;
+            //ListViewItem item1 = itemGroup[0];
+
+            //string sql = string.Format("select * from {0}", item1.SubItems[0].Text);
+
+            //MSsql mSsql = new MSsql();
+            //SqlDataReader dataReader = mSsql.Select(sql);
+            //bool Bool = true;
+
+            //while (dataReader.Read())
+            //{
+            //    ListViewItem item = null;
+            //    for (int i = 0; i < dataReader.FieldCount; i++)
+            //    {
+            //        if (Bool) listView2.Columns.Add(dataReader.GetName(i), 80, HorizontalAlignment.Left);
+
+            //        string value = dataReader.GetValue(i).ToString();
+            //        if (item == null) item = new ListViewItem(value);   // null이면 생성 만든다.
+            //        else item.SubItems.Add(value);
+            //    }
+            //    Bool = false;
+
+            //    listView2.Items.Add(item);
+            //}
         }
     }
 }
