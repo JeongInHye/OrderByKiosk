@@ -15,8 +15,7 @@ namespace OBK.Views.AdminView
     {
         private Draw draw;
         private Form parentForm, tagetForm;
-        private Label label1, label2, label3, label4, label5, label6;
-        private ListView list;
+        private Label lb_main;
         private Button btn1,btn2,btn3,btn4;
         private Hashtable hashtable;
 
@@ -31,8 +30,15 @@ namespace OBK.Views.AdminView
         private void getView()
         {
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(600, 80));
-            hashtable.Add("point", new Point(100, 350));
+            hashtable.Add("text", "관리자 메인 화면");
+            hashtable.Add("point", new Point(170, 50));
+            hashtable.Add("font", new Font("맑은고딕", 40, FontStyle.Bold));
+            hashtable.Add("name", "lb_main");
+            lb_main = draw.getLabel(hashtable, parentForm);
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(500, 80));
+            hashtable.Add("point", new Point(100, 300));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "매출 현황");
@@ -40,8 +46,8 @@ namespace OBK.Views.AdminView
             btn1 = draw.getButton(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(600, 80));
-            hashtable.Add("point", new Point(100, 470));
+            hashtable.Add("size", new Size(500, 80));
+            hashtable.Add("point", new Point(100, 420));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn2");
             hashtable.Add("text", "메뉴 관리");
@@ -49,8 +55,8 @@ namespace OBK.Views.AdminView
             btn2 = draw.getButton(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(600, 80));
-            hashtable.Add("point", new Point(100, 590));
+            hashtable.Add("size", new Size(500, 80));
+            hashtable.Add("point", new Point(100, 540));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "품절 목록");
@@ -58,8 +64,8 @@ namespace OBK.Views.AdminView
             btn3 = draw.getButton(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(600, 80));
-            hashtable.Add("point", new Point(100, 710));
+            hashtable.Add("size", new Size(500, 80));
+            hashtable.Add("point", new Point(100, 660));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn4");
             hashtable.Add("text", "매장 관리");
