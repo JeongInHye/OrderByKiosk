@@ -35,6 +35,7 @@ namespace OBK.Views.StaffView
             listMenu = draw.getListView(hashtable, parentForm);
             listMenu.Columns.Add("", 50, HorizontalAlignment.Center);
             listMenu.Columns.Add("메뉴", 440, HorizontalAlignment.Center);
+            listMenu.Columns.Add("물품 여부", 170, HorizontalAlignment.Center);
             listMenu.Items.Add(new ListViewItem(new string[] { " ", "아메리카노" }));
 
             hashtable = new Hashtable();
