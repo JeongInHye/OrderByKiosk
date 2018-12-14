@@ -158,6 +158,7 @@ namespace OBK.Modules
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
+            parentForm.BackColor = Color.White;
             parentForm.Text = "품절목록메인화면";
             new SoldoutListView(parentForm);
         }
@@ -169,29 +170,28 @@ namespace OBK.Modules
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
+            parentForm.BackColor = Color.White;
             parentForm.Text = "매장관리메인화면";
             new StoreView(parentForm);
         }
 
         private void GetStoreAddLoad(object o, EventArgs a)     // StoreAddForm(매장추가)
         {
-            parentForm.Size = new Size(800, 900);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-            parentForm.StartPosition = FormStartPosition.CenterScreen;
-            parentForm.MaximizeBox = false;
-            parentForm.MinimizeBox = false;
+            parentForm.Size = new Size(680, 520);
+            parentForm.IsMdiContainer = false;
+            parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.Text = "매장추가화면";
+            parentForm.BackColor = Color.White;
             new StoreAddView(parentForm);
         }
 
         private void GetStoreDeleteLoad(object o, EventArgs a)  // StoreDeleteForm(매장삭제)
         {
-            parentForm.Size = new Size(800, 900);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-            parentForm.StartPosition = FormStartPosition.CenterScreen;
-            parentForm.MaximizeBox = false;
-            parentForm.MinimizeBox = false;
+            parentForm.Size = new Size(680, 520);
+            parentForm.IsMdiContainer = false;
+            parentForm.FormBorderStyle = FormBorderStyle.None;
             parentForm.Text = "매장삭제화면";
+            parentForm.BackColor = Color.White;
             new StoreDeleteView(parentForm);
         }
     }
