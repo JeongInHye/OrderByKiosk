@@ -60,10 +60,9 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("width", 300);
             hashtable.Add("point", new Point(150, 108));
-            hashtable.Add("name", "comboCategory");
-            hashtable.Add("hinttext", "메뉴이름을 입력해주세요.");
-            hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
-            txtMenu = draw.getHintTextBox(hashtable, parentForm);
+            hashtable.Add("name", "txtMenu");
+            txtMenu = draw.getTextBox(hashtable, parentForm);
+
             //==============================================================================
 
             hashtable = new Hashtable();
@@ -75,12 +74,28 @@ namespace OBK.Views.AdminView
             lblPrice = draw.getLabel1(hashtable, parentForm);
 
             hashtable = new Hashtable();
+            hashtable.Add("width", 300);
+            hashtable.Add("point", new Point(150, 196));
+            hashtable.Add("name", "txtPrice");
+            txtPrice = draw.getTextBox(hashtable, parentForm);
+
+            //==============================================================================
+
+            hashtable = new Hashtable();
             hashtable.Add("text", "이미지 : ");
             hashtable.Add("width", 110);
             hashtable.Add("point", new Point(20, 260));
             hashtable.Add("font", new Font("고딕", 18, FontStyle.Bold));
             hashtable.Add("name", "주문번호");
             lblImage = draw.getLabel1(hashtable, parentForm);
+
+            hashtable = new Hashtable();
+            hashtable.Add("width", 300);
+            hashtable.Add("point", new Point(150, 284));
+            hashtable.Add("name", "comboCategory");
+            txtMenu = draw.getTextBox(hashtable, parentForm);
+
+            //==============================================================================
 
             hashtable = new Hashtable();
             hashtable.Add("point", new Point(50, 340));
