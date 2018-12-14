@@ -61,7 +61,9 @@ namespace OBK.Views.AdminView
             hashtable.Add("width", 300);
             hashtable.Add("point", new Point(150, 108));
             hashtable.Add("name", "comboCategory");
-            txtMenu = draw.getTextBox(hashtable, parentForm);
+            hashtable.Add("hinttext", "메뉴이름을 입력해주세요.");
+            hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
+            txtMenu = draw.getHintTextBox(hashtable, parentForm);
             //==============================================================================
 
             hashtable = new Hashtable();

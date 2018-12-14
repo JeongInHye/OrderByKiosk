@@ -101,6 +101,17 @@ namespace OBK.Modules
             return textBox;
         }
 
+        public TextBox getHintTextBox(Hashtable hashtable, Control parentDomain)
+        {
+            HintTextBox textBox = new HintTextBox(hashtable["hinttext"].ToString());
+            textBox.Width = Convert.ToInt32(hashtable["width"].ToString());
+            textBox.Location = (Point)hashtable["point"];
+            textBox.Name = hashtable["name"].ToString();
+            textBox.Font = (Font)hashtable["font"];
+            parentDomain.Controls.Add(textBox);
+            return textBox;
+        }
+
         public ComboBox getComboBox(Hashtable hashtable, Control parentDomain)
         {
             ComboBox comboBox = new ComboBox();
