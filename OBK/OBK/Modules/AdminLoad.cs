@@ -100,6 +100,7 @@ namespace OBK.Modules
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
             parentForm.Text = "월별매출화면";
+            parentForm.BackColor = Color.White;
             new MonthlyView(parentForm);
         }
 
@@ -111,6 +112,7 @@ namespace OBK.Modules
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
             parentForm.Text = "메뉴별매출화면";
+            parentForm.BackColor = Color.White;
             new MenuIncomView(parentForm);
         }
 
