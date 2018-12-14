@@ -125,7 +125,6 @@ namespace OBK.Views
             hashtable = new Hashtable();
             hashtable.Add("width", 200);
             hashtable.Add("point", new Point(220, 270));
-            hashtable.Add("color", Color.White);
             hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
             hashtable.Add("name", "cb_size");
             cb_size = draw.getComboBox(hashtable, parentForm);
@@ -182,7 +181,6 @@ namespace OBK.Views
             hashtable = new Hashtable();
             hashtable.Add("width", 120);
             hashtable.Add("point", new Point(300, 350));
-            hashtable.Add("color", Color.White);
             hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
             hashtable.Add("name", "cb_cream");
             cb_cream = draw.getComboBox(hashtable, parentForm);

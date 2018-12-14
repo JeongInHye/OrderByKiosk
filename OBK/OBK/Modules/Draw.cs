@@ -94,9 +94,9 @@ namespace OBK.Modules
             TextBox textBox = new TextBox();
             textBox.Width = Convert.ToInt32(hashtable["width"].ToString());
             textBox.Location = (Point)hashtable["point"];
-            textBox.BackColor = (Color)hashtable["color"];
             textBox.Name = hashtable["name"].ToString();
-            textBox.Enabled = (bool)hashtable["enabled"];
+            //textBox.BackColor = (Color)hashtable["color"];
+            //textBox.Enabled = (bool)hashtable["enabled"];
             parentDomain.Controls.Add(textBox);
             return textBox;
         }
@@ -104,14 +104,14 @@ namespace OBK.Modules
         public ComboBox getComboBox(Hashtable hashtable, Control parentDomain)
         {
             ComboBox comboBox = new ComboBox();
+            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBox.Width = Convert.ToInt32(hashtable["width"].ToString());
             comboBox.DropDownWidth = Convert.ToInt32(hashtable["width"].ToString());
             comboBox.Location = (Point)hashtable["point"];
-            comboBox.BackColor = (Color)hashtable["color"];
             comboBox.Font = (Font)hashtable["font"];
             comboBox.Name = hashtable["name"].ToString();
-            comboBox.DisplayMember = "value";
-            comboBox.ValueMember = "Key";
+            //comboBox.DisplayMember = "value";
+            //comboBox.ValueMember = "Key";
             parentDomain.Controls.Add(comboBox);
             return comboBox;
         }
@@ -152,6 +152,8 @@ namespace OBK.Modules
             checkBox.AutoSize = true;
             checkBox.Location = (Point)hashtable["point"];
             checkBox.Name = hashtable["name"].ToString();
+            checkBox.Text = hashtable["text"].ToString();
+            checkBox.Font = new Font("고딕", 15, FontStyle.Bold);
             parentDomain.Controls.Add(checkBox);
             //checkBox.TabIndex = 
             return checkBox;

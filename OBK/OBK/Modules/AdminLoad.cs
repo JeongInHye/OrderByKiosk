@@ -125,25 +125,27 @@ namespace OBK.Modules
         private void GetMenuAddLoad(object o, EventArgs a)      // MenuAddForm(메뉴추가)
         {
             parentForm.Size = new Size(680, 520);
+            parentForm.IsMdiContainer = false;
             parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.BackColor = Color.BlanchedAlmond;
+            parentForm.BackColor = Color.White;
             new MenuAddView(parentForm);
         }
 
         private void GetMenuEditLoad(object o, EventArgs a)     // MenuEditForm(메뉴수정)
         {
+            parentForm.Size = new Size(680, 520);
             parentForm.IsMdiContainer = false;
-            parentForm.Size = new Size(800, 900);
             parentForm.FormBorderStyle = FormBorderStyle.None;
+            parentForm.BackColor = Color.Red;
             new MenuEditView(parentForm);
         }
 
         private void GetMenuDeleteLoad(object o, EventArgs a)   // MenuDeleteForm(메뉴삭제)
         {
-            parentForm.Size = new Size(1000, 300);
+            parentForm.Size = new Size(680, 520);
+            parentForm.IsMdiContainer = false;
             parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.MaximizeBox = false;
-            parentForm.MinimizeBox = false;
+            parentForm.BackColor = Color.Black;
             new MenuDeleteView(parentForm);
         }
 

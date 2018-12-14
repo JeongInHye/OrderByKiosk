@@ -110,6 +110,11 @@ namespace OBK.Views.AdminView
             btnAdd.BackColor = Color.LightGray;
             btnEdit.BackColor = Color.FromArgb(46, 204, 113);
             btnDelete.BackColor = Color.LightGray;
+
+            if (tagetForm != null) tagetForm.Dispose();
+
+            tagetForm = draw.getMdiForm(parentForm, new MenuEditForm(), contents);
+            tagetForm.Show();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -117,6 +122,11 @@ namespace OBK.Views.AdminView
             btnAdd.BackColor = Color.LightGray;
             btnEdit.BackColor = Color.LightGray;
             btnDelete.BackColor = Color.FromArgb(46, 204, 113);
+
+            if (tagetForm != null) tagetForm.Dispose();
+
+            tagetForm = draw.getMdiForm(parentForm, new MenuDeleteForm(), contents);
+            tagetForm.Show();
         }
 
      
