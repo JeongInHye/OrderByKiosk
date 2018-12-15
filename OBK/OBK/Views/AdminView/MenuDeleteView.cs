@@ -14,7 +14,6 @@ namespace OBK.Views.AdminView
     {
         private Draw draw;
         private Form parentForm;
-        private ListView list;
         private ListView listCategory, listMenu;
         private Button btnMenuDelete;
         private Hashtable hashtable;

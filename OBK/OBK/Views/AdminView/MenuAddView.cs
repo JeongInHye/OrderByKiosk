@@ -101,6 +101,16 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "txtImg");
             txtImg = draw.getHintTextBox(hashtable, parentForm);
 
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(50, 50));
+            hashtable.Add("point", new Point(550, 260));
+            hashtable.Add("color", Color.FromArgb(246, 246, 246));
+            hashtable.Add("name", "btnAdd");
+            hashtable.Add("text", "이미지첨부");
+            hashtable.Add("font", new Font("맑은 고딕", 10, FontStyle.Regular));
+            hashtable.Add("click", (EventHandler)btnImgAdd_Click);
+            btnImgAdd = draw.getButton1(hashtable, parentForm);
+
             //==============================================================================
 
             hashtable = new Hashtable();
@@ -139,6 +149,11 @@ namespace OBK.Views.AdminView
             hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnAdd_Click);
             btnAdd = draw.getButton1(hashtable, parentForm);
+        }
+
+        private void btnImgAdd_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("이미지 첨부");
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
