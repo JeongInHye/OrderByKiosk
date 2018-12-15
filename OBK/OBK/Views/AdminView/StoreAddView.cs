@@ -13,9 +13,6 @@ namespace OBK.Views.AdminView
     {
         private Draw draw;
         private Form parentForm;
-        private Label label1, label2, label3, label4, label5, label6;
-        private ListView list;
-        private Button button;
         private Hashtable hashtable;
 
         public StoreAddView(Form parentForm)

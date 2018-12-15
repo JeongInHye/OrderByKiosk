@@ -16,8 +16,8 @@ namespace OBK.Views.AdminView
         private Hashtable hashtable;
         private Draw draw;
         private Form parentForm, tagetForm;
-        private Button btnAdd, btnEdit, btnDelete,btnMain;
-        private Panel all,contents;
+        private Button btnAdd, btnEdit, btnDelete, btnMain;
+        private Panel all, contents;
 
         public MenuSettingView(Form parentForm)
         {
@@ -42,7 +42,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(20, 20));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btnAdd");
-            hashtable.Add("text", "메뉴추가");
+            hashtable.Add("text", "메뉴\n추가");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnAdd_Click);
             btnAdd = draw.getButton1(hashtable, all);
@@ -53,7 +53,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(20, 140));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btnEdit");
-            hashtable.Add("text", "메뉴수정");
+            hashtable.Add("text", "메뉴\n수정");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnEdit_Click);
             btnEdit = draw.getButton1(hashtable, all);
@@ -63,7 +63,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(20, 260));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btnDelete");
-            hashtable.Add("text", "메뉴삭제");
+            hashtable.Add("text", "메뉴\n삭제");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnDelete_Click);
             btnDelete = draw.getButton1(hashtable, all);
@@ -129,7 +129,7 @@ namespace OBK.Views.AdminView
             tagetForm.Show();
         }
 
-     
+
         private void btnMain_Click(object sender, EventArgs e)
         {
             parentForm.Visible = false;

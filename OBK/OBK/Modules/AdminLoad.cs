@@ -180,7 +180,6 @@ namespace OBK.Modules
             parentForm.Size = new Size(680, 520);
             parentForm.IsMdiContainer = false;
             parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.Text = "매장추가화면";
             parentForm.BackColor = Color.White;
             new StoreAddView(parentForm);
         }
@@ -190,7 +189,6 @@ namespace OBK.Modules
             parentForm.Size = new Size(680, 520);
             parentForm.IsMdiContainer = false;
             parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.Text = "매장삭제화면";
             parentForm.BackColor = Color.White;
             new StoreDeleteView(parentForm);
         }
