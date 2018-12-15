@@ -239,6 +239,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AdminForm\MenuIncomeForm.resx">
+      <DependentUpon>MenuIncomeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\UserForm\ChoiceForm.resx">
       <DependentUpon>ChoiceForm.cs</DependentUpon>
     </EmbeddedResource>

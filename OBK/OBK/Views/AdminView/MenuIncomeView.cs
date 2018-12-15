@@ -18,6 +18,7 @@ namespace OBK.Views.AdminView
         private ListView list;
         private Button btn_search;
         private ComboBox cb_start, cb_end;
+        private DateTimePicker dtp_start, dtp_end;
         private Hashtable hashtable;
 
         public MenuIncomView(Form parentForm)
@@ -62,20 +63,33 @@ namespace OBK.Views.AdminView
             lb_info = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("width", 180);
+            hashtable.Add("size", new Size(180, 40));
             hashtable.Add("point", new Point(110, 25));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
-            hashtable.Add("name", "cb_start");
-            cb_start = draw.getComboBox(hashtable, parentForm);
+            hashtable.Add("name", "dtp_start");
+            dtp_start = draw.GetDateTimePicker(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("width", 180);
+            hashtable.Add("size", new Size(180,40));
             hashtable.Add("point", new Point(340, 25));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
-            hashtable.Add("name", "cb_end");
-            cb_end = draw.getComboBox(hashtable, parentForm);
+            hashtable.Add("name", "dtp_end");
+            dtp_end = draw.GetDateTimePicker(hashtable, parentForm);
+
+
+            //hashtable = new Hashtable();
+            //hashtable.Add("width", 180);
+            //hashtable.Add("point", new Point(110, 25));
+            //hashtable.Add("color", Color.White);
+            //hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
+            //hashtable.Add("name", "cb_start");
+            //cb_start = draw.getComboBox(hashtable, parentForm);
+
+            //hashtable = new Hashtable();
+            //hashtable.Add("width", 180);
+            //hashtable.Add("point", new Point(340, 25));
+            //hashtable.Add("color", Color.White);
+            //hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
+            //hashtable.Add("name", "cb_end");
+            //cb_end = draw.getComboBox(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(660, 420));

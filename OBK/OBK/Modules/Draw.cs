@@ -180,5 +180,16 @@ namespace OBK.Modules
             parentDomain.Controls.Add(pictureBox);
             return pictureBox;
         }
+
+        public DateTimePicker GetDateTimePicker(Hashtable hashtable,Control parentDomain)
+        {
+            DateTimePicker dateTimePicker = new DateTimePicker();
+            dateTimePicker.Location = (Point)hashtable["point"];
+            dateTimePicker.Name = hashtable["name"].ToString();
+            dateTimePicker.Size = (Size)hashtable["size"];
+            dateTimePicker.TabIndex = 0;
+            parentDomain.Controls.Add(dateTimePicker);
+            return dateTimePicker;
+        }
     }
 }
