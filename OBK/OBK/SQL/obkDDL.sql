@@ -10,7 +10,7 @@ create table Admin(
 	aNo int not null AUTO_INCREMENT,
 	aName varchar(10) not null,
 	passwd varchar(10) not null,
-	primary key (managerNo)
+	primary key (aNo)
 );
 
 create table Store(
