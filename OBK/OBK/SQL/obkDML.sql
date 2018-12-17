@@ -18,4 +18,12 @@ SELECT * FROM Menu;
 
 INSERT INTO Store (sName) VALUES ('A매장');
 INSERT INTO Store (sName) VALUES ('B매장');
+
+insert into Orderlist (mNo,sNo,oCount,oDegree,oSize,oShot,oCream) 
+					values (1,1,1,1,0,0,0);
+insert into Orderlist (mNo,sNo,oCount,oDegree,oSize,oShot,oCream) 
+					values (1,1,1,1,0,0,0);
+
+insert into Notsell (sNo,mNo) values (2,3);
+
 SELECT * FROM Store;
