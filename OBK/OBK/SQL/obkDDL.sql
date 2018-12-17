@@ -1,10 +1,5 @@
 #create database obk;
 use obk;
-drop table Manager;
-drop table Store;
-drop table Category;
-drop table Menu;
-drop table Orderlist;
 
 create table Admin(
 	aNo int not null AUTO_INCREMENT,
