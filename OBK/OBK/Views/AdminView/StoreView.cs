@@ -42,7 +42,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(20, 20));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btnStoreAdd");
-            hashtable.Add("text", "매장\n추가");
+            hashtable.Add("text", "매장\n목록");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnStoreList_Click);
             btnStoreList = draw.getButton1(hashtable, all);
@@ -53,7 +53,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(20, 140));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btnStoreDelete");
-            hashtable.Add("text", "메장\n삭제");
+            hashtable.Add("text", "메장\n추가");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnStoreAdd_Click);
             btnStoreAdd = draw.getButton1(hashtable, all);

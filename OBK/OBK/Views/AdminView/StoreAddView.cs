@@ -15,7 +15,7 @@ namespace OBK.Views.AdminView
         private Draw draw;
         private Form parentForm;
         private Label lb_name, lb_city, lb_gu;
-        private TextBox tb_name, tb_city, tb_gu;
+        private TextBox tb_name, tb_city, tb_gu,tb_tmp;
         private Button btn_add;
         private Hashtable hashtable;
 
@@ -29,6 +29,12 @@ namespace OBK.Views.AdminView
 
         private void getView()
         {
+            hashtable = new Hashtable();
+            hashtable.Add("width", 0);
+            hashtable.Add("point", new Point(0, 0));
+            hashtable.Add("name", "tb_tmp");
+            tb_tmp = draw.getTextBox(hashtable, parentForm);
+
             hashtable = new Hashtable();
             hashtable.Add("text", "매장명 : ");
             hashtable.Add("width", 110);
@@ -44,7 +50,6 @@ namespace OBK.Views.AdminView
             hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
             hashtable.Add("name", "tb_name");
             tb_name = draw.getHintTextBox(hashtable, parentForm);
-
             //==============================================================================
 
             hashtable = new Hashtable();
