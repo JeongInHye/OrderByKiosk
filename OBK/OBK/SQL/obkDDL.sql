@@ -11,8 +11,7 @@ create table Admin(
 create table Store(
 	sNo int not null AUTO_INCREMENT,
 	sName varchar(20) not null,
-	sCity varchar(20) not null,
-	sGu varchar(20) not null,
+	sCity varchar(50) not null,
 	primary key (sNo)
 );
 
