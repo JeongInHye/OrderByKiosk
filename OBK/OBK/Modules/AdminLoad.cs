@@ -50,6 +50,8 @@ namespace OBK.Modules
                     return GetMonthlyLoad;
                 case "soldoutlist":
                     return GetSoldoutListLoad;
+                case "storelist":
+                    return GetStoreListLoad;
                 case "storeadd":
                     return GetStoreAddLoad;
                 case "storedelete":
@@ -173,6 +175,15 @@ namespace OBK.Modules
             parentForm.BackColor = Color.White;
             parentForm.Text = "매장관리메인화면";
             new StoreView(parentForm);
+        }
+
+        private void GetStoreListLoad(object o, EventArgs a)     // StoreAddForm(매장리스트)
+        {
+            parentForm.Size = new Size(680, 520);
+            parentForm.IsMdiContainer = false;
+            parentForm.FormBorderStyle = FormBorderStyle.None;
+            parentForm.BackColor = Color.White;
+            new StoreListView(parentForm);
         }
 
         private void GetStoreAddLoad(object o, EventArgs a)     // StoreAddForm(매장추가)

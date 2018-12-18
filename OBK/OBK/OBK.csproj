@@ -143,6 +143,12 @@
     <Compile Include="Forms\AdminForm\StoreForm.Designer.cs">
       <DependentUpon>StoreForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\AdminForm\StoreListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AdminForm\StoreListForm.Designer.cs">
+      <DependentUpon>StoreListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\StaffForm\OrderListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -225,6 +231,7 @@
     <Compile Include="Views\AdminView\SoldoutListView.cs" />
     <Compile Include="Views\AdminView\StoreAddView.cs" />
     <Compile Include="Views\AdminView\StoreDeleteView.cs" />
+    <Compile Include="Views\AdminView\StoreListView.cs" />
     <Compile Include="Views\AdminView\StoreView.cs" />
     <Compile Include="Views\StaffView\OrderListView.cs" />
     <Compile Include="Views\StaffView\SoldoutAddView.cs" />

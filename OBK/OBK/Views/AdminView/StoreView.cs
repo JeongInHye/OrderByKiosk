@@ -15,7 +15,7 @@ namespace OBK.Views.AdminView
     {
         private Draw draw;
         private Form parentForm,tagetForm;
-        private Button btnStoreAdd, btnStoreDelete, btnMain;
+        private Button btnStoreAdd, btnStoreDelete, btnMain,btnStoreList;
         private Panel all, contents;
         private Hashtable hashtable;
 
@@ -44,9 +44,9 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "btnStoreAdd");
             hashtable.Add("text", "매장\n추가");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
-            hashtable.Add("click", (EventHandler)btnStoreAdd_Click);
-            btnStoreAdd = draw.getButton1(hashtable, all);
-            btnStoreAdd.BackColor = Color.FromArgb(46, 204, 113);
+            hashtable.Add("click", (EventHandler)btnStoreList_Click);
+            btnStoreList = draw.getButton1(hashtable, all);
+            btnStoreList.BackColor = Color.FromArgb(46, 204, 113);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(140, 100));
@@ -54,6 +54,17 @@ namespace OBK.Views.AdminView
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btnStoreDelete");
             hashtable.Add("text", "메장\n삭제");
+            hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
+            hashtable.Add("click", (EventHandler)btnStoreAdd_Click);
+            btnStoreAdd = draw.getButton1(hashtable, all);
+
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(140, 100));
+            hashtable.Add("point", new Point(20, 260));
+            hashtable.Add("color", Color.LightGray);
+            hashtable.Add("name", "btnDelete");
+            hashtable.Add("text", "매장\n삭제");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnStoreDelete_Click);
             btnStoreDelete = draw.getButton1(hashtable, all);
@@ -79,12 +90,25 @@ namespace OBK.Views.AdminView
             contents.BorderStyle = BorderStyle.FixedSingle;
 
             if (tagetForm != null) tagetForm.Dispose();
-            tagetForm = draw.getMdiForm(parentForm, new StoreAddForm(), contents);
+            tagetForm = draw.getMdiForm(parentForm, new StoreListForm(), contents);
+            tagetForm.Show();
+        }
+
+        private void btnStoreList_Click(object sender, EventArgs e)
+        {
+            btnStoreList.BackColor = Color.FromArgb(46, 204, 113);
+            btnStoreAdd.BackColor = Color.LightGray;
+            btnStoreDelete.BackColor = Color.LightGray;
+
+            if (tagetForm != null) tagetForm.Dispose();
+
+            tagetForm = draw.getMdiForm(parentForm, new StoreListForm(), contents);
             tagetForm.Show();
         }
 
         private void btnStoreAdd_Click(object sender, EventArgs e)
         {
+            btnStoreList.BackColor = Color.LightGray;
             btnStoreAdd.BackColor = Color.FromArgb(46, 204, 113);
             btnStoreDelete.BackColor = Color.LightGray;
 
@@ -96,6 +120,7 @@ namespace OBK.Views.AdminView
 
         private void btnStoreDelete_Click(object sender, EventArgs e)
         {
+            btnStoreList.BackColor = Color.LightGray;
             btnStoreAdd.BackColor = Color.LightGray;
             btnStoreDelete.BackColor = Color.FromArgb(46, 204, 113);
 

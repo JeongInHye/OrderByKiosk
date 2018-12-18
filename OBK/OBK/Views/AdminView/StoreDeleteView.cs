@@ -49,6 +49,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("click", (EventHandler)button_storedelete_click);
             button_storedelete = draw.getButton1(hashtable, parentForm);
         }
+
         private void button_storedelete_click(object sender, EventArgs e)
         {
             foreach (ListViewItem listitem in liststore.Items)
