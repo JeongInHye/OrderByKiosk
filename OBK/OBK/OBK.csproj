@@ -128,30 +128,6 @@
     <Compile Include="Forms\AdminForm\SoldoutListForm.Designer.cs">
       <DependentUpon>SoldoutListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\AdminForm\StoreAddForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AdminForm\StoreAddForm.Designer.cs">
-      <DependentUpon>StoreAddForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AdminForm\StoreDeleteForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AdminForm\StoreDeleteForm.Designer.cs">
-      <DependentUpon>StoreDeleteForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AdminForm\StoreForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AdminForm\StoreForm.Designer.cs">
-      <DependentUpon>StoreForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\AdminForm\StoreListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\AdminForm\StoreListForm.Designer.cs">
-      <DependentUpon>StoreListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\StaffForm\OrderListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,10 +208,6 @@
     <Compile Include="Views\AdminView\MenuSettingView.cs" />
     <Compile Include="Views\AdminView\MonthlyView.cs" />
     <Compile Include="Views\AdminView\SoldoutListView.cs" />
-    <Compile Include="Views\AdminView\StoreAddView.cs" />
-    <Compile Include="Views\AdminView\StoreDeleteView.cs" />
-    <Compile Include="Views\AdminView\StoreListView.cs" />
-    <Compile Include="Views\AdminView\StoreView.cs" />
     <Compile Include="Views\StaffView\OrderListView.cs" />
     <Compile Include="Views\StaffView\SoldoutAddView.cs" />
     <Compile Include="Views\StaffView\SoldoutDeleteView.cs" />

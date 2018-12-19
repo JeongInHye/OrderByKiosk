@@ -50,14 +50,6 @@ namespace OBK.Modules
                     return GetMonthlyLoad;
                 case "soldoutlist":
                     return GetSoldoutListLoad;
-                case "storelist":
-                    return GetStoreListLoad;
-                case "storeadd":
-                    return GetStoreAddLoad;
-                case "storedelete":
-                    return GetStoreDeleteLoad;
-                case "store":
-                    return GetStoreLoad;
                 default:
                     return null;
             }
@@ -163,45 +155,6 @@ namespace OBK.Modules
             parentForm.BackColor = Color.White;
             parentForm.Text = "품절목록메인화면";
             new SoldoutListView(parentForm);
-        }
-
-        private void GetStoreLoad(object o, EventArgs a)        // StoreForm(매장관리)
-        {
-            parentForm.Size = new Size(900, 600);
-            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
-            parentForm.StartPosition = FormStartPosition.CenterScreen;
-            parentForm.MaximizeBox = false;
-            parentForm.MinimizeBox = false;
-            parentForm.BackColor = Color.White;
-            parentForm.Text = "매장관리메인화면";
-            new StoreView(parentForm);
-        }
-
-        private void GetStoreListLoad(object o, EventArgs a)     // StoreAddForm(매장리스트)
-        {
-            parentForm.Size = new Size(680, 520);
-            parentForm.IsMdiContainer = false;
-            parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.BackColor = Color.White;
-            new StoreListView(parentForm);
-        }
-
-        private void GetStoreAddLoad(object o, EventArgs a)     // StoreAddForm(매장추가)
-        {
-            parentForm.Size = new Size(680, 520);
-            parentForm.IsMdiContainer = false;
-            parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.BackColor = Color.White;
-            new StoreAddView(parentForm);
-        }
-
-        private void GetStoreDeleteLoad(object o, EventArgs a)  // StoreDeleteForm(매장삭제)
-        {
-            parentForm.Size = new Size(680, 520);
-            parentForm.IsMdiContainer = false;
-            parentForm.FormBorderStyle = FormBorderStyle.None;
-            parentForm.BackColor = Color.White;
-            new StoreDeleteView(parentForm);
         }
     }
 }

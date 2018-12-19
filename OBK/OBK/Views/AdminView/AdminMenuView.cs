@@ -62,15 +62,6 @@ namespace OBK.Views.AdminView
             hashtable.Add("text", "품절 목록");
             hashtable.Add("click", (EventHandler)btn3_click);
             btn3 = draw.getButton(hashtable, parentForm);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(500, 80));
-            hashtable.Add("point", new Point(100, 660));
-            hashtable.Add("color", Color.White);
-            hashtable.Add("name", "btn4");
-            hashtable.Add("text", "매장 관리");
-            hashtable.Add("click", (EventHandler)btn4_click);
-            btn4 = draw.getButton(hashtable, parentForm);
         }
 
         private void btn1_click(object sender, EventArgs e)
@@ -98,16 +89,6 @@ namespace OBK.Views.AdminView
             parentForm.Visible = false;
 
             tagetForm = new SoldoutListForm();
-            tagetForm.StartPosition = FormStartPosition.CenterParent;
-            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
-            tagetForm.Show();
-        }
-
-        private void btn4_click(object sender, EventArgs e)
-        {
-            parentForm.Visible = false;
-
-            tagetForm = new StoreForm();
             tagetForm.StartPosition = FormStartPosition.CenterParent;
             tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
             tagetForm.Show();
