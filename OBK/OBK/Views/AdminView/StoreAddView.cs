@@ -12,6 +12,7 @@ namespace OBK.Views.AdminView
 {
     class StoreAddView
     {
+        private WebAPI api;
         private Draw draw;
         private Form parentForm;
         private Label lb_name, lb_city, lb_gu;
@@ -22,7 +23,7 @@ namespace OBK.Views.AdminView
         public StoreAddView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
+            api = new WebAPI();
             draw = new Draw();
             getView();
         }
@@ -70,23 +71,6 @@ namespace OBK.Views.AdminView
 
             //==============================================================================
 
-            hashtable = new Hashtable();
-            hashtable.Add("text", "구 : ");
-            hashtable.Add("width", 110);
-            hashtable.Add("point", new Point(100, 270));
-            hashtable.Add("font", new Font("고딕", 18, FontStyle.Bold));
-            hashtable.Add("name", "lb_gu");
-            lb_gu = draw.getLabel1(hashtable, parentForm);
-
-            hashtable = new Hashtable();
-            hashtable.Add("width", 300);
-            hashtable.Add("point", new Point(230, 270));
-            hashtable.Add("hinttext", "구이름을 입력해주세요.");
-            hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
-            hashtable.Add("name", "tb_gu");
-            tb_gu = draw.getHintTextBox(hashtable, parentForm);
-
-            //==========================================================
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(150, 50));
@@ -101,7 +85,10 @@ namespace OBK.Views.AdminView
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(tb_name.Text+"지점 등록!!\n위치 : "+tb_city.Text+" "+tb_gu.Text);
+            hashtable = new Hashtable();
+            hashtable.Add("sName", tb_name.Text);
+            hashtable.Add("sCity", tb_city.Text);
+            api.Post("http://localhost:5000/Store/insert", hashtable);
         }
     }
 }

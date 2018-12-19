@@ -12,6 +12,7 @@ namespace OBK.Views.AdminView
 {
     class StoreDeleteView
     {
+        private WebAPI api;
         private Draw draw;
         private Form parentForm;
         private ListView liststore;
@@ -23,6 +24,7 @@ namespace OBK.Views.AdminView
             this.parentForm = parentForm;
             //db = new MYsql();
             draw = new Draw();
+            api = new WebAPI();
             getView();
         }
 
@@ -37,7 +39,7 @@ namespace OBK.Views.AdminView
             liststore.Columns.Add("", 30, HorizontalAlignment.Center);
             liststore.Columns.Add("매장명", 240, HorizontalAlignment.Center);
             liststore.Columns.Add("위치", 345, HorizontalAlignment.Center);
-            liststore.Items.Add(new ListViewItem(new string[] { " ", "가산디지털점","서울특별시 금천구" }));
+            //liststore.Items.Add(new ListViewItem(new string[] { " ", "가산디지털점","서울특별시 금천구" }));
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(150, 50));
@@ -48,6 +50,8 @@ namespace OBK.Views.AdminView
             hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)button_storedelete_click);
             button_storedelete = draw.getButton1(hashtable, parentForm);
+
+            getData();
         }
 
         private void button_storedelete_click(object sender, EventArgs e)
@@ -60,12 +64,17 @@ namespace OBK.Views.AdminView
                     {
                         if (liststore.Items[i].Checked == true)
                         {
-                            //MessageBox.Show(liststore.Items[i].Text);
+                            MessageBox.Show(liststore.Items[i].SubItems[1].Text);
                             liststore.Items[i].Remove();
                         }
                     }
                 }
             }
+        }
+
+        private void getData()
+        {
+            api.ListView("http://localhost:5000/Store/select", liststore);
         }
     }
 }

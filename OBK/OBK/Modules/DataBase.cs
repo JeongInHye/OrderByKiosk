@@ -158,6 +158,7 @@ namespace OBK.Modules
 
                 byte[] result = wc.UploadValues(url, "POST", nameValue);
                 string resultStr = Encoding.UTF8.GetString(result);
+
                 if ("1" == resultStr)
                 {
                     MessageBox.Show("성공");

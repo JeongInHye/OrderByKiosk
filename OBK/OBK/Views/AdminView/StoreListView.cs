@@ -12,6 +12,7 @@ namespace OBK.Views.AdminView
 {
     class StoreListView
     {
+        private WebAPI api;
         private Draw draw;
         private Form parentForm;
         private ListView listStore;
@@ -21,6 +22,7 @@ namespace OBK.Views.AdminView
         {
             this.parentForm = parentForm;
             draw = new Draw();
+            api = new WebAPI();
             getView();
         }
 
@@ -35,7 +37,14 @@ namespace OBK.Views.AdminView
             listStore.Columns.Add("", 0, HorizontalAlignment.Center);
             listStore.Columns.Add("매장명", 250, HorizontalAlignment.Center);
             listStore.Columns.Add("위치", 350, HorizontalAlignment.Center);
-            listStore.Items.Add(new ListViewItem(new string[] {"","가산디지털점", "서울특별시 금천구" }));
+            //listStore.Items.Add(new ListViewItem(new string[] {"","가산디지털점", "서울특별시 금천구" }));
+
+            getData();
+        }
+
+        private void getData()
+        {
+            api.ListView("http://localhost:5000/Store/select", listStore);
         }
     }
 }
