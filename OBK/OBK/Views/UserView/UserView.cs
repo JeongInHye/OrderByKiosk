@@ -13,6 +13,7 @@ namespace OBK.Views
 {
     class UserView
     {
+        private WebAPI api;
         private Panel head, menu, bottom;
         private Form parentForm, tagetForm;
         private Hashtable hashtable;
@@ -26,6 +27,7 @@ namespace OBK.Views
             this.parentForm = parentForm;
             //db = new MYsql();
             draw = new Draw();
+            api = new WebAPI();
             getView();
         }
 
@@ -57,39 +59,30 @@ namespace OBK.Views
             //=========head패널에 버튼부분==============
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(30, 10));
             hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn1");
-            hashtable.Add("text", "커피");
-            hashtable.Add("click", (EventHandler)btn1_click);
-            btn1 = draw.getButton(hashtable, head);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(220, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn2");
-            hashtable.Add("text", "음료");
-            hashtable.Add("click", (EventHandler)btn2_click);
-            btn2 = draw.getButton(hashtable, head);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(410, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn3");
-            hashtable.Add("text", "티");
-            hashtable.Add("click", (EventHandler)btn3_click);
-            btn3 = draw.getButton(hashtable, head);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(600, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn4");
-            hashtable.Add("text", "디저트");
-            hashtable.Add("click", (EventHandler)btn4_click);
-            btn4 = draw.getButton(hashtable, head);
+            hashtable.Add("click", (EventHandler)btn_click);
+            ArrayList buttonlist = api.CategoryButton("http://192.168.3.17:5000/category/select", hashtable);
+            for(int i = 0; i < buttonlist.Count; i++)
+            {
+                Hashtable ht = (Hashtable)buttonlist[i];
+                switch (i)
+                {
+                    case 0:
+                        btn1 = draw.getButton(ht, head);
+                        break;
+                    case 1:
+                        btn2 = draw.getButton(ht, head);
+                        break;
+                    case 2:
+                        btn3 = draw.getButton(ht, head);
+                        break;
+                    case 3:
+                        btn4 = draw.getButton(ht, head);
+                        break;
+                    default:break;
+                }
+                
+            }
             //============== bottom패널에 리스트뷰와 버튼================
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
@@ -138,7 +131,7 @@ namespace OBK.Views
             hashtable.Add("click", (EventHandler)btn13_click);
             btn13 = draw.getButton(hashtable, bottom);
 
-            btn1.BackColor = Color.White;
+            //btn1.BackColor = Color.White;
 
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
@@ -148,7 +141,7 @@ namespace OBK.Views
 
         }
 
-
+        
 
         private void btn11_click(object sender, EventArgs e)
         {
@@ -179,66 +172,68 @@ namespace OBK.Views
 
         }
 
-        //=====커피 버튼을 눌렀을때 menu패널에 커피에 대한 메뉴들 출력=====
-        private void btn1_click(object sender, EventArgs e)
+        private void btn_click(object sender, EventArgs e) //카테고리 버튼 클릭 이벤트
         {
-            menuclick = 1;
+            Button b = (Button)sender;
+            switch (b.Name)
+            {
+                case "btn1":
+                    menuclick = 1;
+                    btn1.BackColor = Color.White;
+                    btn2.BackColor = Color.LightGray;
+                    btn3.BackColor = Color.LightGray;
+                    btn4.BackColor = Color.LightGray;
 
-            btn1.BackColor = Color.White;
-            btn2.BackColor = Color.LightGray;
-            btn3.BackColor = Color.LightGray;
-            btn4.BackColor = Color.LightGray;
+                    // form 초기화
+                    if (tagetForm != null) tagetForm.Dispose();
+                    // form 호출
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+                    tagetForm.Show();
+                    break;
+                case "btn2":
+                    menuclick = 2;
+                    btn1.BackColor = Color.LightGray;
+                    btn2.BackColor = Color.White;
+                    btn3.BackColor = Color.LightGray;
+                    btn4.BackColor = Color.LightGray;
 
-            // form 초기화
-            if (tagetForm != null) tagetForm.Dispose();
-            // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
-            tagetForm.Show();
+                    // form 초기화
+                    if (tagetForm != null) tagetForm.Dispose();
+                    // form 호출
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+                    tagetForm.Show();
+                    break;
+                case "btn3":
+                    menuclick = 3;
+                    btn1.BackColor = Color.LightGray;
+                    btn2.BackColor = Color.LightGray;
+                    btn3.BackColor = Color.White;
+                    btn4.BackColor = Color.LightGray;
+
+                    // form 초기화
+                    if (tagetForm != null) tagetForm.Dispose();
+                    // form 호출
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+                    tagetForm.Show();
+                    break;
+                case "btn4":
+                    menuclick = 4;
+                    btn1.BackColor = Color.LightGray;
+                    btn2.BackColor = Color.LightGray;
+                    btn3.BackColor = Color.LightGray;
+                    btn4.BackColor = Color.White;
+
+                    // form 초기화
+                    if (tagetForm != null) tagetForm.Dispose();
+                    // form 호출
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+                    tagetForm.Show();
+                    break;
+                default:
+                    break;
+            }
+           
         }
-        //=====음료 버튼을 눌렀을때 menu패널에 음료에 대한 메뉴들 출력=====
-        private void btn2_click(object sender, EventArgs e)
-        {
-            menuclick = 2;
 
-            btn1.BackColor = Color.LightGray;
-            btn2.BackColor = Color.White;
-            btn3.BackColor = Color.LightGray;
-            btn4.BackColor = Color.LightGray;
-            // form 초기화
-            if (tagetForm != null) tagetForm.Dispose();
-            // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
-            tagetForm.Show();
-        }
-        //=====티 버튼을 눌렀을때 menu패널에 티에 대한 메뉴들 출력=====
-        private void btn3_click(object sender, EventArgs e)
-        {
-            menuclick = 3;
-
-            btn1.BackColor = Color.LightGray;
-            btn2.BackColor = Color.LightGray;
-            btn3.BackColor = Color.White;
-            btn4.BackColor = Color.LightGray;
-            // form 초기화
-            if (tagetForm != null) tagetForm.Dispose();
-            // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
-            tagetForm.Show();
-        }
-        //=====디저트 버튼을 눌렀을때 menu패널에 디저트에 대한 메뉴들 출력=====
-        private void btn4_click(object sender, EventArgs e)
-        {
-            menuclick = 4;
-
-            btn1.BackColor = Color.LightGray;
-            btn2.BackColor = Color.LightGray;
-            btn3.BackColor = Color.LightGray;
-            btn4.BackColor = Color.White;
-            // form 초기화
-            if (tagetForm != null) tagetForm.Dispose();
-            // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
-            tagetForm.Show();
-        }
     }
 }

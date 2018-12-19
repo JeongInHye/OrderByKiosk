@@ -1,10 +1,12 @@
 ﻿using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using OBK.Forms;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -141,6 +143,36 @@ namespace OBK.Modules
             catch
             {
                 return false;
+            }
+        }
+
+        public ArrayList CategoryButton(string url,Hashtable hashtable)
+        {
+            try
+            {
+                ArrayList resultlist = new ArrayList();
+                WebClient wc = new WebClient();
+                Stream stream = wc.OpenRead(url);
+                StreamReader sr = new StreamReader(stream);
+                string result = sr.ReadToEnd();
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);
+                Draw draw = new Draw();
+                //MessageBox.Show("count = "+list.Count);
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Hashtable ht = (Hashtable)hashtable.Clone();
+                    
+                    JArray jArray = (JArray)list[i];
+                    ht.Add("point", new Point(30+(i*190), 10));
+                    ht.Add("name", "btn"+ jArray[0].ToString());
+                    ht.Add("text", jArray[1].ToString());
+                    resultlist.Add(ht);
+                }
+                return resultlist;
+            }
+            catch
+            {
+                return new ArrayList();
             }
         }
 
