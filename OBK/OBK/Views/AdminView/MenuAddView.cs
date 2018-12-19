@@ -2,8 +2,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -20,6 +23,9 @@ namespace OBK.Views.AdminView
         private TextBox txtMenu, txtPrice, txtImg;
         private Button btnImgAdd, btnAdd;
         private Hashtable hashtable;
+        Image image;
+        string fileName;
+        string ext;
 
         public MenuAddView(Form parentForm)
         {
@@ -45,8 +51,8 @@ namespace OBK.Views.AdminView
             hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
             hashtable.Add("name", "comboCategory");
             comboCategory = draw.getComboBox(hashtable, parentForm);
-            comboCategory.Items.AddRange(new object[] { "커피", "음료", "티", "디져트" });
-
+            WebAPI api = new WebAPI();
+            api.SelectCategory("http://192.168.3.17:5000/category/select", comboCategory);
             //==============================================================================
 
             hashtable = new Hashtable();
@@ -60,10 +66,9 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("width", 300);
             hashtable.Add("point", new Point(230, 110));
-            hashtable.Add("hinttext", "메뉴명을 입력해주세요.");
             hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
             hashtable.Add("name", "txtMenu");
-            txtMenu = draw.getHintTextBox(hashtable, parentForm);
+            txtMenu = draw.getTextBox(hashtable, parentForm);
 
             //==============================================================================
 
@@ -78,10 +83,9 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("width", 300);
             hashtable.Add("point", new Point(230, 190));
-            hashtable.Add("hinttext", "가격을 입력해주세요.");
             hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
             hashtable.Add("name", "txtPrice");
-            txtPrice = draw.getHintTextBox(hashtable, parentForm);
+            txtPrice = draw.getTextBox(hashtable, parentForm);
 
             //==============================================================================
 
@@ -96,10 +100,10 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("width", 300);
             hashtable.Add("point", new Point(230, 270));
-            hashtable.Add("hinttext", "이미지를 첨부해주세요.");
             hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
             hashtable.Add("name", "txtImg");
-            txtImg = draw.getHintTextBox(hashtable, parentForm);
+            txtImg = draw.getTextBox(hashtable, parentForm);
+            txtImg.ReadOnly = true;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 50));
@@ -143,7 +147,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(150, 50));
             hashtable.Add("point", new Point(490, 440));
-            hashtable.Add("color", Color.FromArgb(246,246,246));
+            hashtable.Add("color", Color.FromArgb(246, 246, 246));
             hashtable.Add("name", "btnAdd");
             hashtable.Add("text", "메뉴 등록");
             hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
@@ -153,12 +157,101 @@ namespace OBK.Views.AdminView
 
         private void btnImgAdd_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("이미지 첨부");
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.Filter = "Images only. |*.png; *.jpg; *.jpeg; *.gif;";
+
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                string filePath = openFile.FileName;
+                txtImg.Text = filePath;
+                image = Image.FromFile(filePath);
+
+                fileName = openFile.SafeFileName;
+                ext = fileName.Substring(fileName.LastIndexOf("."));
+
+                NameValueCollection nameValue = new NameValueCollection();
+                nameValue.Add("fileName", fileName);
+            }
+            else { }
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("메뉴 추가 완료");
+            if (comboCategory.SelectedIndex + 1 == 0 || txtMenu.Text == "" || txtPrice.Text == "" || txtImg.Text == "")
+            {
+                MessageBox.Show("모두 입력해주세요.");
+            }
+            else
+            {
+                WebClient wc = new WebClient();
+                NameValueCollection nameValue = new NameValueCollection();
+                nameValue.Add("fileName", fileName);
+
+                MemoryStream ms = new MemoryStream();
+                image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                byte[] imgData = ms.ToArray();
+
+                string fileData = Convert.ToBase64String(imgData);
+                nameValue.Add("fileData", fileData);
+
+                nameValue.Add("cNo", (comboCategory.SelectedIndex + 1).ToString());
+                nameValue.Add("mName", txtMenu.Text);
+                nameValue.Add("mPrice", txtPrice.Text);
+
+                if (cboxShot.Checked)
+                {
+                    nameValue.Add("DegreeYn", "1");
+                }
+                else
+                {
+                    nameValue.Add("DegreeYn", "0");
+                }
+
+                if (cboxSize.Checked)
+                {
+                    nameValue.Add("SizeYn", "1");
+                }
+                else
+                {
+                    nameValue.Add("SizeYn", "0");
+                }
+
+                if (cboxShot.Checked)
+                {
+                    nameValue.Add("ShotYn", "1");
+                }
+                else
+                {
+                    nameValue.Add("ShotYn", "0");
+                }
+
+                if (cboxWhip.Checked)
+                {
+                    nameValue.Add("CreamYn", "1");
+                }
+                else
+                {
+                    nameValue.Add("CreamYn", "0");
+                }
+                byte[] result = wc.UploadValues("http://localhost:5000/Menu/imageUpload", "POST", nameValue);
+                string resultStr = Encoding.UTF8.GetString(result);
+                if (resultStr == "1")
+                {
+                    MessageBox.Show("메뉴를 추가했습니다.");
+                    comboCategory.SelectedIndex = -1;
+                    txtMenu.Text = "";
+                    txtPrice.Text = "";
+                    txtImg.Text = "";
+                    cboxHot.Checked = false;
+                    cboxShot.Checked = false;
+                    cboxSize.Checked = false;
+                    cboxWhip.Checked = false;
+                }
+                else
+                {
+                    MessageBox.Show("다시 입력해 주세요.");
+                }
+            }
         }
     }
 }

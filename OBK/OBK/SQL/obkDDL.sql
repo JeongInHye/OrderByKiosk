@@ -24,7 +24,6 @@ create table Menu(
 	SizeYn int not null,
 	ShotYn int not null,
 	CreamYn int not null,
-	sellYn varchar(1) default ('Y'),
 	primary key (mNo),
 	CONSTRAINT FK_Menu_Category FOREIGN KEY (cNo) REFERENCES Category (cNo)
 );

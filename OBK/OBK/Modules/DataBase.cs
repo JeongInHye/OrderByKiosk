@@ -144,6 +144,31 @@ namespace OBK.Modules
             }
         }
 
+        public bool SelectCategory(string url,ComboBox cb)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                Stream stream = wc.OpenRead(url);
+                StreamReader sr = new StreamReader(stream);
+                string result = sr.ReadToEnd();
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(result);
+
+                string[] arr = new string[list.Count];
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray j = (JArray)list[i];
+                    arr[i] = j.Value<string>(1).ToString();
+                }
+                cb.Items.AddRange(arr);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public bool Post(string url, Hashtable ht)
         {
             try
