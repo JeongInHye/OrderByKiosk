@@ -57,39 +57,30 @@ namespace OBK.Views
             //=========head패널에 버튼부분==============
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(30, 10));
             hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn1");
-            hashtable.Add("text", "커피");
-            hashtable.Add("click", (EventHandler)btn1_click);
-            btn1 = draw.getButton(hashtable, head);
+            hashtable.Add("click", (EventHandler)btn_click);
+            ArrayList buttonlist = api.CategoryButton("http://192.168.3.17:5000/category/select", hashtable);
+            for (int i = 0; i < buttonlist.Count; i++)
+            {
+                Hashtable ht = (Hashtable)buttonlist[i];
+                switch (i)
+                {
+                    case 0:
+                        btn1 = draw.getButton(ht, head);
+                        break;
+                    case 1:
+                        btn2 = draw.getButton(ht, head);
+                        break;
+                    case 2:
+                        btn3 = draw.getButton(ht, head);
+                        break;
+                    case 3:
+                        btn4 = draw.getButton(ht, head);
+                        break;
+                    default: break;
+                }
 
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(220, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn2");
-            hashtable.Add("text", "음료");
-            hashtable.Add("click", (EventHandler)btn2_click);
-            btn2 = draw.getButton(hashtable, head);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(410, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn3");
-            hashtable.Add("text", "티");
-            hashtable.Add("click", (EventHandler)btn3_click);
-            btn3 = draw.getButton(hashtable, head);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(600, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn4");
-            hashtable.Add("text", "디저트");
-            hashtable.Add("click", (EventHandler)btn4_click);
-            btn4 = draw.getButton(hashtable, head);
+            }
             //============== bottom패널에 리스트뷰와 버튼================
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
