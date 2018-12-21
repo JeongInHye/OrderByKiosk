@@ -12,16 +12,17 @@ namespace OBK.Views.AdminView
 {
     class MenuDeleteView
     {
+        private WebAPI api;
         private Draw draw;
         private Form parentForm;
-        private ListView listCategory, listMenu;
+        private ListView listCategory, listMenu,listView;
         private Button btnMenuDelete;
+        private Label lblTitle;
         private Hashtable hashtable;
 
         public MenuDeleteView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }
@@ -29,32 +30,41 @@ namespace OBK.Views.AdminView
         private void getView()
         {
             hashtable = new Hashtable();
+            hashtable.Add("text", "메뉴 삭제");
+            hashtable.Add("width", 110);
+            hashtable.Add("point", new Point(20, 10));
+            hashtable.Add("font", new Font("고딕", 30, FontStyle.Bold));
+            hashtable.Add("name", "주문번호");
+            lblTitle = draw.getLabel(hashtable, parentForm);
+
+            hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
-            hashtable.Add("size", new Size(150, 300));
-            hashtable.Add("point", new Point(20, 30));
+            hashtable.Add("size", new Size(150, 350));
+            hashtable.Add("point", new Point(20, 70));
             hashtable.Add("name", "listCategory");
             hashtable.Add("click", (MouseEventHandler)listCategory_click);
             listCategory = draw.getListView1(hashtable, parentForm);
             listCategory.Columns.Add("", 0, HorizontalAlignment.Center);
             listCategory.Columns.Add("카테고리", 146, HorizontalAlignment.Center);
-            listCategory.Items.Add(new ListViewItem(new string[] { "", "커피" }));
-            listCategory.Items.Add(new ListViewItem(new string[] { "", "음료" }));
-            listCategory.Items.Add(new ListViewItem(new string[] { "", "티" }));
-            listCategory.Items.Add(new ListViewItem(new string[] { "", "디져트" }));
+            listCategory.ColumnWidthChanging += ListCategory_ColumnWidthChanging;
+            api = new WebAPI();
+            api.ListView("http://192.168.3.17:5000/category/select", listCategory);
 
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
-            hashtable.Add("size", new Size(490, 300));
-            hashtable.Add("point", new Point(170, 30));
+            hashtable.Add("size", new Size(490, 350));
+            hashtable.Add("point", new Point(170, 70));
             hashtable.Add("name", "listMenu");
             listMenu = draw.getListView(hashtable, parentForm);
-            listMenu.Columns.Add("", 50, HorizontalAlignment.Center);
-            listMenu.Columns.Add("메뉴", 430, HorizontalAlignment.Center);
-            listMenu.Items.Add(new ListViewItem(new string[] { " ", "아메리카노" }));
+            listMenu.Columns.Add("", 20, HorizontalAlignment.Center);
+            listMenu.Columns.Add("메뉴", 460, HorizontalAlignment.Center);
+            listMenu.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
+            listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(150, 50));
-            hashtable.Add("point", new Point(490, 440));
+            hashtable.Add("point", new Point(510, 440));
             hashtable.Add("color", Color.FromArgb(246, 246, 246));
             hashtable.Add("name", "btnAdd");
             hashtable.Add("text", "메뉴 삭제");
@@ -63,40 +73,62 @@ namespace OBK.Views.AdminView
             btnMenuDelete = draw.getButton1(hashtable, parentForm);
         }
 
-        private void btnMenuDelete_click(object sender, EventArgs e)
+        private void btnMenuDelete_click(object sender, EventArgs e)    // 메뉴 삭제
         {
-            MessageBox.Show("메뉴를 삭제했습니다.");
+            api = new WebAPI();
+            string mName = "";
+            bool one = true;
+
+            foreach (ListViewItem listitem in listMenu.Items)
+            {
+                if (listMenu.Items.Count > 0)
+                {
+                    for (int i = listMenu.Items.Count - 1; i >= 0; i--)
+                    {
+                        if (listMenu.Items[i].Checked == true)
+                        {
+                            mName = listMenu.Items[i].SubItems[1].Text;
+                            hashtable = new Hashtable();
+                            hashtable.Add("mName", mName);
+                            api.Post("http://192.168.3.31:5000/Menu/delete", hashtable);
+                            listMenu.Items[i].Remove();
+                            if (one)
+                            {
+                                MessageBox.Show("메뉴를 삭제했습니다.");
+                                one = false;
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
-        private void listCategory_click(object sender, MouseEventArgs e)
+        private void listCategory_click(object sender, MouseEventArgs e)    // 카테고리 선택하면 해당 매뉴 갖고오기
         {
-            //listView2.Clear();
+            api = new WebAPI();
 
-            //ListView listView = (ListView)sender;
-            //ListView.SelectedListViewItemCollection itemGroup = listView.SelectedItems;
-            //ListViewItem item1 = itemGroup[0];
+            listView = (ListView)sender;
+            ListView.SelectedListViewItemCollection itemGroup = listView.SelectedItems;
+            ListViewItem cNoitem = itemGroup[0];
 
-            //string sql = string.Format("select * from {0}", item1.SubItems[0].Text);
+            string cNo = cNoitem.SubItems[0].Text;
 
-            //MSsql mSsql = new MSsql();
-            //SqlDataReader dataReader = mSsql.Select(sql);
-            //bool Bool = true;
+            hashtable = new Hashtable();
+            hashtable.Add("cNo", cNo);
+            api.PostListview("http://192.168.3.31:5000/Menu/nameSelect", hashtable, listMenu);
+        }
 
-            //while (dataReader.Read())
-            //{
-            //    ListViewItem item = null;
-            //    for (int i = 0; i < dataReader.FieldCount; i++)
-            //    {
-            //        if (Bool) listView2.Columns.Add(dataReader.GetName(i), 80, HorizontalAlignment.Left);
+        private void ListMenu_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 메뉴리스트 칼럼 크기 조정 막음
+        {
+            e.NewWidth = listMenu.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
+        }
 
-            //        string value = dataReader.GetValue(i).ToString();
-            //        if (item == null) item = new ListViewItem(value);   // null이면 생성 만든다.
-            //        else item.SubItems.Add(value);
-            //    }
-            //    Bool = false;
-
-            //    listView2.Items.Add(item);
-            //}
+        private void ListCategory_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 카테고리 리트스 칼럼크기 막음
+        {
+            e.NewWidth = listCategory.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
         }
     }
 }

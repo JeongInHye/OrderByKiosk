@@ -68,7 +68,7 @@ namespace OBK.Modules
 
         private void GetAdminMenuLoad(object o, EventArgs a)    // AdminMenuForm(관리자메뉴)
         {
-            parentForm.Size = new Size(700, 800);
+            parentForm.Size = new Size(600, 700);
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.MaximizeBox = false;
             parentForm.MinimizeBox = false;
@@ -113,7 +113,7 @@ namespace OBK.Modules
         private void GetMenuSettingLoad(object o, EventArgs a)  // MenuSettingForm(메뉴관리)
         {
             parentForm.Size = new Size(900, 600);
-            parentForm.FormBorderStyle = FormBorderStyle.None;
+            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.StartPosition = FormStartPosition.CenterScreen;
             new MenuSettingView(parentForm);
         }
