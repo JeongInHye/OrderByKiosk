@@ -23,14 +23,13 @@ namespace OBK.Views.AdminView
         private TextBox txtMenu, txtPrice, txtImg;
         private Button btnImgAdd, btnAdd;
         private Hashtable hashtable;
-        Image image;
-        string fileName;
-        string ext;
+        private Image image;
+        private string fileName;
+        private string ext;
 
         public MenuAddView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }
@@ -155,7 +154,7 @@ namespace OBK.Views.AdminView
             btnAdd = draw.getButton1(hashtable, parentForm);
         }
 
-        private void btnImgAdd_Click(object sender, EventArgs e)
+        private void btnImgAdd_Click(object sender, EventArgs e)    // 이미지 선택하는 부분
         {
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "Images only. |*.png; *.jpg; *.jpeg; *.gif;";
@@ -175,7 +174,7 @@ namespace OBK.Views.AdminView
             else { }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private void btnAdd_Click(object sender, EventArgs e)   // 메뉴 추가하는 부분 + 이미지 보내기
         {
             if (comboCategory.SelectedIndex + 1 == 0 || txtMenu.Text == "" || txtPrice.Text == "" || txtImg.Text == "")
             {
@@ -198,7 +197,7 @@ namespace OBK.Views.AdminView
                 nameValue.Add("mName", txtMenu.Text);
                 nameValue.Add("mPrice", txtPrice.Text);
 
-                if (cboxShot.Checked)
+                if (cboxHot.Checked)
                 {
                     nameValue.Add("DegreeYn", "1");
                 }
@@ -233,8 +232,9 @@ namespace OBK.Views.AdminView
                 {
                     nameValue.Add("CreamYn", "0");
                 }
-                byte[] result = wc.UploadValues("http://localhost:5000/Menu/imageUpload", "POST", nameValue);
+                byte[] result = wc.UploadValues("http://192.168.3.31:5000/Menu/add", "POST", nameValue);
                 string resultStr = Encoding.UTF8.GetString(result);
+
                 if (resultStr == "1")
                 {
                     MessageBox.Show("메뉴를 추가했습니다.");

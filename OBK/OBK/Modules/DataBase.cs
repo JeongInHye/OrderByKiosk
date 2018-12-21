@@ -5,114 +5,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListView;
 
 namespace OBK.Modules
 {
-    class MYsql
-    {
-        private MySqlConnection conn;
-        public bool status;
-
-        public MYsql()
-        {
-            status = Connection();
-        }
-
-        private bool Connection()
-        {
-            string host = "192.168.3.8";
-            string user = "root";
-            string password = "1234";
-            string db = "obk";
-
-            string connStr = string.Format(@"server={0};user={1};password={2};database={3}", host, user, password, db);
-            MySqlConnection conn = new MySqlConnection(connStr);
-
-            try
-            {
-                conn.Open();
-                this.conn = conn;
-                //MessageBox.Show("MS-SQL 연결 성공!");
-                return true;
-            }
-            catch
-            {
-                conn.Close();
-                this.conn = null;
-                //MessageBox.Show("MS-SQL 연결 실패!");
-                return false;
-            }
-        }
-
-        public bool ConnectionClose()
-        {
-            try
-            {
-                conn.Close();
-                //MessageBox.Show("MS-SQL 연결끊기 성공!");
-                return true;
-            }
-            catch
-            {
-                //MessageBox.Show("MS-SQL 연결끊기 실패!");
-                return false;
-            }
-        }
-
-        public bool NonQuery(string sql)
-        {
-            try
-            {
-                if (status)
-                {
-                    MySqlCommand comm = new MySqlCommand(sql, conn);
-                    comm.ExecuteNonQuery();
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public MySqlDataReader Reader(string sql)
-        {
-            try
-            {
-                if (status)
-                {
-                    MySqlCommand comm = new MySqlCommand(sql, conn);
-                    return comm.ExecuteReader();
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public void ReaderClose(MySqlDataReader reader)
-        {
-            reader.Close();
-        }
-    }
-
-
     class WebAPI
     {
         public bool ListView(string url, ListView listView)
@@ -131,11 +34,22 @@ namespace OBK.Modules
                     string[] arr = new string[jArray.Count];
                     for (int j = 0; j < jArray.Count; j++)
                     {
-                        //MessageBox.Show(jArray[j].ToString());
                         arr[j] = jArray[j].ToString();
                     }
                     listView.Items.Add(new ListViewItem(arr));
+                    listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+                    listView.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
                 }
+
+                ListViewItemCollection col = listView.Items;
+                for (int j = 0; j < col.Count; j++)
+                {
+                    for (int k = 0; k < col[j].SubItems.Count; k++)
+                    {
+                        col[j].SubItems[k].Font = new Font("맑은 고딕", 12, FontStyle.Regular);
+                    }
+                }
+
                 return true;
             }
             catch
@@ -144,7 +58,7 @@ namespace OBK.Modules
             }
         }
 
-        public bool SelectCategory(string url,ComboBox cb)
+        public bool SelectCategory(string url, ComboBox cb)
         {
             try
             {
@@ -161,6 +75,7 @@ namespace OBK.Modules
                     arr[i] = j.Value<string>(1).ToString();
                 }
                 cb.Items.AddRange(arr);
+                cb.Font = new Font("맑은 고딕", 13, FontStyle.Bold);
                 return true;
             }
             catch
@@ -186,14 +101,114 @@ namespace OBK.Modules
 
                 if ("1" == resultStr)
                 {
-                    MessageBox.Show("성공");
+                    MessageBox.Show("DB 성공");
                 }
                 else
                 {
-                    MessageBox.Show("실패");
+                    MessageBox.Show("DB 실패");
                 }
-                //MessageBox.Show(resultStr);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
 
+        public bool PostListview(string url, Hashtable hashtable, ListView listView)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                NameValueCollection nameValue = new NameValueCollection();
+
+                foreach (DictionaryEntry data in hashtable)
+                {
+                    nameValue.Add(data.Key.ToString(), data.Value.ToString());
+                }
+
+                byte[] result = wc.UploadValues(url, "POST", nameValue);
+                string resultStr = Encoding.UTF8.GetString(result);
+
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
+                listView.Items.Clear();
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray jArray = (JArray)list[i];
+                    string[] arr = new string[jArray.Count];
+                    for (int j = 0; j < jArray.Count; j++)
+                    {
+                        arr[j] = jArray[j].ToString();
+
+                    }
+                    listView.Items.Add(new ListViewItem(arr));
+                    listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+
+                    listView.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
+                }
+
+                ListViewItemCollection col = listView.Items;
+                for (int j = 0; j < col.Count; j++)
+                {
+                    for (int k = 0; k < col[j].SubItems.Count; k++)
+                    {
+                        col[j].SubItems[k].Font = new Font("맑은 고딕", 12, FontStyle.Regular);
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool MenuEdeitSelect(string url, Hashtable hashtable, TextBox txtMenu, TextBox txtPrice, TextBox txtImg, CheckBox cboxHot, CheckBox cboxSize, CheckBox cboxShot, CheckBox cboxWhip)  // 선택한 메뉴 select 해서 값 넣어주기
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                NameValueCollection nameValue = new NameValueCollection();
+
+                foreach (DictionaryEntry data in hashtable)
+                {
+                    nameValue.Add(data.Key.ToString(), data.Value.ToString());
+                }
+
+                byte[] result = wc.UploadValues(url, "POST", nameValue);
+                string resultStr = Encoding.UTF8.GetString(result);
+
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray jArray = (JArray)list[i];
+
+                    txtMenu.Text = jArray[0].ToString();
+                    txtMenu.Font = new Font("맑은 고딕", 12, FontStyle.Regular);
+                    txtPrice.Text = jArray[1].ToString();
+                    txtPrice.Font = new Font("맑은 고딕", 12, FontStyle.Regular);
+                    txtImg.Text = jArray[2].ToString();
+                    txtImg.Font = new Font("맑은 고딕", 12, FontStyle.Regular);
+
+                    if (jArray[3].ToString() == "1")
+                    {
+                        cboxHot.CheckState = CheckState.Checked;
+                    }
+                    if (jArray[4].ToString() == "1")
+                    {
+                        cboxSize.CheckState = CheckState.Checked;
+                    }
+                    if (jArray[5].ToString() == "1")
+                    {
+                        cboxShot.CheckState = CheckState.Checked;
+                    }
+                    if (jArray[6].ToString() == "1")
+                    {
+                        cboxWhip.CheckState = CheckState.Checked;
+                    }
+                }
                 return true;
             }
             catch (Exception)

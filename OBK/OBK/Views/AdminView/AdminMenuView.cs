@@ -16,13 +16,12 @@ namespace OBK.Views.AdminView
         private Draw draw;
         private Form parentForm, tagetForm;
         private Label lb_main;
-        private Button btn1,btn2,btn3,btn4;
+        private Button btn1, btn2, btn3;
         private Hashtable hashtable;
 
         public AdminMenuView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }
@@ -30,41 +29,44 @@ namespace OBK.Views.AdminView
         private void getView()
         {
             hashtable = new Hashtable();
-            hashtable.Add("text", "관리자 메인 화면");
-            hashtable.Add("point", new Point(170, 50));
+            hashtable.Add("text", "관리자 모드");
+            hashtable.Add("point", new Point(160, 70));
             hashtable.Add("font", new Font("맑은고딕", 40, FontStyle.Bold));
             hashtable.Add("name", "lb_main");
             lb_main = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(500, 80));
-            hashtable.Add("point", new Point(100, 300));
+            hashtable.Add("point", new Point(50, 250));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "매출 현황");
+            hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btn1_click);
-            btn1 = draw.getButton(hashtable, parentForm);
+            btn1 = draw.getButton1(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(500, 80));
-            hashtable.Add("point", new Point(100, 420));
+            hashtable.Add("point", new Point(50, 400));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn2");
             hashtable.Add("text", "메뉴 관리");
+            hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btn2_click);
-            btn2 = draw.getButton(hashtable, parentForm);
+            btn2 = draw.getButton1(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(500, 80));
-            hashtable.Add("point", new Point(100, 540));
+            hashtable.Add("point", new Point(50, 540));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "품절 목록");
+            hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btn3_click);
-            btn3 = draw.getButton(hashtable, parentForm);
+            btn3 = draw.getButton1(hashtable, parentForm);
         }
 
-        private void btn1_click(object sender, EventArgs e)
+        private void btn1_click(object sender, EventArgs e) // 매출 현황
         {
             parentForm.Visible = false;
 
@@ -74,7 +76,7 @@ namespace OBK.Views.AdminView
             tagetForm.Show();
         }
 
-    private void btn2_click(object sender, EventArgs e)
+        private void btn2_click(object sender, EventArgs e) // 메뉴 관리
         {
             parentForm.Visible = false;
 
@@ -84,7 +86,7 @@ namespace OBK.Views.AdminView
             tagetForm.Show();
         }
 
-        private void btn3_click(object sender, EventArgs e)
+        private void btn3_click(object sender, EventArgs e) // 품절 목록
         {
             parentForm.Visible = false;
 
@@ -94,7 +96,7 @@ namespace OBK.Views.AdminView
             tagetForm.Show();
         }
 
-        private void Exit_click(object sender, FormClosedEventArgs e)
+        private void Exit_click(object sender, FormClosedEventArgs e)   // 부모 폼 닫음
         {
             parentForm.Close();
         }
