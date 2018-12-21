@@ -13,10 +13,10 @@ namespace OBK.Forms
 {
     public partial class MenuForm : Form
     {
-        public MenuForm(int mNo)
+        public MenuForm(Form parentForm,int mNo)
         {
             InitializeComponent();
-            Load load = new Load(this,mNo);
+            Load load = new Load(this,mNo, parentForm);
             Load += load.GetHandler("menu");
         }
     }

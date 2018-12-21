@@ -23,7 +23,6 @@ namespace OBK.Views
         public BillView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }

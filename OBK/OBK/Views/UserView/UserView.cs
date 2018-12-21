@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListView;
 
 namespace OBK.Views
 {
@@ -81,7 +82,7 @@ namespace OBK.Views
                         break;
                     default: break;
                 }
-
+                
             }
             //============== bottom패널에 리스트뷰와 버튼================
             hashtable = new Hashtable();
@@ -90,14 +91,19 @@ namespace OBK.Views
             hashtable.Add("point", new Point(5, 5));
             hashtable.Add("size", new Size(600, 220));
             hashtable.Add("click", (MouseEventHandler)listView_click);
-            lv = draw.getListView(hashtable, bottom);
+            lv = draw.getListView1(hashtable, bottom);
             lv.Columns.Add("", 0, HorizontalAlignment.Center);
             lv.Columns.Add("메뉴이름", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("가격", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("수량", 200, HorizontalAlignment.Center);
+            lv.Columns.Add("샷추가", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("휘핑", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("가격", 100, HorizontalAlignment.Center);
+            lv.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lv.Font = new Font("맑은고딕", 14, FontStyle.Bold);
+            api.ListView("http://192.168.3.17:5000/orderlist/select",lv);
 
             hashtable = new Hashtable();
-            hashtable.Add("text", "총 가격 : 30,000원");
+            hashtable.Add("text", "");
             hashtable.Add("width", 610);
             hashtable.Add("point", new Point(0, 230));
             hashtable.Add("name", "totalprice");
@@ -131,17 +137,32 @@ namespace OBK.Views
             hashtable.Add("click", (EventHandler)btn13_click);
             btn13 = draw.getButton(hashtable, bottom);
 
-            //btn1.BackColor = Color.White;
-
+            btn1.BackColor = Color.White;
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
             tagetForm.Show();
-
+            OrderlistLoad();
         }
 
-
+        private void OrderlistLoad()
+        {
+            int allprice = 0;
+            ListViewItemCollection col = lv.Items;
+            for(int j = 0; j < col.Count; j++)
+            {
+                for (int k = 0; k < col[j].SubItems.Count; k++)
+                {
+                    col[j].SubItems[k].Font = new Font("맑은고딕", 12, FontStyle.Regular);
+                }
+            }
+            for (int i = 0; i < lv.Items.Count; i++)
+            {
+                allprice += Convert.ToInt32(lv.Items[i].SubItems[5].Text)* Convert.ToInt32(lv.Items[i].SubItems[4].Text);
+            }
+            label.Text = "총 가격 : " + allprice + "원";
+        }
 
         private void btn11_click(object sender, EventArgs e)
         {
@@ -187,7 +208,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
                     tagetForm.Show();
                     break;
                 case "btn2":
@@ -200,7 +221,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
                     tagetForm.Show();
                     break;
                 case "btn3":
@@ -213,7 +234,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
                     tagetForm.Show();
                     break;
                 case "btn4":
@@ -226,7 +247,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
                     tagetForm.Show();
                     break;
                 default:

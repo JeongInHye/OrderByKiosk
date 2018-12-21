@@ -173,7 +173,7 @@ namespace OBK.Modules
         public PictureBox getPictureBox(Hashtable hashtable,Control parentDomain)
         {
             PictureBox pictureBox = new PictureBox();
-            //pictureBox.Image = ()
+            pictureBox.BackgroundImage = (Image)hashtable["image"];
             pictureBox.Location = (Point)hashtable["point"];
             pictureBox.Size = (Size)hashtable["size"];
             pictureBox.BackColor = (Color)hashtable["color"];
