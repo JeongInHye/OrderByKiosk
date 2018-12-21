@@ -13,61 +13,61 @@ namespace OBK.Views
 {
     class MenuView
     {
-        private Form parentForm;
+        private Form parentForm,targetForm;
         private Draw draw;
         private Hashtable hashtable;
-        private int mNo;
-        private Panel panel;
-        public MenuView(Form parentForm,int mNo)
+        private int cNo;
+        private WebAPI api;
+
+        public MenuView(Form parentForm,Form targetForm, int cNo)
         {
             this.parentForm = parentForm;
-            this.mNo = mNo;
-            //db = new MYsql();
+            this.targetForm = targetForm;
+            this.cNo = cNo;
             draw = new Draw();
             getView();
         }
 
         private void getView()
         {
-            switch (mNo)
+            targetForm.BackColor = Color.WhiteSmoke;
+            api = new WebAPI();
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(170, 170));
+            hashtable.Add("color", Color.BurlyWood);
+            hashtable.Add("click", (EventHandler)menu_click);
+            hashtable.Add("font", new Font("굴림", 12, FontStyle.Bold));
+            Hashtable ht = new Hashtable();
+            ht.Add("cNo", cNo);
+            Hashtable hashtable2 = new Hashtable();
+            hashtable2.Add("click", (EventHandler)menu_click);
+            if (!api.MenuPrint("http://192.168.3.17:5000/menu/select", ht, hashtable, hashtable2, targetForm))
             {
-                case 1:
-                    for(int i = 0; i < 4; i++)
-                    {
-                        for(int j = 0; j < 20; j++)
-                        {
-                            hashtable = new Hashtable();
-                            hashtable.Add("type", "");
-                            hashtable.Add("size", new Size(170, 140));
-                            hashtable.Add("point", new Point(20+190*i, 20+160*j));
-                            hashtable.Add("color", Color.BurlyWood);
-                            hashtable.Add("name", "i"+i+"j"+j);
-                            hashtable.Add("click",(EventHandler)menu_click);
-                            panel = draw.getPanel(hashtable, parentForm);
-                        }
-                    }
-                    break;
-                case 2:
-                    parentForm.BackColor = Color.AliceBlue;
-                    break;
-                case 3:
-                    parentForm.BackColor = Color.AntiqueWhite;
-                    break;
-                case 4:
-                    parentForm.BackColor = Color.Aqua;
-                    break;
+                MessageBox.Show("메뉴 불러오기 실패...");
             }
         }
 
         private void menu_click(object sender, EventArgs e)
         {
-            Panel panel = (Panel)sender;
-            //MessageBox.Show(panel.Name);
+            Button button = (Button)sender;
+            Menuclick(button.Name);
+        }
 
-            ChoiceForm cf = new ChoiceForm();
-            cf.StartPosition = FormStartPosition.CenterParent;
+        private void Menuclick(string name)
+        {
+            string mName = name.Substring(name.IndexOf("_")+1);
+            //MessageBox.Show(mName);
             
-            cf.ShowDialog();
+            ChoiceForm choiceForm = new ChoiceForm(mName);
+            choiceForm.StartPosition = FormStartPosition.CenterParent;
+            choiceForm.FormClosed += choiceForm_FormClosed;
+            choiceForm.ShowDialog();
+        }
+
+        private void choiceForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Choice 선택폼이 닫히게 되면 기존의 UserForm을 업데이트해주기 위한 이벤트
+
         }
     }
 }

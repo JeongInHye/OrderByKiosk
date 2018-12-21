@@ -8,11 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.ListView;
 
 namespace OBK.Views
 {
     class UserView
     {
+        private WebAPI api;
         private Panel head, menu, bottom;
         private Form parentForm, tagetForm;
         private Hashtable hashtable;
@@ -20,12 +22,13 @@ namespace OBK.Views
         private Button btn1, btn2, btn3, btn4, btn11, btn12, btn13;
         private ListView lv;
         private Label label;
-        private int menuclick=1;
+        private int menuclick = 1;
         public UserView(Form parentForm)
         {
             this.parentForm = parentForm;
             //db = new MYsql();
             draw = new Draw();
+            api = new WebAPI();
             getView();
         }
 
@@ -57,39 +60,30 @@ namespace OBK.Views
             //=========head패널에 버튼부분==============
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(30, 10));
             hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn1");
-            hashtable.Add("text", "커피");
-            hashtable.Add("click", (EventHandler)btn1_click);
-            btn1 = draw.getButton(hashtable, head);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(220, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn2");
-            hashtable.Add("text", "음료");
-            hashtable.Add("click", (EventHandler)btn2_click);
-            btn2 = draw.getButton(hashtable, head);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(410, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn3");
-            hashtable.Add("text", "티");
-            hashtable.Add("click", (EventHandler)btn3_click);
-            btn3 = draw.getButton(hashtable, head);
-
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(160, 100));
-            hashtable.Add("point", new Point(600, 10));
-            hashtable.Add("color", Color.LightGray);
-            hashtable.Add("name", "btn4");
-            hashtable.Add("text", "디저트");
-            hashtable.Add("click", (EventHandler)btn4_click);
-            btn4 = draw.getButton(hashtable, head);
+            hashtable.Add("click", (EventHandler)btn_click);
+            ArrayList buttonlist = api.CategoryButton("http://192.168.3.17:5000/category/select", hashtable);
+            for (int i = 0; i < buttonlist.Count; i++)
+            {
+                Hashtable ht = (Hashtable)buttonlist[i];
+                switch (i)
+                {
+                    case 0:
+                        btn1 = draw.getButton(ht, head);
+                        break;
+                    case 1:
+                        btn2 = draw.getButton(ht, head);
+                        break;
+                    case 2:
+                        btn3 = draw.getButton(ht, head);
+                        break;
+                    case 3:
+                        btn4 = draw.getButton(ht, head);
+                        break;
+                    default: break;
+                }
+                
+            }
             //============== bottom패널에 리스트뷰와 버튼================
             hashtable = new Hashtable();
             hashtable.Add("color", Color.White);
@@ -97,14 +91,19 @@ namespace OBK.Views
             hashtable.Add("point", new Point(5, 5));
             hashtable.Add("size", new Size(600, 220));
             hashtable.Add("click", (MouseEventHandler)listView_click);
-            lv = draw.getListView(hashtable, bottom);
+            lv = draw.getListView1(hashtable, bottom);
             lv.Columns.Add("", 0, HorizontalAlignment.Center);
             lv.Columns.Add("메뉴이름", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("가격", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("수량", 200, HorizontalAlignment.Center);
+            lv.Columns.Add("샷추가", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("휘핑", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("가격", 100, HorizontalAlignment.Center);
+            lv.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            lv.Font = new Font("맑은고딕", 14, FontStyle.Bold);
+            api.ListView("http://192.168.3.17:5000/orderlist/select",lv);
 
             hashtable = new Hashtable();
-            hashtable.Add("text", "총 가격 : 30,000원");
+            hashtable.Add("text", "");
             hashtable.Add("width", 610);
             hashtable.Add("point", new Point(0, 230));
             hashtable.Add("name", "totalprice");
@@ -139,16 +138,31 @@ namespace OBK.Views
             btn13 = draw.getButton(hashtable, bottom);
 
             btn1.BackColor = Color.White;
-
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
             tagetForm.Show();
-
+            OrderlistLoad();
         }
 
-
+        private void OrderlistLoad()
+        {
+            int allprice = 0;
+            ListViewItemCollection col = lv.Items;
+            for(int j = 0; j < col.Count; j++)
+            {
+                for (int k = 0; k < col[j].SubItems.Count; k++)
+                {
+                    col[j].SubItems[k].Font = new Font("맑은고딕", 12, FontStyle.Regular);
+                }
+            }
+            for (int i = 0; i < lv.Items.Count; i++)
+            {
+                allprice += Convert.ToInt32(lv.Items[i].SubItems[5].Text)* Convert.ToInt32(lv.Items[i].SubItems[4].Text);
+            }
+            label.Text = "총 가격 : " + allprice + "원";
+        }
 
         private void btn11_click(object sender, EventArgs e)
         {
@@ -179,66 +193,68 @@ namespace OBK.Views
 
         }
 
-        //=====커피 버튼을 눌렀을때 menu패널에 커피에 대한 메뉴들 출력=====
-        private void btn1_click(object sender, EventArgs e)
+        private void btn_click(object sender, EventArgs e) //카테고리 버튼 클릭 이벤트
         {
-            menuclick = 1;
+            Button b = (Button)sender;
+            switch (b.Name)
+            {
+                case "btn1":
+                    menuclick = 1;
+                    btn1.BackColor = Color.White;
+                    btn2.BackColor = Color.LightGray;
+                    btn3.BackColor = Color.LightGray;
+                    btn4.BackColor = Color.LightGray;
 
-            btn1.BackColor = Color.White;
-            btn2.BackColor = Color.LightGray;
-            btn3.BackColor = Color.LightGray;
-            btn4.BackColor = Color.LightGray;
+                    // form 초기화
+                    if (tagetForm != null) tagetForm.Dispose();
+                    // form 호출
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+                    tagetForm.Show();
+                    break;
+                case "btn2":
+                    menuclick = 2;
+                    btn1.BackColor = Color.LightGray;
+                    btn2.BackColor = Color.White;
+                    btn3.BackColor = Color.LightGray;
+                    btn4.BackColor = Color.LightGray;
 
-            // form 초기화
-            if (tagetForm != null) tagetForm.Dispose();
-            // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
-            tagetForm.Show();
+                    // form 초기화
+                    if (tagetForm != null) tagetForm.Dispose();
+                    // form 호출
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+                    tagetForm.Show();
+                    break;
+                case "btn3":
+                    menuclick = 3;
+                    btn1.BackColor = Color.LightGray;
+                    btn2.BackColor = Color.LightGray;
+                    btn3.BackColor = Color.White;
+                    btn4.BackColor = Color.LightGray;
+
+                    // form 초기화
+                    if (tagetForm != null) tagetForm.Dispose();
+                    // form 호출
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+                    tagetForm.Show();
+                    break;
+                case "btn4":
+                    menuclick = 4;
+                    btn1.BackColor = Color.LightGray;
+                    btn2.BackColor = Color.LightGray;
+                    btn3.BackColor = Color.LightGray;
+                    btn4.BackColor = Color.White;
+
+                    // form 초기화
+                    if (tagetForm != null) tagetForm.Dispose();
+                    // form 호출
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+                    tagetForm.Show();
+                    break;
+                default:
+                    break;
+            }
+
         }
-        //=====음료 버튼을 눌렀을때 menu패널에 음료에 대한 메뉴들 출력=====
-        private void btn2_click(object sender, EventArgs e)
-        {
-            menuclick = 2;
 
-            btn1.BackColor = Color.LightGray;
-            btn2.BackColor = Color.White;
-            btn3.BackColor = Color.LightGray;
-            btn4.BackColor = Color.LightGray;
-            // form 초기화
-            if (tagetForm != null) tagetForm.Dispose();
-            // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
-            tagetForm.Show();
-        }
-        //=====티 버튼을 눌렀을때 menu패널에 티에 대한 메뉴들 출력=====
-        private void btn3_click(object sender, EventArgs e)
-        {
-            menuclick = 3;
-
-            btn1.BackColor = Color.LightGray;
-            btn2.BackColor = Color.LightGray;
-            btn3.BackColor = Color.White;
-            btn4.BackColor = Color.LightGray;
-            // form 초기화
-            if (tagetForm != null) tagetForm.Dispose();
-            // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
-            tagetForm.Show();
-        }
-        //=====디저트 버튼을 눌렀을때 menu패널에 디저트에 대한 메뉴들 출력=====
-        private void btn4_click(object sender, EventArgs e)
-        {
-            menuclick = 4;
-
-            btn1.BackColor = Color.LightGray;
-            btn2.BackColor = Color.LightGray;
-            btn3.BackColor = Color.LightGray;
-            btn4.BackColor = Color.White;
-            // form 초기화
-            if (tagetForm != null) tagetForm.Dispose();
-            // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(menuclick), menu);
-            tagetForm.Show();
-        }
     }
 }

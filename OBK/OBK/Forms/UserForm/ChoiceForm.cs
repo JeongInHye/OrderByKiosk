@@ -19,5 +19,12 @@ namespace OBK.Forms
             Load load = new Load(this);
             Load += load.GetHandler("choice");
         }
+
+        public ChoiceForm(string mName)
+        {
+            InitializeComponent();
+            Load load = new Load(this, mName);
+            Load += load.GetHandler("choice");
+        }
     }
 }

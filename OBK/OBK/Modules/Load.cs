@@ -12,18 +12,33 @@ namespace OBK.Modules
     class Load
     {
         private Form parentForm;
+        private Form parent;//mdi를 사용할때 부모폼을 불러오기 위한 변수
         private object oDB;
-        private int mNo=0;
+        private int cNo = 0;
+        private string mName = "";
 
         public Load(Form parentForm)
         {
             this.parentForm = parentForm;
         }
 
-        public Load(Form parentForm,int mNo)
+        public Load(Form parentForm,int cNo)
         {
             this.parentForm = parentForm;
-            this.mNo = mNo;
+            this.cNo = cNo;
+        }
+
+        public Load(Form parentForm, int cNo,Form parent)
+        {
+            this.parentForm = parentForm;
+            this.cNo = cNo;
+            this.parent = parent;
+        }
+
+        public Load(Form parentForm, string mName)
+        {
+            this.parentForm = parentForm;
+            this.mName = mName;
         }
 
         public Load(Form parentForm, object oDB)
@@ -77,7 +92,7 @@ namespace OBK.Modules
             parentForm.MinimizeBox = false;
             parentForm.Text = "선택화면";
             parentForm.BackColor = Color.White;
-            new ChoiceView(parentForm);
+            new ChoiceView(parentForm, mName);
         }
         private void GetMenuLoad(object o, EventArgs a)
         {
@@ -87,13 +102,14 @@ namespace OBK.Modules
             parentForm.MinimizeBox = false;
             parentForm.AutoScroll = true;
             parentForm.Text = "메뉴";
-            new MenuView(parentForm,mNo);
+            new MenuView(parent,parentForm, cNo);
         }
         private void GetPayLoad(object o, EventArgs a)      // 결제
         {
             parentForm.IsMdiContainer = false;
+            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            parentForm.BackColor = Color.White;
             parentForm.Size = new Size(800, 900);
-            parentForm.FormBorderStyle = FormBorderStyle.None;
             new PayView(parentForm);
         }
         private void GetUserLoad(object o, EventArgs a)
