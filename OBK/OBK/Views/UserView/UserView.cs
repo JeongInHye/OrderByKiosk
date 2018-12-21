@@ -94,12 +94,13 @@ namespace OBK.Views
             lv = draw.getListView1(hashtable, bottom);
             lv.Columns.Add("", 0, HorizontalAlignment.Center);
             lv.Columns.Add("메뉴이름", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("샷추가", 100, HorizontalAlignment.Center);
-            lv.Columns.Add("휘핑", 100, HorizontalAlignment.Center);
-            lv.Columns.Add("수량", 100, HorizontalAlignment.Center);
-            lv.Columns.Add("가격", 100, HorizontalAlignment.Center);
+            lv.Columns.Add("샷추가", 80, HorizontalAlignment.Center);
+            lv.Columns.Add("휘핑", 90, HorizontalAlignment.Center);
+            lv.Columns.Add("수량", 80, HorizontalAlignment.Center);
+            lv.Columns.Add("가격", 145, HorizontalAlignment.Center);
             lv.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lv.Font = new Font("맑은고딕", 14, FontStyle.Bold);
+            lv.ColumnWidthChanging += ListView_ColumnWidthChanging;
             api.ListView("http://192.168.3.17:5000/orderlist/select",lv);
 
             hashtable = new Hashtable();
@@ -193,6 +194,12 @@ namespace OBK.Views
 
         }
 
+        private void ListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 카테고리 리트스 칼럼크기 막음
+        {
+            e.NewWidth = lv.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
+        }
+
         private void btn_click(object sender, EventArgs e) //카테고리 버튼 클릭 이벤트
         {
             Button b = (Button)sender;
@@ -255,6 +262,6 @@ namespace OBK.Views
             }
 
         }
-
+        
     }
 }

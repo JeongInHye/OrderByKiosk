@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.Control;
 
 namespace OBK.Views
 {
@@ -67,7 +68,7 @@ namespace OBK.Views
         private void choiceForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             //Choice 선택폼이 닫히게 되면 기존의 UserForm을 업데이트해주기 위한 이벤트
-
+            
         }
     }
 }
