@@ -231,7 +231,7 @@ namespace OBK.Views.AdminView
 
             hashtable = new Hashtable();
             hashtable.Add("cNo", cNo);
-            api.PostListview("http://192.168.3.31:5000/Menu/nameSelect", hashtable, listMenu);
+            api.PostListview(Program.serverUrl + "Menu/nameSelect", hashtable, listMenu);
         }
 
         private void btnEdit_click(object sender, EventArgs e)
@@ -241,7 +241,7 @@ namespace OBK.Views.AdminView
 
             hashtable = new Hashtable();
             hashtable.Add("mName", mName);
-            api.MenuEdeitSelect("http://192.168.3.31:5000/Menu/menuEdeitSelect", hashtable, txtMenu, txtPrice, txtImg, cboxHot, cboxSize, cboxShot, cboxWhip);
+            api.MenuEdeitSelect(Program.serverUrl + "Menu/menuEdeitSelect", hashtable, txtMenu, txtPrice, txtImg, cboxHot, cboxSize, cboxShot, cboxWhip);
         }
 
         private void btnImgAdd_Click(object sender, EventArgs e)    // 이미지 로컬에서 불러오기
@@ -310,7 +310,7 @@ namespace OBK.Views.AdminView
                 if (cboxWhip.Checked) nameValue.Add("CreamYn", "1");
                 else nameValue.Add("CreamYn", "0");
 
-                byte[] result = wc.UploadValues("http://192.168.3.31:5000/Menu/menuEdeit", "POST", nameValue);
+                byte[] result = wc.UploadValues(Program.serverUrl + "Menu/menuEdeit", "POST", nameValue);
                 string resultStr = Encoding.UTF8.GetString(result);
 
                 if (resultStr == "1")
@@ -327,7 +327,7 @@ namespace OBK.Views.AdminView
                     api = new WebAPI();
                     hashtable = new Hashtable();
                     hashtable.Add("cNo", cNo);
-                    api.PostListview("http://192.168.3.31:5000/Menu/nameSelect", hashtable, listMenu);
+                    api.PostListview(Program.serverUrl + "Menu/nameSelect", hashtable, listMenu);
 
                     panelTwo.Visible = false;
                     panelOne.Show();

@@ -232,7 +232,7 @@ namespace OBK.Views.AdminView
                 {
                     nameValue.Add("CreamYn", "0");
                 }
-                byte[] result = wc.UploadValues("http://192.168.3.31:5000/Menu/add", "POST", nameValue);
+                byte[] result = wc.UploadValues(Program.serverUrl + "Menu/add", "POST", nameValue);
                 string resultStr = Encoding.UTF8.GetString(result);
 
                 if (resultStr == "1")

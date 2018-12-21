@@ -90,7 +90,7 @@ namespace OBK.Views.AdminView
                             mName = listMenu.Items[i].SubItems[1].Text;
                             hashtable = new Hashtable();
                             hashtable.Add("mName", mName);
-                            api.Post("http://192.168.3.31:5000/Menu/delete", hashtable);
+                            api.Post(Program.serverUrl + "Menu/delete", hashtable);
                             listMenu.Items[i].Remove();
                             if (one)
                             {
@@ -116,7 +116,7 @@ namespace OBK.Views.AdminView
 
             hashtable = new Hashtable();
             hashtable.Add("cNo", cNo);
-            api.PostListview("http://192.168.3.31:5000/Menu/nameSelect", hashtable, listMenu);
+            api.PostListview(Program.serverUrl + "Menu/nameSelect", hashtable, listMenu);
         }
 
         private void ListMenu_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 메뉴리스트 칼럼 크기 조정 막음

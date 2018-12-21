@@ -12,11 +12,13 @@ namespace OBK.Views.StaffView
 {
     class SoldoutAddView
     {
+        private WebAPI api;
         private Draw draw;
         private Form parentForm;
         private Hashtable hashtable;
         private ListView listCategory, listMenu;
         private Button btnSoldoutAdd;
+        private string cNo;
 
         public SoldoutAddView(Form parentForm)
         {
@@ -36,12 +38,9 @@ namespace OBK.Views.StaffView
             listCategory = draw.getListView1(hashtable, parentForm);
             listCategory.Columns.Add("", 0, HorizontalAlignment.Center);
             listCategory.Columns.Add("카테고리", 146, HorizontalAlignment.Center);
-            listCategory.Items.Add(new ListViewItem(new string[] { "", "커피" }));
-            listCategory.Items.Add(new ListViewItem(new string[] { "", "음료" }));
-            listCategory.Items.Add(new ListViewItem(new string[] { "", "티" }));
-            listCategory.Items.Add(new ListViewItem(new string[] { "", "디져트" }));
-
-
+            listCategory.ColumnWidthChanging += ListCategory_ColumnWidthChanging;
+            api = new WebAPI();
+            api.ListView(Program.serverUrl + "category/select", listCategory);
 
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
@@ -51,9 +50,9 @@ namespace OBK.Views.StaffView
             listMenu = draw.getListView(hashtable, parentForm);
             listMenu.Columns.Add("", 50, HorizontalAlignment.Center);
             listMenu.Columns.Add("메뉴", 440, HorizontalAlignment.Center);
-            listMenu.Items.Add(new ListViewItem(new string[] { " ", "아메리카노" }));
-
-
+            listMenu.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
+            listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 60));
@@ -63,11 +62,14 @@ namespace OBK.Views.StaffView
             hashtable.Add("text", "품절추가");
             hashtable.Add("click", (EventHandler)btnSoldoutAdd_click);
             btnSoldoutAdd = draw.getButton(hashtable, parentForm);
-
         }
 
         private void btnSoldoutAdd_click(object o, EventArgs a)
         {
+            api = new WebAPI();
+            string mName = "";
+            bool one = true;
+
             foreach (ListViewItem listitem in listMenu.Items)
             {
                 if (listMenu.Items.Count > 0)
@@ -76,8 +78,16 @@ namespace OBK.Views.StaffView
                     {
                         if (listMenu.Items[i].Checked == true)
                         {
+                            mName = listMenu.Items[i].SubItems[1].Text;
+                            hashtable = new Hashtable();
+                            hashtable.Add("mName", mName);
+                            api.Post(Program.serverUrl + "Staff/soldOutAdd", hashtable);
                             listMenu.Items[i].Remove();
-                            MessageBox.Show("품절추가 완료");
+                            if (one)
+                            {
+                                MessageBox.Show("asdfasdfasd");
+                                one = false;
+                            }
                         }
                     }
                 }
@@ -86,33 +96,30 @@ namespace OBK.Views.StaffView
 
         private void listCategory_click(object sender, MouseEventArgs e)
         {
-            //listView2.Clear();
+            api = new WebAPI();
 
-            //ListView listView = (ListView)sender;
-            //ListView.SelectedListViewItemCollection itemGroup = listView.SelectedItems;
-            //ListViewItem item1 = itemGroup[0];
+            ListView listView = (ListView)sender;
+            ListView.SelectedListViewItemCollection itemGroup = listView.SelectedItems;
+            ListViewItem cNoitem = itemGroup[0];
 
-            //string sql = string.Format("select * from {0}", item1.SubItems[0].Text);
+            cNo = cNoitem.SubItems[0].Text;
 
-            //MSsql mSsql = new MSsql();
-            //SqlDataReader dataReader = mSsql.Select(sql);
-            //bool Bool = true;
-
-            //while (dataReader.Read())
-            //{
-            //    ListViewItem item = null;
-            //    for (int i = 0; i < dataReader.FieldCount; i++)
-            //    {
-            //        if (Bool) listView2.Columns.Add(dataReader.GetName(i), 80, HorizontalAlignment.Left);
-
-            //        string value = dataReader.GetValue(i).ToString();
-            //        if (item == null) item = new ListViewItem(value);   // null이면 생성 만든다.
-            //        else item.SubItems.Add(value);
-            //    }
-            //    Bool = false;
-
-            //    listView2.Items.Add(item);
-            //}
+            hashtable = new Hashtable();
+            hashtable.Add("cNo", cNo);
+            api.PostListview(Program.serverUrl + "Menu/nameSelect", hashtable, listMenu);
         }
+
+        private void ListCategory_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 카테고리 리트스 칼럼크기 막음
+        {
+            e.NewWidth = listCategory.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
+        }
+
+        private void ListMenu_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 메뉴리스트 칼럼 크기 조정 막음
+        {
+            e.NewWidth = listMenu.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
+        }
+
     }
 }
