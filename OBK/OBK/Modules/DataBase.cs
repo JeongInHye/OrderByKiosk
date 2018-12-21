@@ -294,7 +294,7 @@ namespace OBK.Modules
                     nameValue.Add("mName", btn.Name.Substring(btn.Name.IndexOf("_") + 1));
 
 
-                    byte[] result2 = wc.UploadValues("http://192.168.3.17:5000/menu/image", "POST", nameValue);
+                    byte[] result2 = wc.UploadValues(Program.serverUrl+"menu/image", "POST", nameValue);
                     string resultStr2 = Encoding.UTF8.GetString(result2);
                     //MessageBox.Show(resultStr2);
                     imgbtn.BackgroundImage = Image.FromStream(wc.OpenRead(resultStr2));

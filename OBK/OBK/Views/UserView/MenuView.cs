@@ -42,7 +42,7 @@ namespace OBK.Views
             ht.Add("cNo", cNo);
             Hashtable hashtable2 = new Hashtable();
             hashtable2.Add("click", (EventHandler)menu_click);
-            if (!api.MenuPrint("http://192.168.3.17:5000/menu/select", ht, hashtable, hashtable2, targetForm))
+            if (!api.MenuPrint(Program.serverUrl+"menu/select", ht, hashtable, hashtable2, targetForm))
             {
                 MessageBox.Show("메뉴 불러오기 실패...");
             }

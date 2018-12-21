@@ -51,7 +51,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "comboCategory");
             comboCategory = draw.getComboBox(hashtable, parentForm);
             WebAPI api = new WebAPI();
-            api.SelectCategory("http://192.168.3.17:5000/category/select", comboCategory);
+            api.SelectCategory(Program.serverUrl+"category/select", comboCategory);
             //==============================================================================
 
             hashtable = new Hashtable();

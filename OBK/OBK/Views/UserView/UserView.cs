@@ -23,6 +23,7 @@ namespace OBK.Views
         private ListView lv;
         private Label label;
         private int menuclick = 1;
+
         public UserView(Form parentForm)
         {
             this.parentForm = parentForm;
@@ -62,7 +63,7 @@ namespace OBK.Views
             hashtable.Add("size", new Size(160, 100));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("click", (EventHandler)btn_click);
-            ArrayList buttonlist = api.CategoryButton("http://192.168.3.17:5000/category/select", hashtable);
+            ArrayList buttonlist = api.CategoryButton(Program.serverUrl+"category/select", hashtable);
             for (int i = 0; i < buttonlist.Count; i++)
             {
                 Hashtable ht = (Hashtable)buttonlist[i];
@@ -101,7 +102,7 @@ namespace OBK.Views
             lv.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lv.Font = new Font("맑은고딕", 14, FontStyle.Bold);
             lv.ColumnWidthChanging += ListView_ColumnWidthChanging;
-            api.ListView("http://192.168.3.17:5000/orderlist/select",lv);
+            api.ListView(Program.serverUrl+"orderlist/select",lv);
 
             hashtable = new Hashtable();
             hashtable.Add("text", "");

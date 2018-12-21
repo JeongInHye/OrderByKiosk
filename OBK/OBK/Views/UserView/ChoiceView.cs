@@ -47,7 +47,7 @@ namespace OBK.Views
         {
             Hashtable ht = new Hashtable();
             ht.Add("mName", mName);
-            if (!ChoicePrint("http://192.168.3.17:5000/menu/choice", ht))
+            if (!ChoicePrint(Program.serverUrl+"menu/choice", ht))
             {
                 MessageBox.Show("메뉴 상세내용 읽기 실패");
             }
@@ -294,7 +294,7 @@ namespace OBK.Views
         private void yesbtn_click(object sender, EventArgs e)
         {
             string oSize = "";
-            string oShot = "0";
+            string oShot = "-1";
             string oCream = "";
             string hi = "";
 
@@ -320,7 +320,7 @@ namespace OBK.Views
             ht.Add("oShot", oShot);
             ht.Add("oCream", oCream);
 
-            api.Post("http://192.168.3.17:5000/orderlist/insert", ht);
+            api.Post(Program.serverUrl+"orderlist/insert", ht);
             parentForm.Close();
         }
 

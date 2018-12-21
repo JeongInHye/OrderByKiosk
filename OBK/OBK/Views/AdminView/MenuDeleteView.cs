@@ -48,7 +48,7 @@ namespace OBK.Views.AdminView
             listCategory.Columns.Add("카테고리", 146, HorizontalAlignment.Center);
             listCategory.ColumnWidthChanging += ListCategory_ColumnWidthChanging;
             api = new WebAPI();
-            api.ListView("http://192.168.3.17:5000/category/select", listCategory);
+            api.ListView(Program.serverUrl+"category/select", listCategory);
 
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
