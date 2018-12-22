@@ -17,7 +17,7 @@ namespace OBK.Views.StaffView
         private Hashtable hashtable;
         private ListView list;
         private Button btnOk;
-
+        private WebAPI api;
 
         public OrderListView(Form parentForm)
         {
@@ -43,7 +43,8 @@ namespace OBK.Views.StaffView
             list.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             list.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             list.ColumnWidthChanging += List_ColumnWidthChanging;
-
+            api = new WebAPI();
+            api.ListView(Program.serverUrl + "orderlist/selectstaff", list);
             //_____________________________________________________________________
 
             hashtable = new Hashtable();
@@ -65,6 +66,7 @@ namespace OBK.Views.StaffView
 
         private void btn_click(object o, EventArgs a)
         {
+            api = new WebAPI();
             foreach (ListViewItem listitem in list.Items)
             {
                 if (list.Items.Count > 0)
@@ -73,6 +75,9 @@ namespace OBK.Views.StaffView
                     {
                         if (list.Items[i].Checked == true)
                         {
+                            Hashtable ht = new Hashtable();
+                            ht.Add("oNo", list.Items[i].SubItems[1].Text);
+                            api.Post(Program.serverUrl + "orderlist/complete", ht);
                             list.Items[i].Remove();
                         }
                     }
