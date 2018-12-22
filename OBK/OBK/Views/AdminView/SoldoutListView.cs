@@ -13,6 +13,7 @@ namespace OBK.Views.AdminView
 {
     class SoldoutListView
     {
+        private WebAPI api;
         private Draw draw;
         private Form parentForm, tagetForm;
         private ListView soldoutlist;
@@ -23,7 +24,6 @@ namespace OBK.Views.AdminView
         public SoldoutListView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }
@@ -42,17 +42,13 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(200, 20));
             hashtable.Add("name", "list");
             hashtable.Add("color", Color.White);
-            hashtable.Add("click", (MouseEventHandler)lv_click);
             soldoutlist = draw.getListView1(hashtable, parentForm);
-
-            soldoutlist.Columns.Add("카테고리", 200, HorizontalAlignment.Center);
-            soldoutlist.Columns.Add("메뉴명", 200, HorizontalAlignment.Center);
-            soldoutlist.Columns.Add("지점명", 255, HorizontalAlignment.Center);
-
-            soldoutlist.Items.Add(new ListViewItem(new string[] { "커피", "아메리카노", "강남점" }));
-            soldoutlist.Items.Add(new ListViewItem(new string[] { "커피", "카푸치노", "가산점" }));
-            soldoutlist.Items.Add(new ListViewItem(new string[] { "티", "얼그레이", "강남점" }));
-            soldoutlist.Items.Add(new ListViewItem(new string[] { "디저트", "베이글", "강남점" }));
+            soldoutlist.Columns.Add("", 0);
+            soldoutlist.Columns.Add("카테고리", 325, HorizontalAlignment.Center);
+            soldoutlist.Columns.Add("메뉴명", 325, HorizontalAlignment.Center);
+            soldoutlist.ColumnWidthChanging += Soldoutlist_ColumnWidthChanging;
+            api = new WebAPI();
+            api.ListView("http://175.119.63.181:5000/Admin/soldoutList", soldoutlist);
 
             //----------------------------------------
             hashtable = new Hashtable();
@@ -66,9 +62,10 @@ namespace OBK.Views.AdminView
             btn_mainwindow = draw.getButton1(hashtable, parentForm);
         }
 
-        private void lv_click(object sender, MouseEventArgs e)
+        private void Soldoutlist_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
-
+            e.NewWidth = soldoutlist.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
         }
 
         private void btn_mainwindow_click(object sender, EventArgs e)

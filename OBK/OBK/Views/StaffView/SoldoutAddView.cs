@@ -106,7 +106,7 @@ namespace OBK.Views.StaffView
 
             hashtable = new Hashtable();
             hashtable.Add("cNo", cNo);
-            api.PostListview(Program.serverUrl + "Menu/nameSelect", hashtable, listMenu);
+            api.PostListview(Program.serverUrl + "Menu/soldOutAddList", hashtable, listMenu);
         }
 
         private void ListCategory_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 카테고리 리트스 칼럼크기 막음
@@ -120,6 +120,5 @@ namespace OBK.Views.StaffView
             e.NewWidth = listMenu.Columns[e.ColumnIndex].Width;
             e.Cancel = true;
         }
-
     }
 }

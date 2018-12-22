@@ -210,14 +210,6 @@ namespace OBK.Views.AdminView
             btnEditOk = draw.getButton1(hashtable, panelTwo);
         }
 
-        private void listMenu_Click(object sender, MouseEventArgs e)    // mName 갖고오기
-        {
-            listView = (ListView)sender;
-            ListView.SelectedListViewItemCollection itemGroup = listView.SelectedItems;
-            ListViewItem mNameitem = itemGroup[0];
-
-            mName = mNameitem.SubItems[1].Text;
-        }
 
         private void listCategory_click(object sender, MouseEventArgs e)    // 카테고리 클릭시 옆에 메뉴명 출력
         {
@@ -232,6 +224,15 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("cNo", cNo);
             api.PostListview(Program.serverUrl + "Menu/nameSelect", hashtable, listMenu);
+        }
+
+        private void listMenu_Click(object sender, MouseEventArgs e)    // mName 갖고오기
+        {
+            listView = (ListView)sender;
+            ListView.SelectedListViewItemCollection itemGroup = listView.SelectedItems;
+            ListViewItem mNameitem = itemGroup[0];
+
+            mName = mNameitem.SubItems[1].Text;
         }
 
         private void btnEdit_click(object sender, EventArgs e)

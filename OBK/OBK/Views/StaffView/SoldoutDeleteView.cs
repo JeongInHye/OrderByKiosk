@@ -12,6 +12,7 @@ namespace OBK.Views.StaffView
 {
     class SoldoutDeleteView
     {
+        private WebAPI api;
         private Draw draw;
         private Form parentForm;
         private Hashtable hashtable;
@@ -36,7 +37,9 @@ namespace OBK.Views.StaffView
             listMenu.Columns.Add("", 50, HorizontalAlignment.Center);
             listMenu.Columns.Add("메뉴", 440, HorizontalAlignment.Center);
             listMenu.Columns.Add("물품 여부", 170, HorizontalAlignment.Center);
-            listMenu.Items.Add(new ListViewItem(new string[] { " ", "아메리카노" }));
+            listMenu.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
+            listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 60));
@@ -48,9 +51,12 @@ namespace OBK.Views.StaffView
             btnSoldoutDelete = draw.getButton(hashtable, parentForm);
         }
 
-
         private void btnSoldoutDelete_click(object o, EventArgs a)
         {
+            api = new WebAPI();
+            string mName = "";
+            bool one = true;
+
             foreach (ListViewItem listitem in listMenu.Items)
             {
                 if (listMenu.Items.Count > 0)
@@ -59,12 +65,26 @@ namespace OBK.Views.StaffView
                     {
                         if (listMenu.Items[i].Checked == true)
                         {
+                            mName = listMenu.Items[i].SubItems[1].Text;
+                            hashtable = new Hashtable();
+                            hashtable.Add("mName", mName);
+                            api.Post(Program.serverUrl + "Staff/soldOutDelete", hashtable);
                             listMenu.Items[i].Remove();
-                            MessageBox.Show("품절 제외(취소)");
+                            if (one)
+                            {
+                                MessageBox.Show("asdfasdfasd");
+                                one = false;
+                            }
                         }
                     }
                 }
             }
+        }
+
+        private void ListMenu_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 메뉴리스트 칼럼 크기 조정 막음
+        {
+            e.NewWidth = listMenu.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
         }
     }
 }
