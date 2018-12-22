@@ -40,7 +40,9 @@ namespace OBK.Views.StaffView
             list.Columns.Add("샷추가", 108, HorizontalAlignment.Center);
             list.Columns.Add("휘핑", 108, HorizontalAlignment.Center);
             list.Columns.Add("수량", 100, HorizontalAlignment.Center);
-            list.Items.Add(new ListViewItem(new string[] { "", "123", "아메리카노(Hot)_R", "0", "없음", "2" }));
+            list.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
+            list.HeaderStyle = ColumnHeaderStyle.Nonclickable;
+            list.ColumnWidthChanging += List_ColumnWidthChanging;
 
             //_____________________________________________________________________
 
@@ -55,10 +57,14 @@ namespace OBK.Views.StaffView
 
         }
 
+        private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.NewWidth = list.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
+        }
+
         private void btn_click(object o, EventArgs a)
         {
-            MessageBox.Show("asdf");
-
             foreach (ListViewItem listitem in list.Items)
             {
                 if (list.Items.Count > 0)

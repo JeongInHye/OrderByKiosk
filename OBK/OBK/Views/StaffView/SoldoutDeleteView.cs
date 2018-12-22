@@ -35,11 +35,12 @@ namespace OBK.Views.StaffView
             hashtable.Add("name", "주문리스트");
             listMenu = draw.getListView(hashtable, parentForm);
             listMenu.Columns.Add("", 50, HorizontalAlignment.Center);
-            listMenu.Columns.Add("메뉴", 440, HorizontalAlignment.Center);
-            listMenu.Columns.Add("물품 여부", 170, HorizontalAlignment.Center);
+            listMenu.Columns.Add("메뉴", 600, HorizontalAlignment.Center);
             listMenu.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
+            api = new WebAPI();
+            api.ListView("http://175.119.63.181:5000/Staff/soldOutDeleteList", listMenu);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 60));
@@ -72,7 +73,7 @@ namespace OBK.Views.StaffView
                             listMenu.Items[i].Remove();
                             if (one)
                             {
-                                MessageBox.Show("asdfasdfasd");
+                                MessageBox.Show("품절취소가 완료되었슴니다.");
                                 one = false;
                             }
                         }

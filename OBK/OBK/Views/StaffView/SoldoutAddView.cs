@@ -85,7 +85,7 @@ namespace OBK.Views.StaffView
                             listMenu.Items[i].Remove();
                             if (one)
                             {
-                                MessageBox.Show("asdfasdfasd");
+                                MessageBox.Show("품절을 추가가 완료되었습니다.");
                                 one = false;
                             }
                         }
@@ -106,7 +106,7 @@ namespace OBK.Views.StaffView
 
             hashtable = new Hashtable();
             hashtable.Add("cNo", cNo);
-            api.PostListview(Program.serverUrl + "Menu/soldOutAddList", hashtable, listMenu);
+            api.PostListview(Program.serverUrl + "Staff/soldOutAddList", hashtable, listMenu);
         }
 
         private void ListCategory_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 카테고리 리트스 칼럼크기 막음
