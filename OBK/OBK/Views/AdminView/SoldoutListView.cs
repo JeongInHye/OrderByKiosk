@@ -43,12 +43,13 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "list");
             hashtable.Add("color", Color.White);
             soldoutlist = draw.getListView1(hashtable, parentForm);
+            soldoutlist.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             soldoutlist.Columns.Add("", 0);
             soldoutlist.Columns.Add("카테고리", 325, HorizontalAlignment.Center);
             soldoutlist.Columns.Add("메뉴명", 325, HorizontalAlignment.Center);
             soldoutlist.ColumnWidthChanging += Soldoutlist_ColumnWidthChanging;
             api = new WebAPI();
-            api.ListView("http://175.119.63.181:5000/Admin/soldoutList", soldoutlist);
+            api.ListView(Program.serverUrl + "Admin/soldoutList", soldoutlist);
 
             //----------------------------------------
             hashtable = new Hashtable();

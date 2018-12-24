@@ -40,7 +40,7 @@ namespace OBK.Views.StaffView
             listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
             api = new WebAPI();
-            api.ListView("http://175.119.63.181:5000/Staff/soldOutDeleteList", listMenu);
+            api.ListView(Program.serverUrl + "Staff/soldOutDeleteList", listMenu);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 60));
@@ -48,8 +48,9 @@ namespace OBK.Views.StaffView
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "ok");
             hashtable.Add("text", "품절 제외(취소)");
+            hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnSoldoutDelete_click);
-            btnSoldoutDelete = draw.getButton(hashtable, parentForm);
+            btnSoldoutDelete = draw.getButton1(hashtable, parentForm);
         }
 
         private void btnSoldoutDelete_click(object o, EventArgs a)

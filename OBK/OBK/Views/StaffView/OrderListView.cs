@@ -53,8 +53,9 @@ namespace OBK.Views.StaffView
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "ok");
             hashtable.Add("text", "확인");
+            hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btn_click);
-            btnOk = draw.getButton(hashtable, parentForm);
+            btnOk = draw.getButton1(hashtable, parentForm);
 
         }
 
