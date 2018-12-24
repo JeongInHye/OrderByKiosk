@@ -22,5 +22,6 @@ namespace OBK
             
         }
         static public string serverUrl = "http://192.168.3.31:5000/";
+        static public int maxoNum = 0;
     }
 }

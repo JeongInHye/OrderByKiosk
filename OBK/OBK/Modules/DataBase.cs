@@ -20,6 +20,25 @@ namespace OBK.Modules
     {
         private Draw draw;
 
+        public int MaxoNum(string url)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                Stream stream = wc.OpenRead(url);
+                StreamReader sr = new StreamReader(stream);
+                string result = sr.ReadToEnd();
+                int max = 0;
+                max = Convert.ToInt32(result);
+
+                return max;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
         public bool ListView(string url, ListView listView)
         {
             try

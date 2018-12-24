@@ -35,6 +35,8 @@ namespace OBK.Views
 
         private void getView()
         {
+            Program.maxoNum = api.MaxoNum(Program.serverUrl+ "orderlist/selectMaxoNum");
+            MessageBox.Show(Program.maxoNum.ToString());
             //=====panel 선언부분========head,menus,bottom
             hashtable = new Hashtable();
             hashtable.Add("type", "");

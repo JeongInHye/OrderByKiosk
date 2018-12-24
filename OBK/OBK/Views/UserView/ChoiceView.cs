@@ -27,6 +27,7 @@ namespace OBK.Views
         private WebAPI api;
         private int count = 0, price = 0, height = 180;
         private bool hotice = true;
+        private int oNum=1;
 
         public ChoiceView(Form parentForm)
         {
@@ -314,6 +315,7 @@ namespace OBK.Views
             api = new WebAPI();
             Hashtable ht = new Hashtable();
             ht.Add("mName", mName);
+            ht.Add("oNum", Program.maxoNum);
             ht.Add("oCount", lb_count2.Text);
             ht.Add("oDegree", hi);
             ht.Add("oSize", oSize);

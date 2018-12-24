@@ -19,7 +19,7 @@ namespace OBK.Views
         private ListView listOrderList;
         private Label lblMessage;
         private Button btnMoney, btnCard, btnCancel;
-
+        private WebAPI api;
         public PayView(Form parentForm)
         {
             this.parentForm = parentForm;
@@ -41,12 +41,11 @@ namespace OBK.Views
             listOrderList.Columns.Add("휘핑", 156, HorizontalAlignment.Center);
             listOrderList.Columns.Add("수량", 156, HorizontalAlignment.Center);
             listOrderList.Columns.Add("가격", 156, HorizontalAlignment.Center);
-            ListViewItem listViewItem = new ListViewItem();
-            listViewItem.UseItemStyleForSubItems = false;
-            listViewItem.Text = "Test";
-            listViewItem.SubItems.Add("아메리카노");
-            listViewItem.SubItems[1].Font = new Font("새굴림", 13, FontStyle.Regular);
-            listOrderList.Items.Add(listViewItem);
+
+            api = new WebAPI();
+            hashtable = new Hashtable();
+            //hashtable.Add("",);
+            api.PostListview(Program.serverUrl + "", hashtable, listOrderList);
             listOrderList.ColumnWidthChanging += ListOrderList_ColumnWidthChanging;
             SetHeight(listOrderList, 30);
 
