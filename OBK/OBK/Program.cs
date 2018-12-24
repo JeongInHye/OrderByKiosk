@@ -21,6 +21,6 @@ namespace OBK
             Application.Run(new MainForm());
             
         }
-        static public string serverUrl = "http://175.119.63.181:5000/";
+        static public string serverUrl = "http://192.168.3.31:5000/";
     }
 }
