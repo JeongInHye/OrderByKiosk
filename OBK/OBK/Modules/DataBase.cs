@@ -39,6 +39,22 @@ namespace OBK.Modules
             }
         }
 
+        public string getPasswd(string url)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                Stream stream = wc.OpenRead(url);
+                StreamReader sr = new StreamReader(stream);
+                string result = sr.ReadToEnd();
+                return result;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
         public bool ListView(string url, ListView listView)
         {
             try
@@ -62,7 +78,7 @@ namespace OBK.Modules
                     listView.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
                 }
 
-                ListViewItemCollection col = listView.Items;
+                ListViewItemCollection col = listView.Items;    // listview subitems 글꼴 바꾸
                 for (int j = 0; j < col.Count; j++)
                 {
                     for (int k = 0; k < col[j].SubItems.Count; k++)

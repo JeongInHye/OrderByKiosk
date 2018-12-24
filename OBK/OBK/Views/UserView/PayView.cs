@@ -37,12 +37,14 @@ namespace OBK.Views
             hashtable.Add("name", "주문리스트");
             listOrderList = draw.getListView(hashtable, parentForm);
             listOrderList.Columns.Add("", 0);
-            listOrderList.Columns.Add("메뉴", 156, HorizontalAlignment.Center);
+            listOrderList.Columns.Add("메뉴이름", 200, HorizontalAlignment.Center);
             listOrderList.Columns.Add("샷추가", 156, HorizontalAlignment.Center);
             listOrderList.Columns.Add("휘핑", 156, HorizontalAlignment.Center);
-            listOrderList.Columns.Add("수량", 156, HorizontalAlignment.Center);
+            listOrderList.Columns.Add("수량", 110, HorizontalAlignment.Center);
             listOrderList.Columns.Add("가격", 156, HorizontalAlignment.Center);
             listOrderList.ColumnWidthChanging += ListOrderList_ColumnWidthChanging;
+            api = new WebAPI();
+            api.ListView(Program.serverUrl + "orderlist/select", listOrderList);
 
             hashtable = new Hashtable();
             hashtable.Add("text", "결제 수단을 선택해 주세요.");

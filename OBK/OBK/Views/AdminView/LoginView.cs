@@ -48,10 +48,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "textBox");
             hashtable.Add("enabled", true);
             textBox = draw.getTextBox(hashtable, parentForm);
-
-            
-           
-            textBox.Enabled = (bool)hashtable["enabled"];
+            textBox.ReadOnly = true;
 
             hashtable = new Hashtable();
             hashtable.Add("width", 50);
@@ -188,12 +185,25 @@ namespace OBK.Views.AdminView
 
         private void btn_login_click(object sender, EventArgs e)
         {
-            parentForm.Visible = false;
+            WebAPI api = new WebAPI();
+            string Correctpw = api.getPasswd("http://192.168.3.31:5000/admin/passwd");
 
-            tagetForm = new AdminMenuForm();
-            tagetForm.StartPosition = FormStartPosition.CenterParent;
-            tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
-            tagetForm.Show();
+
+            if (passwd == Correctpw)
+            {
+                parentForm.Visible = false;
+
+                tagetForm = new AdminMenuForm();
+                tagetForm.StartPosition = FormStartPosition.CenterParent;
+                tagetForm.FormClosed += new FormClosedEventHandler(Exit_click);
+                tagetForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("비밀번호를 다시 입력해 주세요.");
+                textBox.Text = "";
+                passwd = "";
+            }
         }
 
         private void Exit_click(object sender, FormClosedEventArgs e)
@@ -203,8 +213,11 @@ namespace OBK.Views.AdminView
 
         private void btn_erase_click(object sender, EventArgs e)//입력비밀번호 뒤에 1개 삭제
         {
-            passwd = passwd.Substring(0, passwd.Length - 1);
-            emp = emp.Substring(0, emp.Length - 1);
+            if (passwd!="")
+            {
+                passwd = passwd.Substring(0, passwd.Length - 1);
+                emp = emp.Substring(0, emp.Length - 1);
+            }
             ShowPasswd();
         }
 
