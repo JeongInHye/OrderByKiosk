@@ -81,7 +81,7 @@ namespace OBK.Modules
         private void GetBillLoad(object sender, EventArgs e)    // 영수증
         {
             parentForm.Size = new Size(500, 500);
-            parentForm.FormBorderStyle = FormBorderStyle.None;
+            parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             new BillView(parentForm);
         }
         private void GetChoiceLoad(object o, EventArgs a)

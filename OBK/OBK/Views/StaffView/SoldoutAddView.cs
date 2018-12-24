@@ -60,8 +60,9 @@ namespace OBK.Views.StaffView
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "ok");
             hashtable.Add("text", "품절추가");
+            hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnSoldoutAdd_click);
-            btnSoldoutAdd = draw.getButton(hashtable, parentForm);
+            btnSoldoutAdd = draw.getButton1(hashtable, parentForm);
         }
 
         private void btnSoldoutAdd_click(object o, EventArgs a)

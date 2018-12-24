@@ -1,4 +1,5 @@
-﻿using OBK.Modules;
+﻿using OBK.Forms;
+using OBK.Modules;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace OBK.Views
             label3 = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("color", Color.LightGray);
+            hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("size", new Size(400, 110));
             hashtable.Add("point", new Point(25, 165));
             hashtable.Add("name", "주문리스트");
@@ -58,6 +59,7 @@ namespace OBK.Views
             list.Columns.Add("메뉴", 250, HorizontalAlignment.Center);
             list.Columns.Add("가격", 79, HorizontalAlignment.Center);
             list.Columns.Add("수량", 70, HorizontalAlignment.Center);
+            list.ColumnWidthChanging += List_ColumnWidthChanging;
 
             hashtable = new Hashtable();
             hashtable.Add("text", "----------------------------------------------------------------------");
@@ -81,18 +83,32 @@ namespace OBK.Views
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
-            hashtable.Add("point", new Point(290, 400));
-            hashtable.Add("color", Color.Red);
+            hashtable.Add("point", new Point(350, 390));
+            hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "ok");
             hashtable.Add("text", "확인");
             hashtable.Add("click", (EventHandler)btn_click);
             button = draw.getButton(hashtable, parentForm);
         }
 
-        private void btn_click(object o, EventArgs a)
+        private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
         {
-            parentForm.Close();
+            e.NewWidth = list.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
         }
 
+        private void btn_click(object o, EventArgs a)
+        {
+            //parentForm.Visible = false;
+            //UserForm userForm = new UserForm();
+            //userForm.StartPosition = FormStartPosition.CenterParent;
+            //userForm.FormClosed += new FormClosedEventHandler(exit_click);
+            //userForm.Show();
+        }
+
+        private void exit_click(object sender, FormClosedEventArgs e)
+        {
+            //parentForm.Close();
+        }
     }
 }
