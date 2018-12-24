@@ -311,7 +311,7 @@ namespace OBK.Views
             if (lb_shot2 != null)
                 oShot = lb_shot2.Text;
 
-            MessageBox.Show(mName + ">>" + lb_count2.Text + "개\n" + hi + "\n" + oSize + "\n" + oCream + "\n" + oShot + "샷");
+            //MessageBox.Show(mName + ">>" + lb_count2.Text + "개\n" + hi + "\n" + oSize + "\n" + oCream + "\n" + oShot + "샷");
             api = new WebAPI();
             Hashtable ht = new Hashtable();
             ht.Add("mName", mName);

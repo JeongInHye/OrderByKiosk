@@ -99,16 +99,9 @@ namespace OBK.Views
 
         private void btn_click(object o, EventArgs a)
         {
-            //parentForm.Visible = false;
-            //UserForm userForm = new UserForm();
-            //userForm.StartPosition = FormStartPosition.CenterParent;
-            //userForm.FormClosed += new FormClosedEventHandler(exit_click);
-            //userForm.Show();
+            parentForm.Close();
         }
 
-        private void exit_click(object sender, FormClosedEventArgs e)
-        {
-            //parentForm.Close();
-        }
+        
     }
 }

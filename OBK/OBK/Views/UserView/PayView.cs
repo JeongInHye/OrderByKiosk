@@ -92,11 +92,10 @@ namespace OBK.Views
 
         private void btnCard_click(object o, EventArgs a)
         {
-            MessageBox.Show("orderYn -> Y 로 바꿈");
 
-            //api = new WebAPI();
-            //hashtable.Add("oNum", oNum);
-            //api.Post(Program.serverUrl + "orderlist/orderYn", hashtable);
+            api = new WebAPI();
+            hashtable.Add("oNum", Program.maxoNum);
+            api.Post(Program.serverUrl + "orderlist/orderYn", hashtable);
 
             BillForm billForm = new BillForm();
             Point p = new Point((parentForm.Width - billForm.Width) / 2, (parentForm.Height - billForm.Height) / 2);
@@ -106,25 +105,25 @@ namespace OBK.Views
 
         private void btnMoney_click(object o, EventArgs a)
         {
-            MessageBox.Show("orderYn -> Y 로 바꿈");
 
-            //api = new WebAPI();
-            //hashtable.Add("oNum",oNum);
-            //api.Post(Program.serverUrl + "orderlist/orderYn", hashtable);
+            api = new WebAPI();
+            hashtable.Add("oNum", Program.maxoNum);
+            api.Post(Program.serverUrl + "orderlist/orderYn", hashtable);
 
             BillForm billForm = new BillForm();
             Point p = new Point((parentForm.Width - billForm.Width) / 2, (parentForm.Height - billForm.Height) / 2);
             billForm.StartPosition = parentForm.StartPosition;
+            billForm.FormClosed += exit_click;
             billForm.ShowDialog();
         }
 
         private void btnCancel_click(object o, EventArgs a)
         {
-            parentForm.Visible = false;
-            UserForm userForm = new UserForm();
-            userForm.StartPosition = FormStartPosition.CenterParent;
-            userForm.FormClosed += new FormClosedEventHandler(exit_click);
-            userForm.Show();
+            //parentForm.Visible = false;
+            //UserForm userForm = new UserForm();
+            //userForm.StartPosition = FormStartPosition.CenterParent;
+            //userForm.FormClosed += new FormClosedEventHandler(exit_click);
+            //userForm.Show();
         }
 
         private void exit_click(object sender, FormClosedEventArgs e)
