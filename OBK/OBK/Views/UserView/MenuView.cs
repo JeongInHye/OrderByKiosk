@@ -15,15 +15,17 @@ namespace OBK.Views
     class MenuView
     {
         private Form parentForm,targetForm;
+        private UserView uv;
         private Draw draw;
         private Hashtable hashtable;
         private int cNo;
         private WebAPI api;
 
-        public MenuView(Form parentForm,Form targetForm, int cNo)
+        public MenuView(Form parentForm,Form targetForm, int cNo, UserView uv)
         {
             this.parentForm = parentForm;
             this.targetForm = targetForm;
+            this.uv = uv;
             this.cNo = cNo;
             draw = new Draw();
             getView();
@@ -57,18 +59,15 @@ namespace OBK.Views
         private void Menuclick(string name)
         {
             string mName = name.Substring(name.IndexOf("_")+1);
-            //MessageBox.Show(mName);
+            
             
             ChoiceForm choiceForm = new ChoiceForm(mName);
             choiceForm.StartPosition = FormStartPosition.CenterParent;
-            choiceForm.FormClosed += choiceForm_FormClosed;
-            choiceForm.ShowDialog();
-        }
-
-        private void choiceForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            //Choice 선택폼이 닫히게 되면 기존의 UserForm을 업데이트해주기 위한 이벤트
             
+            choiceForm.ShowDialog();
+            
+            uv.tt();
         }
+        
     }
 }
