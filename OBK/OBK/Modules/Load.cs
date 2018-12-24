@@ -13,6 +13,7 @@ namespace OBK.Modules
     {
         private Form parentForm;
         private Form parent;//mdi를 사용할때 부모폼을 불러오기 위한 변수
+        private UserView uv;//부모구현 코드 정보 받아오기
         private object oDB;
         private int cNo = 0;
         private string mName = "";
@@ -28,11 +29,12 @@ namespace OBK.Modules
             this.cNo = cNo;
         }
 
-        public Load(Form parentForm, int cNo,Form parent)
+        public Load(Form parentForm, int cNo,Form parent, UserView uv)
         {
             this.parentForm = parentForm;
             this.cNo = cNo;
             this.parent = parent;
+            this.uv = uv;
         }
 
         public Load(Form parentForm, string mName)
@@ -102,7 +104,7 @@ namespace OBK.Modules
             parentForm.MinimizeBox = false;
             parentForm.AutoScroll = true;
             parentForm.Text = "메뉴";
-            new MenuView(parent,parentForm, cNo);
+            new MenuView(parent,parentForm, cNo, uv);
         }
         private void GetPayLoad(object o, EventArgs a)      // 결제
         {

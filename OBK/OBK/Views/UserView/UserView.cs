@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.ListView;
 
 namespace OBK.Views
 {
-    class UserView
+    public class UserView
     {
         private WebAPI api;
         private Panel head, menu, bottom;
@@ -23,6 +24,7 @@ namespace OBK.Views
         private ListView lv;
         private Label label;
         private int menuclick = 1;
+        private string selectOrder = "";
 
         public UserView(Form parentForm)
         {
@@ -101,10 +103,12 @@ namespace OBK.Views
             lv.Columns.Add("휘핑", 90, HorizontalAlignment.Center);
             lv.Columns.Add("수량", 80, HorizontalAlignment.Center);
             lv.Columns.Add("가격", 145, HorizontalAlignment.Center);
+            lv.Columns.Add("주문번호", 0, HorizontalAlignment.Center);
             lv.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             lv.Font = new Font("맑은고딕", 14, FontStyle.Bold);
             lv.ColumnWidthChanging += ListView_ColumnWidthChanging;
-            api.ListView(Program.serverUrl+"orderlist/select",lv);
+            api.ListView(Program.serverUrl + "orderlist/select", lv);
+            lv.MouseClick += Lv_MouseClick;
 
             hashtable = new Hashtable();
             hashtable.Add("text", "");
@@ -145,9 +149,17 @@ namespace OBK.Views
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
             tagetForm.Show();
             OrderlistLoad();
+
+        }
+
+        private void Lv_MouseClick(object sender, MouseEventArgs e)
+        {
+            ListView listview = (ListView)sender;
+            SelectedListViewItemCollection col = listview.SelectedItems;
+            selectOrder = col[0].SubItems[6].Text;
         }
 
         private void OrderlistLoad()
@@ -203,6 +215,8 @@ namespace OBK.Views
             e.Cancel = true;
         }
 
+        
+
         private void btn_click(object sender, EventArgs e) //카테고리 버튼 클릭 이벤트
         {
             Button b = (Button)sender;
@@ -218,7 +232,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
                     tagetForm.Show();
                     break;
                 case "btn2":
@@ -231,7 +245,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
                     tagetForm.Show();
                     break;
                 case "btn3":
@@ -244,7 +258,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
                     tagetForm.Show();
                     break;
                 case "btn4":
@@ -257,13 +271,18 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
                     tagetForm.Show();
                     break;
                 default:
                     break;
             }
 
+        }
+
+        public void tt()
+        {
+            api.ListView(Program.serverUrl + "orderlist/select", lv);
         }
         
     }
