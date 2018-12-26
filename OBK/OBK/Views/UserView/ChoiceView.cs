@@ -340,7 +340,10 @@ namespace OBK.Views
 
                 count = Convert.ToInt32(lb_count2.Text);
                 price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                lb_allprice.Text = "전체금액 : " + (count * price) + "원";
+                int shot = Convert.ToInt32(lb_shot2.Text);
+                price += 500 * shot;
+                int allprice = (count * price);
+                lb_allprice.Text = "전체금액 : " + allprice + "원";
             }
         }
 
@@ -353,7 +356,10 @@ namespace OBK.Views
 
                 count = Convert.ToInt32(lb_count2.Text);
                 price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                lb_allprice.Text = "전체금액 : " + (count * price) + "원";
+                int shot = Convert.ToInt32(lb_shot2.Text);
+                price += 500 * shot;
+                int allprice = (count * price);
+                lb_allprice.Text = "전체금액 : " + allprice+ "원";
             }
         }
 
@@ -385,8 +391,8 @@ namespace OBK.Views
                 count = Convert.ToInt32(lb_count2.Text);
                 price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
                 int shot = Convert.ToInt32(lb_shot2.Text);
+                price -= 500 * shot;
                 int allprice = (count * price);
-                allprice -= 500 * shot;
                 lb_allprice.Text = "전체금액 : " + allprice + "원";
             }
         }
@@ -401,8 +407,8 @@ namespace OBK.Views
                 count = Convert.ToInt32(lb_count2.Text);
                 price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
                 int shot = Convert.ToInt32(lb_shot2.Text);
+                price += 500 * shot;
                 int allprice = (count * price);
-                allprice += 500 * shot;
                 lb_allprice.Text = "전체금액 : " + allprice + "원";
             }
         }

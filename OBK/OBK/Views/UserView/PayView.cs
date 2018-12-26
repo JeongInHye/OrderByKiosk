@@ -18,7 +18,7 @@ namespace OBK.Views
         private Form parentForm;
         private Draw draw;
         private ListView listOrderList;
-        private Label lblMessage;
+        private Label lblMessage,lb_total;
         private Button btnMoney, btnCard, btnCancel;
 
         public PayView(Form parentForm)
@@ -82,6 +82,40 @@ namespace OBK.Views
             hashtable.Add("text", "취소");
             hashtable.Add("click", (EventHandler)btnCancel_click);
             btnCancel = draw.getButton1(hashtable, parentForm);
+
+            hashtable = new Hashtable();
+            hashtable.Add("text", "총 가격 :          ");
+            hashtable.Add("width", 610);
+            hashtable.Add("point", new Point(130, 320));
+            hashtable.Add("name", "totalprice");
+            hashtable.Add("font", new Font("맑은 고딕", 20, FontStyle.Bold));
+            lb_total = draw.getLabel1(hashtable, parentForm);
+            
+            ListShotCalc();//주문목록 각각에 대한 샷추가를 가격에 샷당 500원 추가해주는 함수호출
+            lb_total.Text += ListTotalPrice();//총 가격 계산
+        }
+
+        private void ListShotCalc()
+        {
+            for(int i = 0; i< listOrderList.Items.Count; i++)
+            {
+                int price = Convert.ToInt32(listOrderList.Items[i].SubItems[5].Text);
+                int shot = Convert.ToInt32(listOrderList.Items[i].SubItems[2].Text);
+                price += shot * 500;
+                listOrderList.Items[i].SubItems[5].Text = price.ToString();
+            }
+        }
+
+        private string ListTotalPrice()
+        {
+            int total = 0;
+            for (int i = 0; i < listOrderList.Items.Count; i++)
+            {
+                int price = Convert.ToInt32(listOrderList.Items[i].SubItems[5].Text);
+                int count = Convert.ToInt32(listOrderList.Items[i].SubItems[4].Text);
+                total += price * count;
+            }
+            return total.ToString();
         }
 
         private void ListOrderList_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)   // listView 칼럼사이즈 고정
@@ -113,17 +147,17 @@ namespace OBK.Views
             BillForm billForm = new BillForm();
             Point p = new Point((parentForm.Width - billForm.Width) / 2, (parentForm.Height - billForm.Height) / 2);
             billForm.StartPosition = parentForm.StartPosition;
-            billForm.FormClosed += exit_click;
+            billForm.FormClosed += new FormClosedEventHandler(exit_click);
             billForm.ShowDialog();
         }
 
         private void btnCancel_click(object o, EventArgs a)
         {
-            //parentForm.Visible = false;
-            //UserForm userForm = new UserForm();
-            //userForm.StartPosition = FormStartPosition.CenterParent;
-            //userForm.FormClosed += new FormClosedEventHandler(exit_click);
-            //userForm.Show();
+            parentForm.Visible = false;
+            UserForm userForm = new UserForm();
+            userForm.StartPosition = FormStartPosition.CenterParent;
+            userForm.FormClosed += new FormClosedEventHandler(exit_click);
+            userForm.Show();
         }
 
         private void exit_click(object sender, FormClosedEventArgs e)
