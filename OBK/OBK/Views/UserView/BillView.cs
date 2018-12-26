@@ -101,7 +101,5 @@ namespace OBK.Views
         {
             parentForm.Close();
         }
-
-        
     }
 }

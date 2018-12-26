@@ -116,7 +116,7 @@ namespace OBK.Views
             hashtable.Add("width", 610);
             hashtable.Add("point", new Point(0, 220));
             hashtable.Add("name", "totalprice");
-            hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Bold));
+            hashtable.Add("font", new Font("맑은 고딕", 17, FontStyle.Bold));
             label = draw.getLabel1(hashtable, bottom);
 
             hashtable = new Hashtable();
@@ -176,7 +176,8 @@ namespace OBK.Views
             }
             for (int i = 0; i < lv.Items.Count; i++)
             {
-                allprice += Convert.ToInt32(lv.Items[i].SubItems[5].Text)* Convert.ToInt32(lv.Items[i].SubItems[4].Text);
+                lv.Items[i].SubItems[5].Text = (Convert.ToInt32(lv.Items[i].SubItems[5].Text)+Convert.ToInt32(lv.Items[i].SubItems[2].Text) * 500).ToString();
+                allprice += Convert.ToInt32(lv.Items[i].SubItems[5].Text) * Convert.ToInt32(lv.Items[i].SubItems[4].Text);
             }
             label.Text = "총 가격 : " + allprice + "원";
         }
