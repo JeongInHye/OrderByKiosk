@@ -114,9 +114,9 @@ namespace OBK.Views
             hashtable = new Hashtable();
             hashtable.Add("text", "");
             hashtable.Add("width", 610);
-            hashtable.Add("point", new Point(0, 230));
+            hashtable.Add("point", new Point(0, 220));
             hashtable.Add("name", "totalprice");
-            hashtable.Add("font", new Font("맑은 고딕", 18, FontStyle.Bold));
+            hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Bold));
             label = draw.getLabel1(hashtable, bottom);
 
             hashtable = new Hashtable();
