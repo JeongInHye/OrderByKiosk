@@ -14,7 +14,7 @@ namespace OBK.Views.AdminView
     {
         private Draw draw;
         private Form parentForm;
-        private Label lb_day1, lb_day2,lb_info;
+        private Label lb_day1, lb_day2, lb_info;
         private ListView list;
         private Button btn_search;
         private DateTimePicker dtp_start, dtp_end;
@@ -63,37 +63,45 @@ namespace OBK.Views.AdminView
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(180, 40));
-            hashtable.Add("point", new Point(110, 30));
+            hashtable.Add("point", new Point(110, 26));
             hashtable.Add("name", "dtp_start");
             dtp_start = draw.GetDateTimePicker(hashtable, parentForm);
+            dtp_start.Value = DateTime.Today.AddMonths(-1);
+            dtp_start.Format = DateTimePickerFormat.Custom;
+            dtp_start.CustomFormat = "yyyy년 MMMM";
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(180,40));
-            hashtable.Add("point", new Point(340, 30));
+            hashtable.Add("size", new Size(180, 40));
+            hashtable.Add("point", new Point(340, 26));
             hashtable.Add("name", "dtp_end");
             dtp_end = draw.GetDateTimePicker(hashtable, parentForm);
+            dtp_end.Format = DateTimePickerFormat.Custom;
+            dtp_end.CustomFormat = "yyyy년 MMMM";
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(660, 420));
             hashtable.Add("point", new Point(10, 90));
             hashtable.Add("name", "list");
             hashtable.Add("color", Color.White);
-            hashtable.Add("click", (MouseEventHandler)lv_click);
+            //hashtable.Add("click", (MouseEventHandler)lv_click);
             list = draw.getListView(hashtable, parentForm);
+            list.ColumnWidthChanging += List_ColumnWidthChanging;
 
-            list.Columns.Add("해당 년/월", 200, HorizontalAlignment.Center);
-            list.Columns.Add("수량", 100, HorizontalAlignment.Center);
-            list.Columns.Add("매출액", 360, HorizontalAlignment.Center);
+            list.Columns.Add("해당 년/월", 130, HorizontalAlignment.Center);
+            list.Columns.Add("메뉴명", 180, HorizontalAlignment.Center);
+            list.Columns.Add("수량", 70, HorizontalAlignment.Center);
+            list.Columns.Add("매출액", 270, HorizontalAlignment.Center);
         }
-
-        private void lv_click(object sender, MouseEventArgs e)
-        {
-
-        }
-
+        
         private void btn_search_click(object sender, EventArgs e)
         {
 
+        }
+
+        private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        {
+            e.NewWidth = list.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
         }
     }
 }

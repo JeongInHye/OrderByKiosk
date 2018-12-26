@@ -35,10 +35,10 @@ namespace OBK.Views.StaffView
             hashtable.Add("name", "주문리스트");
             list = draw.getListView(hashtable, parentForm);
             list.Columns.Add("", 25, HorizontalAlignment.Center);
-            list.Columns.Add("주문번호", 120, HorizontalAlignment.Center);
+            list.Columns.Add("주문번호", 110, HorizontalAlignment.Center);
             list.Columns.Add("메뉴", 200, HorizontalAlignment.Center);
             list.Columns.Add("샷추가", 108, HorizontalAlignment.Center);
-            list.Columns.Add("휘핑", 108, HorizontalAlignment.Center);
+            list.Columns.Add("휘핑", 90, HorizontalAlignment.Center);
             list.Columns.Add("수량", 100, HorizontalAlignment.Center);
             list.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             list.HeaderStyle = ColumnHeaderStyle.Nonclickable;
@@ -68,6 +68,8 @@ namespace OBK.Views.StaffView
         private void btn_click(object o, EventArgs a)
         {
             api = new WebAPI();
+            bool one = true;
+
             foreach (ListViewItem listitem in list.Items)
             {
                 if (list.Items.Count > 0)
@@ -77,9 +79,14 @@ namespace OBK.Views.StaffView
                         if (list.Items[i].Checked == true)
                         {
                             Hashtable ht = new Hashtable();
-                            ht.Add("oNo", list.Items[i].SubItems[1].Text);
-                            api.Post(Program.serverUrl + "orderlist/complete", ht);
+                            ht.Add("oNum", list.Items[i].SubItems[1].Text);
+                            api.Post(Program.serverUrl + "orderlist/comYn", ht);
                             list.Items[i].Remove();
+                            if (one)
+                            {
+                                MessageBox.Show("주문 확인");
+                                one = false;
+                            }
                         }
                     }
                 }
