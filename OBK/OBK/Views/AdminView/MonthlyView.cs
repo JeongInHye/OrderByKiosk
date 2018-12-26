@@ -84,17 +84,24 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "list");
             hashtable.Add("color", Color.White);
             //hashtable.Add("click", (MouseEventHandler)lv_click);
-            list = draw.getListView(hashtable, parentForm);
+            list = draw.getListView1(hashtable, parentForm);
             list.ColumnWidthChanging += List_ColumnWidthChanging;
 
             list.Columns.Add("해당 년/월", 200, HorizontalAlignment.Center);
-            list.Columns.Add("매출액", 460, HorizontalAlignment.Center);
+            list.Columns.Add("매출액", 450, HorizontalAlignment.Center);
         }
 
         private void btn_search_click(object sender, EventArgs e)
         {
-            string startYear = dtp_start.Value.ToString("yyyy-MM");
-            MessageBox.Show(startYear);
+            string startDate = dtp_start.Value.ToString("yyyy-MM");
+            string endDate = dtp_end.Value.ToString("yyyy-MM");
+            //MessageBox.Show("시작년월-->"+startDate+"\n종료년월-->"+ endDate);
+            WebAPI api = new WebAPI();
+            Hashtable ht = new Hashtable();
+            ht.Add("startdate", startDate);
+            ht.Add("enddate", endDate);
+            api.PostListview(Program.serverUrl + "admin/selectMonthIncome", ht, list);
+            
         }
 
         private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
