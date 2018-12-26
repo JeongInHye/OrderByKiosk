@@ -13,10 +13,10 @@ namespace OBK.Views
 {
     class BillView
     {
-        //private MYsql db;
+        PictureBox pictureBox;
         private Draw draw;
         private Form parentForm;
-        private Label label1, label2, label3, label4, label5, label6;
+        private Label label1, label2, lblnum, label3, label4, label5, label6;
         private ListView list;
         private Button button;
         private Hashtable hashtable;
@@ -30,17 +30,27 @@ namespace OBK.Views
 
         private void getView()
         {
+            pictureBox = new PictureBox();
+            pictureBox.Image = (Bitmap)OBK.Properties.Resources.ResourceManager.GetObject("logo2");
+            pictureBox.Location = new Point(140, 5);
+            pictureBox.Size = new Size(200, 93);
+            pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+            parentForm.Controls.Add(pictureBox);
+
             hashtable = new Hashtable();
             hashtable.Add("text", "----------------------------------------------------------------------");
             hashtable.Add("point", new Point(18, 100));
             hashtable.Add("name", "선");
             label1 = draw.getLabel(hashtable, parentForm);
 
+            WebAPI api = new WebAPI();
+            Program.maxoNum = api.MaxoNum(Program.serverUrl + "orderlist/selectMaxoNum");
+            Program.maxoNum--;
             hashtable = new Hashtable();
-            hashtable.Add("text", "주문번호 : {0}");
-            hashtable.Add("point", new Point(150, 111));
+            hashtable.Add("text", string.Format("주문번호 : {0}",Program.maxoNum.ToString()));
+            hashtable.Add("point", new Point(180, 117));
             hashtable.Add("font", new Font("고딕", 18, FontStyle.Bold));
-            hashtable.Add("name", "주문번호");
+            hashtable.Add("name", "oNumTxt");
             label2 = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
@@ -52,7 +62,7 @@ namespace OBK.Views
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("size", new Size(400, 110));
-            hashtable.Add("point", new Point(25, 165));
+            hashtable.Add("point", new Point(25, 170));
             hashtable.Add("name", "주문리스트");
             list = draw.getListView(hashtable, parentForm);
             list.Columns.Add("", 0);
@@ -70,15 +80,15 @@ namespace OBK.Views
             hashtable = new Hashtable();
             hashtable.Add("text", "합계");
             hashtable.Add("point", new Point(25, 320));
-            hashtable.Add("font", new Font("굴림", 12,FontStyle.Bold));
-            hashtable.Add("name", "합계");
+            hashtable.Add("font", new Font("굴림", 12, FontStyle.Bold));
+            hashtable.Add("name", "sum");
             label5 = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("text", "3,000"); // db에서 갖구오기이
+            hashtable.Add("text", ""); // db에서 갖구오기이
             hashtable.Add("point", new Point(290, 320));
             hashtable.Add("font", new Font("굴림", 12, FontStyle.Bold));
-            hashtable.Add("name", "합계");
+            hashtable.Add("name", "Money");
             label6 = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
@@ -102,6 +112,6 @@ namespace OBK.Views
             parentForm.Close();
         }
 
-        
+
     }
 }
