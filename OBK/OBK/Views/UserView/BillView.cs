@@ -66,10 +66,16 @@ namespace OBK.Views
             hashtable.Add("name", "주문리스트");
             list = draw.getListView(hashtable, parentForm);
             list.Columns.Add("", 0);
-            list.Columns.Add("메뉴", 250, HorizontalAlignment.Center);
+            list.Columns.Add("메뉴", 165, HorizontalAlignment.Center);
+            list.Columns.Add("샷", 50, HorizontalAlignment.Center);
+            list.Columns.Add("휘핑", 50, HorizontalAlignment.Center);
+            list.Columns.Add("수량", 50, HorizontalAlignment.Center);
             list.Columns.Add("가격", 79, HorizontalAlignment.Center);
-            list.Columns.Add("수량", 70, HorizontalAlignment.Center);
+            list.Columns.Add("oNum", 0, HorizontalAlignment.Center);
             list.ColumnWidthChanging += List_ColumnWidthChanging;
+            Hashtable ht = new Hashtable();
+            ht.Add("oNum",Program.maxoNum);
+            api.PostListview(Program.serverUrl + "orderlist/selectBill",ht, list);
 
             hashtable = new Hashtable();
             hashtable.Add("text", "----------------------------------------------------------------------");
@@ -78,18 +84,18 @@ namespace OBK.Views
             label4 = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("text", "합계");
-            hashtable.Add("point", new Point(25, 320));
+            hashtable.Add("text", "합계 :  ");
+            hashtable.Add("point", new Point(300, 320));
             hashtable.Add("font", new Font("굴림", 12, FontStyle.Bold));
             hashtable.Add("name", "sum");
             label5 = draw.getLabel(hashtable, parentForm);
 
-            hashtable = new Hashtable();
-            hashtable.Add("text", ""); // db에서 갖구오기이
-            hashtable.Add("point", new Point(290, 320));
-            hashtable.Add("font", new Font("굴림", 12, FontStyle.Bold));
-            hashtable.Add("name", "Money");
-            label6 = draw.getLabel(hashtable, parentForm);
+            //hashtable = new Hashtable();
+            //hashtable.Add("text", ""); // db에서 갖구오기이
+            //hashtable.Add("point", new Point(290, 320));
+            //hashtable.Add("font", new Font("굴림", 12, FontStyle.Bold));
+            //hashtable.Add("name", "Money");
+            //label6 = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
@@ -99,6 +105,37 @@ namespace OBK.Views
             hashtable.Add("text", "확인");
             hashtable.Add("click", (EventHandler)btn_click);
             button = draw.getButton(hashtable, parentForm);
+
+            BillResize();//주문목록의 주문갯수에 따라서 영수증의 크기를 맞춰주는 함수호출
+            label5.Text += TotalPrice();
+        }
+
+        private string TotalPrice()
+        {
+            int total = 0;
+            for (int i = 0; i < list.Items.Count; i++)
+            {
+                int price = Convert.ToInt32(list.Items[i].SubItems[5].Text);
+                int shot = Convert.ToInt32(list.Items[i].SubItems[2].Text);
+                price += shot * 500;
+                list.Items[i].SubItems[5].Text = price.ToString();
+                int count = Convert.ToInt32(list.Items[i].SubItems[4].Text);
+                total += price * count;
+            }
+            return total.ToString();
+        }
+
+        private void BillResize()
+        {
+            if (list.Items.Count > 2)
+            {
+                int additem = list.Items.Count - 2;
+                parentForm.Size = new Size(500, 500 + (30 * additem));
+                list.Size = new Size(400, 110 + (30 * additem));
+                label4.Location = new Point(18, 300 + (30 * additem));
+                label5.Location = new Point(25, 320 + (30 * additem));
+                button.Location = new Point(350, 390 + (30 * additem));
+            }
         }
 
         private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
