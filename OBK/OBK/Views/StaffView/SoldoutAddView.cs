@@ -86,7 +86,7 @@ namespace OBK.Views.StaffView
                             listMenu.Items[i].Remove();
                             if (one)
                             {
-                                MessageBox.Show("품절을 추가가 완료되었습니다.");
+                                MessageBox.Show("품절추가 완료");
                                 one = false;
                             }
                         }

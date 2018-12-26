@@ -184,6 +184,7 @@ namespace OBK.Modules
         public DateTimePicker GetDateTimePicker(Hashtable hashtable,Control parentDomain)
         {
             DateTimePicker dateTimePicker = new DateTimePicker();
+            dateTimePicker.Font = new Font("맑은 고딕", 11);
             dateTimePicker.Location = (Point)hashtable["point"];
             dateTimePicker.Name = hashtable["name"].ToString();
             dateTimePicker.Size = (Size)hashtable["size"];
