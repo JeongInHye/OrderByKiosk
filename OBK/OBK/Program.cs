@@ -18,7 +18,7 @@ namespace OBK
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new UserForm());
             
         }
         static public string serverUrl = "http://192.168.3.31:5000/";

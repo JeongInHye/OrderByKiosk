@@ -18,7 +18,7 @@ namespace OBK.Views
         private Form parentForm;
         private Draw draw;
         private ListView listOrderList;
-        private Label lblMessage,lb_total;
+        private Label lblMessage, lb_total;
         private Button btnMoney, btnCard, btnCancel;
 
         public PayView(Form parentForm)
@@ -48,14 +48,14 @@ namespace OBK.Views
 
             hashtable = new Hashtable();
             hashtable.Add("text", "결제 수단을 선택해 주세요.");
-            hashtable.Add("point", new Point(180, 380));
+            hashtable.Add("point", new Point(180, 460));
             hashtable.Add("font", new Font("맑은 고딕", 25, FontStyle.Bold));
             hashtable.Add("name", "lblMessage");
             lblMessage = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(190, 100));
-            hashtable.Add("point", new Point(130, 470));
+            hashtable.Add("point", new Point(150, 540));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("name", "btnCard");
@@ -65,7 +65,7 @@ namespace OBK.Views
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(190, 100));
-            hashtable.Add("point", new Point(450, 470));
+            hashtable.Add("point", new Point(450, 540));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("name", "btnMoney");
@@ -75,7 +75,7 @@ namespace OBK.Views
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(140, 50));
-            hashtable.Add("point", new Point(600, 770));
+            hashtable.Add("point", new Point(630, 790));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btnCancel");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
@@ -88,16 +88,16 @@ namespace OBK.Views
             hashtable.Add("width", 610);
             hashtable.Add("point", new Point(130, 320));
             hashtable.Add("name", "totalprice");
-            hashtable.Add("font", new Font("맑은 고딕", 20, FontStyle.Bold));
+            hashtable.Add("font", new Font("맑은 고딕", 18, FontStyle.Regular));
             lb_total = draw.getLabel1(hashtable, parentForm);
-            
             ListShotCalc();//주문목록 각각에 대한 샷추가를 가격에 샷당 500원 추가해주는 함수호출
             lb_total.Text += ListTotalPrice();//총 가격 계산
+            lb_total.Height = 35;
         }
 
         private void ListShotCalc()
         {
-            for(int i = 0; i< listOrderList.Items.Count; i++)
+            for (int i = 0; i < listOrderList.Items.Count; i++)
             {
                 int price = Convert.ToInt32(listOrderList.Items[i].SubItems[5].Text);
                 int shot = Convert.ToInt32(listOrderList.Items[i].SubItems[2].Text);
@@ -118,15 +118,8 @@ namespace OBK.Views
             return total.ToString();
         }
 
-        private void ListOrderList_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)   // listView 칼럼사이즈 고정
-        {
-            e.NewWidth = listOrderList.Columns[e.ColumnIndex].Width;
-            e.Cancel = true;
-        }
-
         private void btnCard_click(object o, EventArgs a)
         {
-
             api = new WebAPI();
             hashtable.Add("oNum", Program.maxoNum);
             api.Post(Program.serverUrl + "orderlist/orderYn", hashtable);
@@ -139,7 +132,6 @@ namespace OBK.Views
 
         private void btnMoney_click(object o, EventArgs a)
         {
-
             api = new WebAPI();
             hashtable.Add("oNum", Program.maxoNum);
             api.Post(Program.serverUrl + "orderlist/orderYn", hashtable);
@@ -151,8 +143,13 @@ namespace OBK.Views
             billForm.ShowDialog();
         }
 
-        private void btnCancel_click(object o, EventArgs a)
+        private void btnCancel_click(object o, EventArgs a) // 취소 클릭 이벤트
         {
+            api = new WebAPI();
+            hashtable = new Hashtable();
+            hashtable.Add("oNum", Program.maxoNum);
+            api.Post(Program.serverUrl + "orderlist/deleteOrderAll", hashtable);
+
             parentForm.Visible = false;
             UserForm userForm = new UserForm();
             userForm.StartPosition = FormStartPosition.CenterParent;
@@ -163,6 +160,12 @@ namespace OBK.Views
         private void exit_click(object sender, FormClosedEventArgs e)
         {
             parentForm.Close();
+        }
+
+        private void ListOrderList_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)   // listView 칼럼사이즈 고정
+        {
+            e.NewWidth = listOrderList.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
         }
     }
 }

@@ -29,7 +29,6 @@ namespace OBK.Views
         public UserView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }
@@ -37,7 +36,7 @@ namespace OBK.Views
         private void getView()
         {
             api = new WebAPI();
-            Program.maxoNum = api.MaxoNum(Program.serverUrl+ "orderlist/selectMaxoNum");
+            Program.maxoNum = api.MaxoNum(Program.serverUrl + "orderlist/selectMaxoNum");
             //=====panel 선언부분========head,menus,bottom
             hashtable = new Hashtable();
             hashtable.Add("type", "");
@@ -67,7 +66,7 @@ namespace OBK.Views
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("click", (EventHandler)btn_click);
             api = new WebAPI();
-            ArrayList buttonlist = api.CategoryButton(Program.serverUrl+"category/select", hashtable);
+            ArrayList buttonlist = api.CategoryButton(Program.serverUrl + "category/select", hashtable);
             for (int i = 0; i < buttonlist.Count; i++)
             {
                 Hashtable ht = (Hashtable)buttonlist[i];
@@ -87,7 +86,7 @@ namespace OBK.Views
                         break;
                     default: break;
                 }
-                
+
             }
             //============== bottom패널에 리스트뷰와 버튼================
             hashtable = new Hashtable();
@@ -109,15 +108,16 @@ namespace OBK.Views
             lv.ColumnWidthChanging += ListView_ColumnWidthChanging;
             api = new WebAPI();
             api.ListView(Program.serverUrl + "orderlist/select", lv);
-            
 
             hashtable = new Hashtable();
             hashtable.Add("text", "");
             hashtable.Add("width", 610);
             hashtable.Add("point", new Point(0, 220));
+            //hashtable.Add("point", new Point(410, 222));
             hashtable.Add("name", "totalprice");
             hashtable.Add("font", new Font("맑은 고딕", 17, FontStyle.Bold));
             label = draw.getLabel1(hashtable, bottom);
+            label.Height = 30;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(150, 60));
@@ -150,7 +150,7 @@ namespace OBK.Views
             // form 초기화
             if (tagetForm != null) tagetForm.Dispose();
             // form 호출
-            tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
+            tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm, menuclick, this), menu);
             tagetForm.Show();
             OrderlistLoad();
 
@@ -167,7 +167,7 @@ namespace OBK.Views
         {
             int allprice = 0;
             ListViewItemCollection col = lv.Items;
-            for(int j = 0; j < col.Count; j++)
+            for (int j = 0; j < col.Count; j++)
             {
                 for (int k = 0; k < col[j].SubItems.Count; k++)
                 {
@@ -176,13 +176,13 @@ namespace OBK.Views
             }
             for (int i = 0; i < lv.Items.Count; i++)
             {
-                lv.Items[i].SubItems[5].Text = (Convert.ToInt32(lv.Items[i].SubItems[5].Text)+Convert.ToInt32(lv.Items[i].SubItems[2].Text) * 500).ToString();
+                lv.Items[i].SubItems[5].Text = (Convert.ToInt32(lv.Items[i].SubItems[5].Text) + Convert.ToInt32(lv.Items[i].SubItems[2].Text) * 500).ToString();
                 allprice += Convert.ToInt32(lv.Items[i].SubItems[5].Text) * Convert.ToInt32(lv.Items[i].SubItems[4].Text);
             }
             label.Text = "총 가격 : " + allprice + "원";
         }
 
-        private void btn11_click(object sender, EventArgs e)//선택삭제 하는 클릭 이벤트
+        private void btn11_click(object sender, EventArgs e)    //선택삭제 하는 클릭 이벤트
         {
             api = new WebAPI();
             Hashtable ht = new Hashtable();
@@ -191,7 +191,7 @@ namespace OBK.Views
             this.tt();
         }
 
-        private void btn12_click(object sender, EventArgs e)
+        private void btn12_click(object sender, EventArgs e)    // 전체삭제 이벤트
         {
             api = new WebAPI();
             Hashtable ht = new Hashtable();
@@ -200,9 +200,9 @@ namespace OBK.Views
             this.tt();
         }
 
-        private void btn13_click(object sender, EventArgs e)
+        private void btn13_click(object sender, EventArgs e)    // 주문결제 버튼
         {
-            if(lv.Items.Count ==0)
+            if (lv.Items.Count == 0)
             {
                 MessageBox.Show("상품을 선택해주세요.");
                 return;
@@ -229,14 +229,6 @@ namespace OBK.Views
             selectOrder = col[0].SubItems[6].Text;
         }
 
-        private void ListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 카테고리 리트스 칼럼크기 막음
-        {
-            e.NewWidth = lv.Columns[e.ColumnIndex].Width;
-            e.Cancel = true;
-        }
-
-        
-
         private void btn_click(object sender, EventArgs e) //카테고리 버튼 클릭 이벤트
         {
             Button b = (Button)sender;
@@ -252,7 +244,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm, menuclick, this), menu);
                     tagetForm.Show();
                     break;
                 case "btn2":
@@ -265,7 +257,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm, menuclick, this), menu);
                     tagetForm.Show();
                     break;
                 case "btn3":
@@ -278,7 +270,7 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm, menuclick, this), menu);
                     tagetForm.Show();
                     break;
                 case "btn4":
@@ -291,13 +283,12 @@ namespace OBK.Views
                     // form 초기화
                     if (tagetForm != null) tagetForm.Dispose();
                     // form 호출
-                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm,menuclick, this), menu);
+                    tagetForm = draw.getMdiForm(parentForm, new MenuForm(parentForm, menuclick, this), menu);
                     tagetForm.Show();
                     break;
                 default:
                     break;
             }
-
         }
 
         public void tt()
@@ -305,6 +296,11 @@ namespace OBK.Views
             api.ListView(Program.serverUrl + "orderlist/select", lv);
             OrderlistLoad();
         }
-        
+
+        private void ListView_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)    // 카테고리 리트스 칼럼크기 막음
+        {
+            e.NewWidth = lv.Columns[e.ColumnIndex].Width;
+            e.Cancel = true;
+        }
     }
 }

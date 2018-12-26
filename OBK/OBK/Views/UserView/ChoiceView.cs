@@ -27,7 +27,6 @@ namespace OBK.Views
         private WebAPI api;
         private int count = 0, price = 0, height = 180;
         private bool hotice = true;
-        private int oNum=1;
 
         public ChoiceView(Form parentForm)
         {
@@ -291,7 +290,7 @@ namespace OBK.Views
                 return false;
             }
         }
-
+        
         private void yesbtn_click(object sender, EventArgs e)
         {
             string oSize = "";
