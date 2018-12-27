@@ -132,3 +132,119 @@ begin
 end
 \\
 	
+	/*===============================================================================*/
+delimiter \\
+create PROCEDURE p_Menu_Insert(in _cNo int,in _mName VARCHAR(20),in _mPrice int,in _mImage VARCHAR(1000),in _DegreeYn int,in _SizeYn int,in _ShotYn int,in _CreamYn INT)
+BEGIN
+	declare _mNameselect varchar(20);
+	set _mNameselect = (select mName from Menu where mName = _mName);
+	if _mNameselect=_mName then update Menu SET cNo=_cNo,mPrice=_mPrice,mImage=_mImage,DegreeYn=_DegreeYn,SizeYn=_SizeYn,ShotYn=_SizeYn,CreamYn=_CreamYn,soldoutYn='N',delYn='N' WHERE mName=_mName;
+	else INSERT INTO Menu (cNo,mName,mPrice,mImage,DegreeYn,SizeYn,ShotYn,CreamYn) VALUES (_cNo,_mName,_mPrice,_mImage,_DegreeYn,_SizeYn,_ShotYn,_CreamYn);
+	end if;
+end
+\\
+/*===============================================================================*/
+DELIMITER \\
+CREATE PROCEDURE p_Menu_NameSelect(in _cNo int)
+begin
+   SELECT '',mName from Menu where cNo = _cNo and delYn='N';
+end
+\\
+
+call p_Menu_NameSelect(1);
+/*===============================================================================*/
+delimiter \\
+create PROCEDURE p_Menu_Delete(in _mName VARCHAR(20))
+BEGIN
+	UPDATE Menu SET delYn='Y' WHERE mName=_mName;
+end
+\\
+
+/*===============================================================================*/
+delimiter \\
+create PROCEDURE p_Menu_MenuEdeitSelect(in _mName VARCHAR(20))
+BEGIN
+	SELECT mName,mPrice,mImage,DegreeYn,SizeYn,ShotYn,CreamYn FROM Menu WHERE mName=_mName;
+end
+\\
+
+/*===============================================================================*/
+delimiter \\
+create PROCEDURE p_Menu_MenuEdit(in _mName VARCHAR(20),in _NewmName VARCHAR(20),in _mPrice int,in _mImage VARCHAR(1000),in _DegreeYn int,in _SizeYn int,in _ShotYn int,in _CreamYn INT)
+BEGIN
+	UPDATE Menu SET mName=_NewmName,mPrice=_mPrice,mImage=_mImage,DegreeYn=_DegreeYn,SizeYn=_SizeYn,ShotYn=_ShotYn,CreamYn=_CreamYn  WHERE mName=_mName;
+end
+\\
+
+
+
+/*===============================================================================*/
+DELIMITER \\
+CREATE PROCEDURE p_SoldoutList()
+begin
+   select '',cName,mName from Menu inner join Category on Menu.cNo = Category.cNo where Menu.soldoutYn='Y';
+end
+\\
+
+call p_SoldoutList;
+
+/*===============================================================================*/
+
+delimiter \\
+create PROCEDURE p_Staff_ComYn(in _oNum int)
+BEGIN
+	UPDATE Orderlist SET comYn='Y' WHERE oNum=_oNum;
+end
+\\
+/*===============================================================================*/
+delimiter \\
+create PROCEDURE p_Staff_SoldOutAdd(in _mName VARCHAR(20))
+BEGIN
+	UPDATE Menu SET soldoutYn='Y' WHERE mName=_mName;
+end
+\\
+
+call p_Staff_SoldOutAdd('티라미수 라떼');
+/*===============================================================================*/
+delimiter \\
+create PROCEDURE p_Staff_SoldOutDelete(in _mName VARCHAR(20))
+BEGIN
+	UPDATE Menu SET soldoutYn='N' WHERE mName=_mName;
+end
+\\
+
+call p_Staff_SoldOutDelete('티라미수 라떼');
+/*===============================================================================*/
+delimiter \\
+create PROCEDURE p_Staff_SoldOutAddList(in _cNo int)
+BEGIN
+	select '',mName from Menu where cNo=_cNo and delYn='N'and soldoutYn='N';
+end
+\\
+
+
+/*===============================================================================*/
+delimiter \\
+create PROCEDURE p_Staff_SoldOutDeleteList()
+BEGIN
+	select '',mName from Menu where delYn='N'and soldoutYn='Y';
+end
+\\
+
+
+SELECT * FROM Orderlist;
+
+delimiter \\
+create PROCEDURE p_Orderlist_orderYn(IN _oNum int)
+BEGIN
+	UPDATE Orderlist SET orderYn='Y' WHERE _oNum=oNum;
+end
+\\
+
+/*----------------------------------------------------------*/
+delimiter \\
+create PROCEDURE p_Admin_Passwd()
+BEGIN
+	SELECT passwd FROM Admin;
+end
+\\
