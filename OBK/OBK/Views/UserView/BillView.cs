@@ -61,16 +61,17 @@ namespace OBK.Views
 
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
-            hashtable.Add("size", new Size(400, 110));
-            hashtable.Add("point", new Point(25, 170));
+            hashtable.Add("size", new Size(430, 110));
+            hashtable.Add("point", new Point(15, 170));
             hashtable.Add("name", "주문리스트");
             list = draw.getListView(hashtable, parentForm);
             list.Columns.Add("", 0);
             list.Columns.Add("메뉴", 165, HorizontalAlignment.Center);
-            list.Columns.Add("샷", 50, HorizontalAlignment.Center);
+            list.Columns.Add("샷", 40, HorizontalAlignment.Center);
             list.Columns.Add("휘핑", 50, HorizontalAlignment.Center);
-            list.Columns.Add("수량", 50, HorizontalAlignment.Center);
-            list.Columns.Add("가격", 79, HorizontalAlignment.Center);
+            list.Columns.Add("단가", 60, HorizontalAlignment.Center);
+            list.Columns.Add("수량", 40, HorizontalAlignment.Center);
+            list.Columns.Add("금액", 69, HorizontalAlignment.Center);
             list.Columns.Add("oNum", 0, HorizontalAlignment.Center);
             list.ColumnWidthChanging += List_ColumnWidthChanging;
             Hashtable ht = new Hashtable();

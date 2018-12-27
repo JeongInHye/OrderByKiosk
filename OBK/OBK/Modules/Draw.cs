@@ -63,6 +63,9 @@ namespace OBK.Modules
         public Button getButton(Hashtable hashtable, Control parentDomain)
         {
             Button button = new Button();
+            button.TabStop = false;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 0;
             button.Size = (Size)hashtable["size"];
             button.Location = (Point)hashtable["point"];
             button.BackColor = (Color)hashtable["color"];
@@ -77,6 +80,9 @@ namespace OBK.Modules
         public Button getButton1(Hashtable hashtable, Control parentDomain)
         {
             Button button = new Button();
+            button.TabStop = false;
+            button.FlatStyle = FlatStyle.Flat;
+            button.FlatAppearance.BorderSize = 0;
             button.Size = (Size)hashtable["size"];
             button.Location = (Point)hashtable["point"];
             button.BackColor = (Color)hashtable["color"];

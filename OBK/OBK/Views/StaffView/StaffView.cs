@@ -53,6 +53,7 @@ namespace OBK.Views.StaffView
             hashtable.Add("click", (EventHandler)OrderList_Click);
             btn1 = draw.getButton1(hashtable, head);
             btn1.BackColor = Color.FromArgb(46,204,113);
+            
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(200, 90));
