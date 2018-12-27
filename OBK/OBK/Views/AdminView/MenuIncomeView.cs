@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace OBK.Views.AdminView
 {
@@ -19,6 +20,8 @@ namespace OBK.Views.AdminView
         private Button btn_search;
         private DateTimePicker dtp_start, dtp_end;
         private Hashtable hashtable;
+        private Chart chart;
+        private Chart chartcount;
 
         public MenuIncomView(Form parentForm)
         {
@@ -78,18 +81,37 @@ namespace OBK.Views.AdminView
             dtp_end.Format = DateTimePickerFormat.Custom;
             dtp_end.CustomFormat = "yyyy년 MMMM";
 
-            hashtable = new Hashtable();
-            hashtable.Add("size", new Size(660, 420));
-            hashtable.Add("point", new Point(10, 90));
-            hashtable.Add("name", "list");
-            hashtable.Add("color", Color.White);
-            list = draw.getListView1(hashtable, parentForm);
-            list.ColumnWidthChanging += List_ColumnWidthChanging;
+            //hashtable = new Hashtable();
+            //hashtable.Add("size", new Size(660, 420));
+            //hashtable.Add("point", new Point(10, 90));
+            //hashtable.Add("name", "list");
+            //hashtable.Add("color", Color.White);
+            //list = draw.getListView1(hashtable, parentForm);
+            //list.ColumnWidthChanging += List_ColumnWidthChanging;
 
-            list.Columns.Add("해당 년/월", 130, HorizontalAlignment.Center);
-            list.Columns.Add("메뉴명", 180, HorizontalAlignment.Center);
-            list.Columns.Add("수량", 70, HorizontalAlignment.Center);
-            list.Columns.Add("매출액", 270, HorizontalAlignment.Center);
+            //list.Columns.Add("해당 년/월", 130, HorizontalAlignment.Center);
+            //list.Columns.Add("메뉴명", 180, HorizontalAlignment.Center);
+            //list.Columns.Add("수량", 70, HorizontalAlignment.Center);
+            //list.Columns.Add("매출액", 270, HorizontalAlignment.Center);
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(660, 210));
+            hashtable.Add("point", new Point(10, 90));
+            hashtable.Add("name", "chart");
+            chart = draw.getChart(hashtable, parentForm);
+            chart.Series[0].Color = Color.Black;
+            chart.Series[0].ChartType = SeriesChartType.Spline;
+            chart.Series[0].IsValueShownAsLabel = true;
+            chart.Series[0].Points.AddXY("", "");
+
+            hashtable = new Hashtable();
+            hashtable.Add("size", new Size(660, 210));
+            hashtable.Add("point", new Point(10, 310));
+            hashtable.Add("name", "chart");
+            chartcount = draw.getChart(hashtable, parentForm);
+            chartcount.Series[0].Color = Color.LightGreen;
+            chartcount.Series[0].ChartType = SeriesChartType.RangeColumn;
+            chartcount.Series[0].IsValueShownAsLabel = true;
+            chartcount.Series[0].Points.AddXY("", "");
         }
         
         private void btn_search_click(object sender, EventArgs e)
@@ -101,13 +123,14 @@ namespace OBK.Views.AdminView
             Hashtable ht = new Hashtable();
             ht.Add("startdate", startDate);
             ht.Add("enddate", endDate);
-            api.PostListview(Program.serverUrl + "admin/selectMenuIncome", ht, list);
+            api.PostChartPrice(Program.serverUrl + "admin/selectMenuIncome", ht, chart);
+            api.PostChartCount(Program.serverUrl + "admin/selectMenuIncome", ht, chartcount);
         }
 
-        private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
-        {
-            e.NewWidth = list.Columns[e.ColumnIndex].Width;
-            e.Cancel = true;
-        }
+        //private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
+        //{
+        //    e.NewWidth = list.Columns[e.ColumnIndex].Width;
+        //    e.Cancel = true;
+        //}
     }
 }

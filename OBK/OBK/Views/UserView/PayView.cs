@@ -30,33 +30,33 @@ namespace OBK.Views
 
         private void getView()
         {
-            hashtable = new Hashtable();
-            hashtable.Add("color", Color.White);
-            hashtable.Add("size", new Size(800, 300));
-            hashtable.Add("point", new Point(0, 20));
-            hashtable.Add("name", "주문리스트");
-            listOrderList = draw.getListView(hashtable, parentForm);
-            listOrderList.Columns.Add("", 0);
-            listOrderList.Columns.Add("메뉴이름", 170, HorizontalAlignment.Center);
-            listOrderList.Columns.Add("샷추가", 110, HorizontalAlignment.Center);
-            listOrderList.Columns.Add("휘핑", 136, HorizontalAlignment.Center);
-            listOrderList.Columns.Add("단가", 136, HorizontalAlignment.Center);
-            listOrderList.Columns.Add("수량", 90, HorizontalAlignment.Center);
-            listOrderList.Columns.Add("금액", 136, HorizontalAlignment.Center);
-            listOrderList.ColumnWidthChanging += ListOrderList_ColumnWidthChanging;
-            api = new WebAPI();
-            api.ListView(Program.serverUrl + "orderlist/select", listOrderList);
+            //hashtable = new Hashtable();
+            //hashtable.Add("color", Color.White);
+            //hashtable.Add("size", new Size(800, 300));
+            //hashtable.Add("point", new Point(0, 20));
+            //hashtable.Add("name", "주문리스트");
+            //listOrderList = draw.getListView(hashtable, parentForm);
+            //listOrderList.Columns.Add("", 0);
+            //listOrderList.Columns.Add("메뉴이름", 170, HorizontalAlignment.Center);
+            //listOrderList.Columns.Add("샷추가", 110, HorizontalAlignment.Center);
+            //listOrderList.Columns.Add("휘핑", 136, HorizontalAlignment.Center);
+            //listOrderList.Columns.Add("단가", 136, HorizontalAlignment.Center);
+            //listOrderList.Columns.Add("수량", 90, HorizontalAlignment.Center);
+            //listOrderList.Columns.Add("금액", 136, HorizontalAlignment.Center);
+            //listOrderList.ColumnWidthChanging += ListOrderList_ColumnWidthChanging;
+            //api = new WebAPI();
+            //api.ListView(Program.serverUrl + "orderlist/select", listOrderList);
 
             hashtable = new Hashtable();
             hashtable.Add("text", "결제 수단을 선택해 주세요.");
-            hashtable.Add("point", new Point(180, 460));
-            hashtable.Add("font", new Font("맑은 고딕", 25, FontStyle.Bold));
+            hashtable.Add("point", new Point(70, 30));
+            hashtable.Add("font", new Font("맑은 고딕", 20, FontStyle.Bold));
             hashtable.Add("name", "lblMessage");
             lblMessage = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(190, 100));
-            hashtable.Add("point", new Point(150, 540));
+            hashtable.Add("point", new Point(30, 100));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("name", "btnCard");
@@ -66,7 +66,7 @@ namespace OBK.Views
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(190, 100));
-            hashtable.Add("point", new Point(450, 540));
+            hashtable.Add("point", new Point(260, 100));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
             hashtable.Add("name", "btnMoney");
@@ -75,8 +75,8 @@ namespace OBK.Views
             btnMoney = draw.getButton1(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(140, 50));
-            hashtable.Add("point", new Point(630, 790));
+            hashtable.Add("size", new Size(100, 50));
+            hashtable.Add("point", new Point(350, 290));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btnCancel");
             hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Regular));
@@ -84,16 +84,16 @@ namespace OBK.Views
             hashtable.Add("click", (EventHandler)btnCancel_click);
             btnCancel = draw.getButton1(hashtable, parentForm);
 
-            hashtable = new Hashtable();
-            hashtable.Add("text", "총 가격 :          ");
-            hashtable.Add("width", 610);
-            hashtable.Add("point", new Point(130, 320));
-            hashtable.Add("name", "totalprice");
-            hashtable.Add("font", new Font("맑은 고딕", 18, FontStyle.Regular));
-            lb_total = draw.getLabel1(hashtable, parentForm);
+            //hashtable = new Hashtable();
+            //hashtable.Add("text", "총 가격 :          ");
+            //hashtable.Add("width", 610);
+            //hashtable.Add("point", new Point(130, 320));
+            //hashtable.Add("name", "totalprice");
+            //hashtable.Add("font", new Font("맑은 고딕", 18, FontStyle.Regular));
+            //lb_total = draw.getLabel1(hashtable, parentForm);
             //ListShotCalc();//주문목록 각각에 대한 샷추가를 가격에 샷당 500원 추가해주는 함수호출
-            lb_total.Text += ListTotalPrice();//총 가격 계산
-            lb_total.Height = 35;
+            //lb_total.Text += ListTotalPrice();//총 가격 계산
+            //lb_total.Height = 35;
         }
 
         private void ListShotCalc()
@@ -126,8 +126,9 @@ namespace OBK.Views
             api.Post(Program.serverUrl + "orderlist/orderYn", hashtable);
 
             BillForm billForm = new BillForm();
-            Point p = new Point((parentForm.Width - billForm.Width) / 2, (parentForm.Height - billForm.Height) / 2);
-            billForm.StartPosition = parentForm.StartPosition;
+            billForm.StartPosition = FormStartPosition.Manual;
+            billForm.Location = new Point(parentForm.Location.X, parentForm.Location.Y + (parentForm.Height / 2) - (billForm.Height / 2));
+            billForm.FormClosed += new FormClosedEventHandler(exit_click);
             billForm.ShowDialog();
         }
 
@@ -138,8 +139,10 @@ namespace OBK.Views
             api.Post(Program.serverUrl + "orderlist/orderYn", hashtable);
 
             BillForm billForm = new BillForm();
-            Point p = new Point((parentForm.Width - billForm.Width) / 2, (parentForm.Height - billForm.Height) / 2);
-            billForm.StartPosition = parentForm.StartPosition;
+            //Point p = new Point((parentForm.Width - billForm.Width) / 2, (parentForm.Height - billForm.Height) / 2);
+            //billForm.StartPosition = FormStartPosition.CenterParent;
+            billForm.StartPosition = FormStartPosition.Manual;
+            billForm.Location = new Point(parentForm.Location.X , parentForm.Location.Y + (parentForm.Height / 2) - (billForm.Height / 2));
             billForm.FormClosed += new FormClosedEventHandler(exit_click);
             billForm.ShowDialog();
         }
@@ -151,11 +154,7 @@ namespace OBK.Views
             hashtable.Add("oNum", Program.maxoNum);
             api.Post(Program.serverUrl + "orderlist/deleteOrderAll", hashtable);
 
-            parentForm.Visible = false;
-            UserForm userForm = new UserForm();
-            userForm.StartPosition = FormStartPosition.CenterParent;
-            userForm.FormClosed += new FormClosedEventHandler(exit_click);
-            userForm.Show();
+            parentForm.Close();
         }
 
         private void exit_click(object sender, FormClosedEventArgs e)
