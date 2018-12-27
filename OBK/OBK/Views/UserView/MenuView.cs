@@ -60,7 +60,6 @@ namespace OBK.Views
         {
             string mName = name.Substring(name.IndexOf("_")+1);
             
-            
             ChoiceForm choiceForm = new ChoiceForm(mName);
             choiceForm.StartPosition = FormStartPosition.CenterParent;
             

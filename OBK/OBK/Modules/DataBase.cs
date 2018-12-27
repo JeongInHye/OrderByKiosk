@@ -304,7 +304,6 @@ namespace OBK.Modules
                 draw = new Draw();
                 for (int i = 0; i < list.Count; i++)
                 {
-
                     //0 mNo 1 mName 2 mPrice 3 mImage
                     JArray jArray = (JArray)list[i];
 
@@ -327,7 +326,6 @@ namespace OBK.Modules
                     nameValue = new NameValueCollection();
 
                     nameValue.Add("mName", btn.Name.Substring(btn.Name.IndexOf("_") + 1));
-
 
                     byte[] result2 = wc.UploadValues(Program.serverUrl+"menu/image", "POST", nameValue);
                     string resultStr2 = Encoding.UTF8.GetString(result2);
