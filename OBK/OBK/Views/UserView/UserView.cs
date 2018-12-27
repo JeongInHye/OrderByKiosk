@@ -65,6 +65,7 @@ namespace OBK.Views
             hashtable.Add("size", new Size(160, 100));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("click", (EventHandler)btn_click);
+            hashtable.Add("font", new Font("맑은 고딕",15,FontStyle.Regular));
             api = new WebAPI();
             ArrayList buttonlist = api.CategoryButton(Program.serverUrl + "category/select", hashtable);
             for (int i = 0; i < buttonlist.Count; i++)
@@ -73,16 +74,17 @@ namespace OBK.Views
                 switch (i)
                 {
                     case 0:
-                        btn1 = draw.getButton(ht, head);
+                        
+                        btn1 = draw.getButton1(ht, head);
                         break;
                     case 1:
-                        btn2 = draw.getButton(ht, head);
+                        btn2 = draw.getButton1(ht, head);
                         break;
                     case 2:
-                        btn3 = draw.getButton(ht, head);
+                        btn3 = draw.getButton1(ht, head);
                         break;
                     case 3:
-                        btn4 = draw.getButton(ht, head);
+                        btn4 = draw.getButton1(ht, head);
                         break;
                     default: break;
                 }
