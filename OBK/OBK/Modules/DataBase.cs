@@ -139,7 +139,7 @@ namespace OBK.Modules
 
                 if ("1" == resultStr)
                 {
-                    MessageBox.Show("DB 성공");
+                    //MessageBox.Show("DB 성공");
                 }
                 else
                 {
@@ -201,6 +201,69 @@ namespace OBK.Modules
         }
 
         public bool PostChart(string url, Hashtable hashtable, Chart chart)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                NameValueCollection nameValue = new NameValueCollection();
+
+                foreach (DictionaryEntry data in hashtable)
+                {
+                    nameValue.Add(data.Key.ToString(), data.Value.ToString());
+                }
+
+                byte[] result = wc.UploadValues(url, "POST", nameValue);
+                string resultStr = Encoding.UTF8.GetString(result);
+
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
+                chart.Series[0].Points.Clear();
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray jArray = (JArray)list[i];
+                    chart.Series[0].Points.AddXY(jArray[0].ToString(), jArray[1].ToString());
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool PostChartPrice(string url, Hashtable hashtable, Chart chart)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                NameValueCollection nameValue = new NameValueCollection();
+
+                foreach (DictionaryEntry data in hashtable)
+                {
+                    nameValue.Add(data.Key.ToString(), data.Value.ToString());
+                }
+
+                byte[] result = wc.UploadValues(url, "POST", nameValue);
+                string resultStr = Encoding.UTF8.GetString(result);
+
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
+                chart.Series[0].Points.Clear();
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray jArray = (JArray)list[i];
+                    chart.Series[0].Points.AddXY(jArray[0].ToString(), jArray[2].ToString());
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+        public bool PostChartCount(string url, Hashtable hashtable, Chart chart)
         {
             try
             {

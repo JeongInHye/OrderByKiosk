@@ -111,7 +111,7 @@ namespace OBK.Modules
             parentForm.IsMdiContainer = false;
             parentForm.FormBorderStyle = FormBorderStyle.FixedSingle;
             parentForm.BackColor = Color.White;
-            parentForm.Size = new Size(800, 900);
+            parentForm.Size = new Size(500, 400);
             new PayView(parentForm);
         }
         private void GetUserLoad(object o, EventArgs a)

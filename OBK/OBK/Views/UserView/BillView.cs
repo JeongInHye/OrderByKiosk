@@ -66,13 +66,10 @@ namespace OBK.Views
             hashtable.Add("name", "주문리스트");
             list = draw.getListView(hashtable, parentForm);
             list.Columns.Add("", 0);
-            list.Columns.Add("메뉴", 165, HorizontalAlignment.Center);
-            list.Columns.Add("샷", 40, HorizontalAlignment.Center);
-            list.Columns.Add("휘핑", 50, HorizontalAlignment.Center);
-            list.Columns.Add("단가", 60, HorizontalAlignment.Center);
-            list.Columns.Add("수량", 40, HorizontalAlignment.Center);
-            list.Columns.Add("금액", 69, HorizontalAlignment.Center);
-            list.Columns.Add("oNum", 0, HorizontalAlignment.Center);
+            list.Columns.Add("메뉴", 185, HorizontalAlignment.Center);
+            list.Columns.Add("단가", 80, HorizontalAlignment.Center);
+            list.Columns.Add("수량", 60, HorizontalAlignment.Center);
+            list.Columns.Add("금액", 89, HorizontalAlignment.Center);
             list.ColumnWidthChanging += List_ColumnWidthChanging;
             Hashtable ht = new Hashtable();
             ht.Add("oNum",Program.maxoNum);
@@ -109,11 +106,8 @@ namespace OBK.Views
             int total = 0;
             for (int i = 0; i < list.Items.Count; i++)
             {
-                int price = Convert.ToInt32(list.Items[i].SubItems[5].Text);
-                //int shot = Convert.ToInt32(list.Items[i].SubItems[2].Text);
-                //price += shot * 500;
-                //list.Items[i].SubItems[5].Text = price.ToString();
-                int count = Convert.ToInt32(list.Items[i].SubItems[4].Text);
+                int price = Convert.ToInt32(list.Items[i].SubItems[4].Text);
+                int count = Convert.ToInt32(list.Items[i].SubItems[3].Text);
                 total += price * count;
             }
             return total.ToString();

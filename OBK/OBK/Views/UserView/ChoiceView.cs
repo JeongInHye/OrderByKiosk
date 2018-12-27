@@ -298,9 +298,12 @@ namespace OBK.Views
             {
                 count = Convert.ToInt32(lb_count2.Text);
                 price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                int shot = Convert.ToInt32(lb_shot2.Text);
                 price += 500;
-                price += 500 * shot;
+                if (lb_shot2 != null)
+                {
+                    int shot = Convert.ToInt32(lb_shot2.Text);
+                    price += 500 * shot;
+                }
                 int allprice = (count * price);
                 lb_allprice.Text = "전체금액 : " + allprice + "원";
             }
@@ -308,8 +311,11 @@ namespace OBK.Views
             {
                 count = Convert.ToInt32(lb_count2.Text);
                 price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                int shot = Convert.ToInt32(lb_shot2.Text);
-                price += 500 * shot;
+                if(lb_shot2 != null)
+                {
+                    int shot = Convert.ToInt32(lb_shot2.Text);
+                    price += 500 * shot;
+                }
                 int allprice = (count * price);
                 lb_allprice.Text = "전체금액 : " + allprice + "원";
             }
@@ -337,7 +343,7 @@ namespace OBK.Views
                 if(cb_size.SelectedItem.ToString()== "Large(+500원)")
                 {
                     oSize = cb_size.SelectedItem.ToString().Substring(0,5);
-                    MessageBox.Show(oSize);
+                    //MessageBox.Show(oSize);
                 }
                 else
                 {
@@ -351,6 +357,7 @@ namespace OBK.Views
 
             //MessageBox.Show(mName + ">>" + lb_count2.Text + "개\n" + hi + "\n" + oSize + "\n" + oCream + "\n" + oShot + "샷");
             api = new WebAPI();
+            Program.maxoNum = api.MaxoNum(Program.serverUrl + "orderlist/selectMaxoNum");
             Hashtable ht = new Hashtable();
             ht.Add("mName", mName);
             ht.Add("oNum", Program.maxoNum);

@@ -212,20 +212,21 @@ namespace OBK.Views
                 MessageBox.Show("상품을 선택해주세요.");
                 return;
             }
-            parentForm.Visible = false;
+
             PayForm pf = new PayForm();
-            pf.StartPosition = FormStartPosition.CenterParent;
-            pf.FormClosed += new FormClosedEventHandler(exit_click);
-            pf.Show();
+            pf.StartPosition = FormStartPosition.Manual;
+            pf.Location = new Point(parentForm.Location.X + (parentForm.Width / 2) - (pf.Width / 4), parentForm.Location.Y + (parentForm.Height / 2) - (pf.Height / 2));
+            pf.ShowDialog();
+            tt();
         }
 
-        private void exit_click(object sender, FormClosedEventArgs e)
-        {
-            parentForm.Visible = false;
-            UserForm userForm = new UserForm();
-            userForm.StartPosition = FormStartPosition.CenterParent;
-            userForm.Show();
-        }
+        //private void exit_click(object sender, FormClosedEventArgs e)
+        //{
+        //    parentForm.Visible = false;
+        //    UserForm userForm = new UserForm();
+        //    userForm.StartPosition = FormStartPosition.CenterParent;
+        //    userForm.Show();
+        //}
 
         private void listView_click(object sender, MouseEventArgs e)
         {
