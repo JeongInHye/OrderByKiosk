@@ -68,7 +68,6 @@ namespace OBK.Views.AdminView
             api = new WebAPI();
             api.ListView(Program.serverUrl+"category/select", listCategory);
 
-
             hashtable = new Hashtable();
             hashtable.Add("color", Color.WhiteSmoke);
             hashtable.Add("size", new Size(490, 350));
@@ -79,7 +78,6 @@ namespace OBK.Views.AdminView
             listMenu.Columns.Add("", 0, HorizontalAlignment.Center);
             listMenu.Columns.Add("메뉴", 480, HorizontalAlignment.Center);
             listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
-            listMenu.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
 
             hashtable = new Hashtable();

@@ -58,7 +58,6 @@ namespace OBK.Views.AdminView
             listMenu = draw.getListView(hashtable, parentForm);
             listMenu.Columns.Add("", 20, HorizontalAlignment.Center);
             listMenu.Columns.Add("메뉴", 460, HorizontalAlignment.Center);
-            listMenu.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
 

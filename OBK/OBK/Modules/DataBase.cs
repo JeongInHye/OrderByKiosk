@@ -78,7 +78,7 @@ namespace OBK.Modules
                     listView.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
                 }
 
-                ListViewItemCollection col = listView.Items;    // listview subitems 글꼴 바꾸
+                ListViewItemCollection col = listView.Items;    // listview subitems 글꼴 바꾸기
                 for (int j = 0; j < col.Count; j++)
                 {
                     for (int k = 0; k < col[j].SubItems.Count; k++)
@@ -181,8 +181,6 @@ namespace OBK.Modules
                     }
                     listView.Items.Add(new ListViewItem(arr));
                     listView.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-
-                    listView.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
                 }
 
                 ListViewItemCollection col = listView.Items;
@@ -193,7 +191,6 @@ namespace OBK.Modules
                         col[j].SubItems[k].Font = new Font("맑은 고딕", 12, FontStyle.Regular);
                     }
                 }
-
                 return true;
             }
             catch (Exception)

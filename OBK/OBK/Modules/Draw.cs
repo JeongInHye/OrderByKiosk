@@ -138,6 +138,7 @@ namespace OBK.Modules
             listView.Name = hashtable["name"].ToString();
             listView.CheckBoxes = true;
             listView.MouseClick += (MouseEventHandler)hashtable["click"];
+            listView.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             parentDomain.Controls.Add(listView);
             return listView;
         }
@@ -153,6 +154,7 @@ namespace OBK.Modules
             listView.BackColor = (Color)hashtable["color"];
             listView.Name = hashtable["name"].ToString();
             listView.MouseClick += (MouseEventHandler)hashtable["click"];
+            listView.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             parentDomain.Controls.Add(listView);
             return listView;
         }

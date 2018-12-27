@@ -212,8 +212,9 @@ namespace OBK.Views
                         hashtable.Add("font", new Font("맑은고딕", 14, FontStyle.Bold));
                         hashtable.Add("name", "cb_size");
                         cb_size = draw.getComboBox(hashtable, parentForm);
-                        cb_size.Items.AddRange(new object[] { "Regular", "Large" });
+                        cb_size.Items.AddRange(new object[] { "Regular", "Large(+500원)" });
                         cb_size.SelectedIndex = 0;
+                        cb_size.SelectedIndexChanged += Cb_size_SelectedIndexChanged;
                     }
                     if (jArray[6].ToString() != "0" || jArray[7].ToString() != "0")
                     {
@@ -290,7 +291,35 @@ namespace OBK.Views
                 return false;
             }
         }
-        
+
+        private void Price_Calculate()
+        {
+            if (cb_size.SelectedItem.ToString() == "Large(+500원)")
+            {
+                count = Convert.ToInt32(lb_count2.Text);
+                price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
+                int shot = Convert.ToInt32(lb_shot2.Text);
+                price += 500;
+                price += 500 * shot;
+                int allprice = (count * price);
+                lb_allprice.Text = "전체금액 : " + allprice + "원";
+            }
+            else if(cb_size.SelectedItem.ToString() == "Regular")
+            {
+                count = Convert.ToInt32(lb_count2.Text);
+                price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
+                int shot = Convert.ToInt32(lb_shot2.Text);
+                price += 500 * shot;
+                int allprice = (count * price);
+                lb_allprice.Text = "전체금액 : " + allprice + "원";
+            }
+        }
+
+        private void Cb_size_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Price_Calculate();
+        }
+
         private void yesbtn_click(object sender, EventArgs e)
         {
             string oSize = "";
@@ -303,8 +332,18 @@ namespace OBK.Views
                 if (hotice) hi = "Hot";
                 else hi = "Iced";
             }
-            if (cb_size != null) 
-                oSize = cb_size.SelectedItem.ToString();
+            if (cb_size != null)
+            {
+                if(cb_size.SelectedItem.ToString()== "Large(+500원)")
+                {
+                    oSize = cb_size.SelectedItem.ToString().Substring(0,5);
+                    MessageBox.Show(oSize);
+                }
+                else
+                {
+                    oSize = cb_size.SelectedItem.ToString();
+                }
+            }
             if (cb_cream != null)
                 oCream = cb_cream.SelectedItem.ToString();
             if (lb_shot2 != null)
@@ -337,12 +376,7 @@ namespace OBK.Views
                 int minus = Convert.ToInt32(lb_count2.Text) - 1;
                 lb_count2.Text = minus.ToString();
 
-                count = Convert.ToInt32(lb_count2.Text);
-                price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                int shot = Convert.ToInt32(lb_shot2.Text);
-                price += 500 * shot;
-                int allprice = (count * price);
-                lb_allprice.Text = "전체금액 : " + allprice + "원";
+                Price_Calculate();
             }
         }
 
@@ -353,12 +387,7 @@ namespace OBK.Views
                 int plus = Convert.ToInt32(lb_count2.Text) + 1;
                 lb_count2.Text = plus.ToString();
 
-                count = Convert.ToInt32(lb_count2.Text);
-                price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                int shot = Convert.ToInt32(lb_shot2.Text);
-                price += 500 * shot;
-                int allprice = (count * price);
-                lb_allprice.Text = "전체금액 : " + allprice+ "원";
+                Price_Calculate();
             }
         }
 
@@ -387,12 +416,7 @@ namespace OBK.Views
                 int minus = Convert.ToInt32(lb_shot2.Text) - 1;
                 lb_shot2.Text = minus.ToString();
 
-                count = Convert.ToInt32(lb_count2.Text);
-                price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                int shot = Convert.ToInt32(lb_shot2.Text);
-                price -= 500 * shot;
-                int allprice = (count * price);
-                lb_allprice.Text = "전체금액 : " + allprice + "원";
+                Price_Calculate();
             }
         }
 
@@ -403,12 +427,7 @@ namespace OBK.Views
                 int plus = Convert.ToInt32(lb_shot2.Text) + 1;
                 lb_shot2.Text = plus.ToString();
 
-                count = Convert.ToInt32(lb_count2.Text);
-                price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                int shot = Convert.ToInt32(lb_shot2.Text);
-                price += 500 * shot;
-                int allprice = (count * price);
-                lb_allprice.Text = "전체금액 : " + allprice + "원";
+                Price_Calculate();
             }
         }
     }

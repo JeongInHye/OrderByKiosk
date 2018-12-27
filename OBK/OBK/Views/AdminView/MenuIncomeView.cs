@@ -83,7 +83,6 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(10, 90));
             hashtable.Add("name", "list");
             hashtable.Add("color", Color.White);
-            //hashtable.Add("click", (MouseEventHandler)lv_click);
             list = draw.getListView1(hashtable, parentForm);
             list.ColumnWidthChanging += List_ColumnWidthChanging;
 

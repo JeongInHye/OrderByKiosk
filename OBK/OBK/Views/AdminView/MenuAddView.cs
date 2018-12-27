@@ -40,7 +40,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("text", "카테고리 : ");
             hashtable.Add("width", 110);
             hashtable.Add("point", new Point(100, 30));
-            hashtable.Add("font", new Font("고딕", 18, FontStyle.Bold));
+            hashtable.Add("font", new Font("맑은 고딕", 14, FontStyle.Bold));
             hashtable.Add("name", "주문번호");
             lblCategory = draw.getLabel1(hashtable, parentForm);
 

@@ -90,13 +90,6 @@ namespace OBK.Views
             hashtable.Add("name", "sum");
             label5 = draw.getLabel(hashtable, parentForm);
 
-            //hashtable = new Hashtable();
-            //hashtable.Add("text", ""); // db에서 갖구오기이
-            //hashtable.Add("point", new Point(290, 320));
-            //hashtable.Add("font", new Font("굴림", 12, FontStyle.Bold));
-            //hashtable.Add("name", "Money");
-            //label6 = draw.getLabel(hashtable, parentForm);
-
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(100, 50));
             hashtable.Add("point", new Point(350, 390));
@@ -116,9 +109,9 @@ namespace OBK.Views
             for (int i = 0; i < list.Items.Count; i++)
             {
                 int price = Convert.ToInt32(list.Items[i].SubItems[5].Text);
-                int shot = Convert.ToInt32(list.Items[i].SubItems[2].Text);
-                price += shot * 500;
-                list.Items[i].SubItems[5].Text = price.ToString();
+                //int shot = Convert.ToInt32(list.Items[i].SubItems[2].Text);
+                //price += shot * 500;
+                //list.Items[i].SubItems[5].Text = price.ToString();
                 int count = Convert.ToInt32(list.Items[i].SubItems[4].Text);
                 total += price * count;
             }

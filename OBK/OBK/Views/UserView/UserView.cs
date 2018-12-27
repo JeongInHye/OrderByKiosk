@@ -97,14 +97,14 @@ namespace OBK.Views
             hashtable.Add("click", (MouseEventHandler)listView_click);
             lv = draw.getListView1(hashtable, bottom);
             lv.Columns.Add("", 0, HorizontalAlignment.Center);
-            lv.Columns.Add("메뉴이름", 200, HorizontalAlignment.Center);
-            lv.Columns.Add("샷추가", 80, HorizontalAlignment.Center);
+            lv.Columns.Add("메뉴이름", 160, HorizontalAlignment.Center);
+            lv.Columns.Add("샷추가", 70, HorizontalAlignment.Center);
             lv.Columns.Add("휘핑", 90, HorizontalAlignment.Center);
-            lv.Columns.Add("수량", 80, HorizontalAlignment.Center);
-            lv.Columns.Add("가격", 145, HorizontalAlignment.Center);
+            lv.Columns.Add("단가", 80, HorizontalAlignment.Center);
+            lv.Columns.Add("수량", 70, HorizontalAlignment.Center);
+            lv.Columns.Add("금액", 125, HorizontalAlignment.Center);
             lv.Columns.Add("주문번호", 0, HorizontalAlignment.Center);
             lv.HeaderStyle = ColumnHeaderStyle.Nonclickable;
-            lv.Font = new Font("맑은고딕", 14, FontStyle.Bold);
             lv.ColumnWidthChanging += ListView_ColumnWidthChanging;
             api = new WebAPI();
             api.ListView(Program.serverUrl + "orderlist/select", lv);
@@ -126,7 +126,8 @@ namespace OBK.Views
             hashtable.Add("name", "btn11");
             hashtable.Add("text", "선택삭제");
             hashtable.Add("click", (EventHandler)btn11_click);
-            btn11 = draw.getButton(hashtable, bottom);
+            hashtable.Add("font",new Font("맑은고딕", 15, FontStyle.Regular));
+            btn11 = draw.getButton1(hashtable, bottom);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(150, 60));
@@ -135,7 +136,8 @@ namespace OBK.Views
             hashtable.Add("name", "btn12");
             hashtable.Add("text", "전체삭제");
             hashtable.Add("click", (EventHandler)btn12_click);
-            btn12 = draw.getButton(hashtable, bottom);
+            hashtable.Add("font", new Font("맑은고딕", 15, FontStyle.Regular));
+            btn12 = draw.getButton1(hashtable, bottom);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(150, 60));
@@ -144,7 +146,8 @@ namespace OBK.Views
             hashtable.Add("name", "btn13");
             hashtable.Add("text", "주문결제");
             hashtable.Add("click", (EventHandler)btn13_click);
-            btn13 = draw.getButton(hashtable, bottom);
+            hashtable.Add("font", new Font("맑은고딕", 15, FontStyle.Regular));
+            btn13 = draw.getButton1(hashtable, bottom);
 
             btn1.BackColor = Color.White;
             // form 초기화
@@ -176,7 +179,7 @@ namespace OBK.Views
             }
             for (int i = 0; i < lv.Items.Count; i++)
             {
-                lv.Items[i].SubItems[5].Text = (Convert.ToInt32(lv.Items[i].SubItems[5].Text) + Convert.ToInt32(lv.Items[i].SubItems[2].Text) * 500).ToString();
+                //lv.Items[i].SubItems[5].Text = (Convert.ToInt32(lv.Items[i].SubItems[5].Text) + Convert.ToInt32(lv.Items[i].SubItems[2].Text) * 500).ToString();
                 allprice += Convert.ToInt32(lv.Items[i].SubItems[5].Text) * Convert.ToInt32(lv.Items[i].SubItems[4].Text);
             }
             label.Text = "총 가격 : " + allprice + "원";
