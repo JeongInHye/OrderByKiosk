@@ -259,6 +259,8 @@
     <None Include="Resources\logo2.png" />
     <Content Include="SQL\obkDDL.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

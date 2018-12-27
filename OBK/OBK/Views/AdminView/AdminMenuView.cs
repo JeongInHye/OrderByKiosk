@@ -31,37 +31,37 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("text", "관리자 모드");
             hashtable.Add("point", new Point(160, 70));
-            hashtable.Add("font", new Font("맑은고딕", 40, FontStyle.Bold));
+            hashtable.Add("font", new Font("맑은고딕", 45, FontStyle.Bold));
             hashtable.Add("name", "lb_main");
             lb_main = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(500, 80));
             hashtable.Add("point", new Point(50, 250));
-            hashtable.Add("color", Color.White);
+            hashtable.Add("color", Color.FromArgb(214, 205, 194));
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "매출 현황");
-            hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
+            hashtable.Add("font", new Font("맑은 고딕", 20, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btn1_click);
             btn1 = draw.getButton1(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(500, 80));
             hashtable.Add("point", new Point(50, 400));
-            hashtable.Add("color", Color.White);
+            hashtable.Add("color", Color.FromArgb(214, 205, 194));
             hashtable.Add("name", "btn2");
             hashtable.Add("text", "메뉴 관리");
-            hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
+            hashtable.Add("font", new Font("맑은 고딕", 20, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btn2_click);
             btn2 = draw.getButton1(hashtable, parentForm);
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(500, 80));
             hashtable.Add("point", new Point(50, 540));
-            hashtable.Add("color", Color.White);
+            hashtable.Add("color", Color.FromArgb(214, 205, 194));
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "품절 목록");
-            hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
+            hashtable.Add("font", new Font("맑은 고딕", 20, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btn3_click);
             btn3 = draw.getButton1(hashtable, parentForm);
         }
