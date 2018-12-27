@@ -12,6 +12,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using static System.Windows.Forms.ListView;
 
 namespace OBK.Modules
@@ -194,6 +195,37 @@ namespace OBK.Modules
                     }
                 }
 
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool PostChart(string url, Hashtable hashtable, Chart chart)
+        {
+            try
+            {
+                WebClient wc = new WebClient();
+                NameValueCollection nameValue = new NameValueCollection();
+
+                foreach (DictionaryEntry data in hashtable)
+                {
+                    nameValue.Add(data.Key.ToString(), data.Value.ToString());
+                }
+
+                byte[] result = wc.UploadValues(url, "POST", nameValue);
+                string resultStr = Encoding.UTF8.GetString(result);
+
+                ArrayList list = JsonConvert.DeserializeObject<ArrayList>(resultStr);
+                chart.Series[0].Points.Clear();
+
+                for (int i = 0; i < list.Count; i++)
+                {
+                    JArray jArray = (JArray)list[i];
+                    chart.Series[0].Points.AddXY(jArray[0].ToString(), jArray[1].ToString());
+                }
                 return true;
             }
             catch (Exception)

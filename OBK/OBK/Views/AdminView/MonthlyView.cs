@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace OBK.Views.AdminView
 {
@@ -15,9 +16,9 @@ namespace OBK.Views.AdminView
         private Draw draw;
         private Form parentForm;
         private Label lb_day1, lb_day2, lb_info;
-        private ListView list;
         private Button btn_search;
         private DateTimePicker dtp_start, dtp_end;
+        private Chart chart;
         private Hashtable hashtable;
 
         public MonthlyView(Form parentForm)
@@ -54,7 +55,7 @@ namespace OBK.Views.AdminView
             lb_day2 = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("text", "* 매출액기준 내림차순");
+            hashtable.Add("text", "* 단위: 원");
             hashtable.Add("point", new Point(20, 75));
             hashtable.Add("font", new Font("굴림", 8, FontStyle.Regular));
             hashtable.Add("name", "lb_info");
@@ -65,8 +66,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(110, 26));
             hashtable.Add("name", "dtp_start");
             dtp_start = draw.GetDateTimePicker(hashtable, parentForm);
-            //dtp_start.DropDown += Dtp_start_DropDown;
-            dtp_start.Value = DateTime.Today.AddMonths(-1);
+            dtp_start.Value = DateTime.Today.AddMonths(-12);
             dtp_start.Format = DateTimePickerFormat.Custom;
             dtp_start.CustomFormat = "yyyy년 MMMM";
 
@@ -77,18 +77,16 @@ namespace OBK.Views.AdminView
             dtp_end = draw.GetDateTimePicker(hashtable, parentForm);
             dtp_end.Format = DateTimePickerFormat.Custom;
             dtp_end.CustomFormat = "yyyy년 MMMM";
-
+            
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(660, 420));
             hashtable.Add("point", new Point(10, 90));
-            hashtable.Add("name", "list");
-            hashtable.Add("color", Color.White);
-            //hashtable.Add("click", (MouseEventHandler)lv_click);
-            list = draw.getListView1(hashtable, parentForm);
-            list.ColumnWidthChanging += List_ColumnWidthChanging;
-
-            list.Columns.Add("해당 년/월", 200, HorizontalAlignment.Center);
-            list.Columns.Add("매출액", 450, HorizontalAlignment.Center);
+            hashtable.Add("name", "chart");
+            chart = draw.getChart(hashtable, parentForm);
+            chart.Series[0].Color = Color.Black;
+            chart.Series[0].ChartType = SeriesChartType.Spline;
+            chart.Series[0].IsValueShownAsLabel = true;
+            chart.Series[0].Points.AddXY("","");
         }
 
         private void btn_search_click(object sender, EventArgs e)
@@ -100,14 +98,8 @@ namespace OBK.Views.AdminView
             Hashtable ht = new Hashtable();
             ht.Add("startdate", startDate);
             ht.Add("enddate", endDate);
-            api.PostListview(Program.serverUrl + "admin/selectMonthIncome", ht, list);
+            api.PostChart(Program.serverUrl + "admin/selectMonthIncome", ht, chart);
             
-        }
-
-        private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
-        {
-            e.NewWidth = list.Columns[e.ColumnIndex].Width;
-            e.Cancel = true;
         }
     }
 }

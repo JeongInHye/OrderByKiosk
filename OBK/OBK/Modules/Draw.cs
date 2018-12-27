@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace OBK.Modules
 {
@@ -191,6 +193,28 @@ namespace OBK.Modules
             dateTimePicker.TabIndex = 0;
             parentDomain.Controls.Add(dateTimePicker);
             return dateTimePicker;
+        }
+
+        public Chart getChart(Hashtable hashtable,Control parentDomain)
+        {
+            ChartArea chartArea = new ChartArea();
+            Chart chart = new Chart();
+            Series series = new Series();
+            //=================chart area===========================
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.Name = "ChartArea";
+            //chartArea.BackColor = Color.AliceBlue;
+            //===================chart==============================
+            chart.ChartAreas.Add(chartArea);
+            chart.Location = (Point)hashtable["point"];
+            chart.Name = hashtable["name"].ToString();
+            series.ChartArea = "ChartArea";
+            series.Name = "Series";
+            chart.Series.Add(series);
+            chart.Size = (Size)hashtable["size"];
+            parentDomain.Controls.Add(chart);
+            return chart;
         }
     }
 }
