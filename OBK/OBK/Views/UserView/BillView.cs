@@ -107,8 +107,7 @@ namespace OBK.Views
             for (int i = 0; i < list.Items.Count; i++)
             {
                 int price = Convert.ToInt32(list.Items[i].SubItems[4].Text);
-                int count = Convert.ToInt32(list.Items[i].SubItems[3].Text);
-                total += price * count;
+                total += price;
             }
             return total.ToString();
         }
@@ -119,7 +118,7 @@ namespace OBK.Views
             {
                 int additem = list.Items.Count - 2;
                 parentForm.Size = new Size(500, 500 + (30 * additem));
-                list.Size = new Size(400, 110 + (30 * additem));
+                list.Size = new Size(430, 110 + (30 * additem));
                 label4.Location = new Point(18, 300 + (30 * additem));
                 label5.Location = new Point(25, 320 + (30 * additem));
                 button.Location = new Point(350, 390 + (30 * additem));

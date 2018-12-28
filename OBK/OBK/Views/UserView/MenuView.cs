@@ -61,10 +61,9 @@ namespace OBK.Views
             string mName = name.Substring(name.IndexOf("_")+1);
             
             ChoiceForm choiceForm = new ChoiceForm(mName);
-            choiceForm.StartPosition = FormStartPosition.CenterParent;
-            
+            choiceForm.StartPosition = FormStartPosition.Manual;
+            choiceForm.Location = new Point(parentForm.Location.X + (parentForm.Width / 2) - (choiceForm.Width / 4), parentForm.Location.Y + (parentForm.Height / 2) - (choiceForm.Height / 2));
             choiceForm.ShowDialog();
-            
             uv.tt();
         }
         

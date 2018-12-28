@@ -57,7 +57,7 @@ namespace OBK.Views.AdminView
             lb_day2 = draw.getLabel(hashtable, parentForm);
 
             hashtable = new Hashtable();
-            hashtable.Add("text", "* 매출액기준 내림차순");
+            hashtable.Add("text", "* 단위 : 원");
             hashtable.Add("point", new Point(20, 75));
             hashtable.Add("font", new Font("굴림", 8, FontStyle.Regular));
             hashtable.Add("name", "lb_info");
@@ -81,24 +81,26 @@ namespace OBK.Views.AdminView
             dtp_end.CustomFormat = "yyyy년 MMMM";
 
             hashtable = new Hashtable();
-            hashtable.Add("size", new Size(660, 210));
-            hashtable.Add("point", new Point(10, 90));
+            hashtable.Add("size", new Size(700, 210));
+            hashtable.Add("point", new Point(-10, 90));
             hashtable.Add("name", "chart");
             chart = draw.getChart(hashtable, parentForm);
             chart.Series[0].Color = Color.Black;
             chart.Series[0].ChartType = SeriesChartType.Spline;
             chart.Series[0].IsValueShownAsLabel = true;
             chart.Series[0].Points.AddXY("", "");
-
+            chart.ChartAreas[0].AxisX.Interval = 1;
+            
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(660, 210));
             hashtable.Add("point", new Point(10, 310));
             hashtable.Add("name", "chart");
             chartcount = draw.getChart(hashtable, parentForm);
-            chartcount.Series[0].Color = Color.LightGreen;
-            chartcount.Series[0].ChartType = SeriesChartType.RangeColumn;
+            chartcount.Series[0].Color = Color.CadetBlue;
+            chartcount.Series[0].ChartType = SeriesChartType.Column;
             chartcount.Series[0].IsValueShownAsLabel = true;
             chartcount.Series[0].Points.AddXY("", "");
+            chartcount.ChartAreas[0].AxisX.Interval = 1;
         }
         
         private void btn_search_click(object sender, EventArgs e)

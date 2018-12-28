@@ -26,6 +26,7 @@ namespace OBK.Views.AdminView
         private Image image;
         private string fileName;
         private string ext;
+        private PictureBox pbImage;
 
         public MenuAddView(Form parentForm)
         {
@@ -153,6 +154,15 @@ namespace OBK.Views.AdminView
             hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnAdd_Click);
             btnAdd = draw.getButton1(hashtable, parentForm);
+
+            hashtable = new Hashtable();
+            hashtable.Add("image",null);
+            hashtable.Add("size",new Size(100,60));
+            hashtable.Add("point",new Point(230,300));
+            hashtable.Add("color",Color.White);
+            pbImage = draw.getPictureBox(hashtable, parentForm);
+            pbImage.BorderStyle = BorderStyle.FixedSingle;
+            pbImage.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         private void btnImgAdd_Click(object sender, EventArgs e)    // 이미지 선택하는 부분
@@ -165,7 +175,8 @@ namespace OBK.Views.AdminView
                 string filePath = openFile.FileName;
                 txtImg.Text = filePath;
                 image = Image.FromFile(filePath);
-
+                pbImage.BackgroundImage = image;
+                
                 fileName = openFile.SafeFileName;
                 ext = fileName.Substring(fileName.LastIndexOf("."));
 
