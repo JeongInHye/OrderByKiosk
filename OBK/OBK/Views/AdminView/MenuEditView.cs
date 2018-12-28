@@ -26,7 +26,7 @@ namespace OBK.Views.AdminView
         private Button btnEdit, btnImgAdd, btnEditOk, btnEditCancel;
         private Hashtable hashtable;
         private Image image;
-        private string mName;
+        private string mName = "";
         private string cNo;
         private string fileName;
         private string ext;
@@ -77,7 +77,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("click", (MouseEventHandler)listMenu_Click);
             listMenu = draw.getListView1(hashtable, panelOne);
             listMenu.Columns.Add("", 0, HorizontalAlignment.Center);
-            listMenu.Columns.Add("메뉴", 480, HorizontalAlignment.Center);
+            listMenu.Columns.Add("메뉴", 450, HorizontalAlignment.Center);
             listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
             listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
 
@@ -248,14 +248,21 @@ namespace OBK.Views.AdminView
 
         private void btnEdit_click(object sender, EventArgs e)
         {
-            panelOne.Visible = false;
-            panelTwo.Show();
+            if (mName == "")
+            {
+                MessageBox.Show("수정할 메뉴를 선택해 주세요.");
+            }
+            else
+            {
+                panelOne.Visible = false;
+                panelTwo.Show();
 
-            hashtable = new Hashtable();
-            hashtable.Add("mName", mName);
-            api.MenuEdeitSelect(Program.serverUrl + "Menu/menuEdeitSelect", hashtable, txtMenu, txtPrice, txtImg, cboxHot, cboxSize, cboxShot, cboxWhip);
-            WebClient wc = new WebClient();
-            pbImage.BackgroundImage = Image.FromStream(wc.OpenRead(txtImg.Text));
+                hashtable = new Hashtable();
+                hashtable.Add("mName", mName);
+                api.MenuEdeitSelect(Program.serverUrl + "Menu/menuEdeitSelect", hashtable, txtMenu, txtPrice, txtImg, cboxHot, cboxSize, cboxShot, cboxWhip);
+                WebClient wc = new WebClient();
+                pbImage.BackgroundImage = Image.FromStream(wc.OpenRead(txtImg.Text));
+            }
         }
 
         private void btnImgAdd_Click(object sender, EventArgs e)    // 이미지 로컬에서 불러오기
@@ -337,6 +344,7 @@ namespace OBK.Views.AdminView
                     cboxShot.Checked = false;
                     cboxSize.Checked = false;
                     cboxWhip.Checked = false;
+                    pbImage.BackgroundImage = null;
 
                     api = new WebAPI();
                     hashtable = new Hashtable();

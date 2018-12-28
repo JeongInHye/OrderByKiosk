@@ -25,7 +25,6 @@ namespace OBK.Views.AdminView
         public MenuIncomView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }
@@ -101,6 +100,8 @@ namespace OBK.Views.AdminView
             chartcount.Series[0].IsValueShownAsLabel = true;
             chartcount.Series[0].Points.AddXY("", "");
             chartcount.ChartAreas[0].AxisX.Interval = 1;
+            chart.Series[0].MarkerStyle = MarkerStyle.Diamond;
+            chart.Series[0].MarkerSize = 7;
         }
         
         private void btn_search_click(object sender, EventArgs e)

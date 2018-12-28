@@ -258,6 +258,7 @@ namespace OBK.Views.AdminView
                     cboxShot.Checked = false;
                     cboxSize.Checked = false;
                     cboxWhip.Checked = false;
+                    pbImage.BackgroundImage = null;
                 }
                 else
                 {

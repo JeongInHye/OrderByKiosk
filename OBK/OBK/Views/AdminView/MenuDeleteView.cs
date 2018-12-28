@@ -57,7 +57,7 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "listMenu");
             listMenu = draw.getListView(hashtable, parentForm);
             listMenu.Columns.Add("", 20, HorizontalAlignment.Center);
-            listMenu.Columns.Add("메뉴", 460, HorizontalAlignment.Center);
+            listMenu.Columns.Add("메뉴", 445, HorizontalAlignment.Center);
             listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
 
@@ -90,12 +90,12 @@ namespace OBK.Views.AdminView
                             hashtable = new Hashtable();
                             hashtable.Add("mName", mName);
                             api.Post(Program.serverUrl + "Menu/delete", hashtable);
-                            listMenu.Items[i].Remove();
                             if (one)
                             {
                                 MessageBox.Show("메뉴를 삭제했습니다.");
                                 one = false;
                             }
+                            listMenu.Items[i].Remove();
                         }
                     }
                 }

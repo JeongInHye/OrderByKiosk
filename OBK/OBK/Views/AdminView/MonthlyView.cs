@@ -83,10 +83,13 @@ namespace OBK.Views.AdminView
             hashtable.Add("point", new Point(10, 90));
             hashtable.Add("name", "chart");
             chart = draw.getChart(hashtable, parentForm);
-            chart.Series[0].Color = Color.Black;
-            chart.Series[0].ChartType = SeriesChartType.Spline;
+            chart.Series[0].Color = Color.FromArgb(56, 56, 56);
+            chart.Series[0].ChartType = SeriesChartType.Line;
             chart.Series[0].IsValueShownAsLabel = true;
             chart.Series[0].Points.AddXY("","");
+            chart.Series[0].MarkerStyle = MarkerStyle.Diamond;
+            chart.Series[0].MarkerSize = 8;
+            
             chart.ChartAreas[0].AxisX.Interval = 1;
         }
 
