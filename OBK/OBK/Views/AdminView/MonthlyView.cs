@@ -87,6 +87,7 @@ namespace OBK.Views.AdminView
             chart.Series[0].ChartType = SeriesChartType.Spline;
             chart.Series[0].IsValueShownAsLabel = true;
             chart.Series[0].Points.AddXY("","");
+            chart.ChartAreas[0].AxisX.Interval = 1;
         }
 
         private void btn_search_click(object sender, EventArgs e)
