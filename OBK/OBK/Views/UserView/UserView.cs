@@ -165,7 +165,7 @@ namespace OBK.Views
         {
             ListView listview = (ListView)sender;
             SelectedListViewItemCollection col = listview.SelectedItems;
-            selectOrder = col[0].SubItems[6].Text;
+            selectOrder = col[0].SubItems[7].Text;
         }
 
         private void OrderlistLoad()
