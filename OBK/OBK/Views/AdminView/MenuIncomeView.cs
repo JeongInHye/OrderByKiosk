@@ -16,7 +16,6 @@ namespace OBK.Views.AdminView
         private Draw draw;
         private Form parentForm;
         private Label lb_day1, lb_day2, lb_info;
-        private ListView list;
         private Button btn_search;
         private DateTimePicker dtp_start, dtp_end;
         private Hashtable hashtable;
@@ -81,18 +80,6 @@ namespace OBK.Views.AdminView
             dtp_end.Format = DateTimePickerFormat.Custom;
             dtp_end.CustomFormat = "yyyy년 MMMM";
 
-            //hashtable = new Hashtable();
-            //hashtable.Add("size", new Size(660, 420));
-            //hashtable.Add("point", new Point(10, 90));
-            //hashtable.Add("name", "list");
-            //hashtable.Add("color", Color.White);
-            //list = draw.getListView1(hashtable, parentForm);
-            //list.ColumnWidthChanging += List_ColumnWidthChanging;
-
-            //list.Columns.Add("해당 년/월", 130, HorizontalAlignment.Center);
-            //list.Columns.Add("메뉴명", 180, HorizontalAlignment.Center);
-            //list.Columns.Add("수량", 70, HorizontalAlignment.Center);
-            //list.Columns.Add("매출액", 270, HorizontalAlignment.Center);
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(660, 210));
             hashtable.Add("point", new Point(10, 90));
@@ -126,11 +113,5 @@ namespace OBK.Views.AdminView
             api.PostChartPrice(Program.serverUrl + "admin/selectMenuIncome", ht, chart);
             api.PostChartCount(Program.serverUrl + "admin/selectMenuIncome", ht, chartcount);
         }
-
-        //private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
-        //{
-        //    e.NewWidth = list.Columns[e.ColumnIndex].Width;
-        //    e.Cancel = true;
-        //}
     }
 }

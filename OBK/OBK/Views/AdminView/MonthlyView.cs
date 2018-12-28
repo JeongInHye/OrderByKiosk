@@ -99,7 +99,6 @@ namespace OBK.Views.AdminView
             ht.Add("startdate", startDate);
             ht.Add("enddate", endDate);
             api.PostChart(Program.serverUrl + "admin/selectMonthIncome", ht, chart);
-            
         }
     }
 }

@@ -107,13 +107,14 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 50));
             hashtable.Add("point", new Point(550, 260));
-            hashtable.Add("color", Color.FromArgb(246, 246, 246));
+            hashtable.Add("color", Color.FromArgb(255, 255, 255));
             hashtable.Add("name", "btnAdd");
-            hashtable.Add("text", "이미지첨부");
+            hashtable.Add("text", "");
             hashtable.Add("font", new Font("맑은 고딕", 10, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnImgAdd_Click);
             btnImgAdd = draw.getButton1(hashtable, parentForm);
-
+            btnImgAdd.BackgroundImage = Properties.Resources.attach_image;
+            btnImgAdd.BackgroundImageLayout = ImageLayout.Stretch;
             //==============================================================================
 
             hashtable = new Hashtable();

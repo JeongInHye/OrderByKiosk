@@ -158,6 +158,8 @@ namespace OBK.Views.AdminView
             hashtable.Add("font", new Font("맑은 고딕", 10, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnImgAdd_Click);
             btnImgAdd = draw.getButton1(hashtable, panelTwo);
+            btnImgAdd.BackgroundImage = Properties.Resources.attach_image;
+            btnImgAdd.BackgroundImageLayout = ImageLayout.Stretch;
 
             //==============================================================================
 
