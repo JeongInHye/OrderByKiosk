@@ -35,7 +35,7 @@ namespace OBK.Views.StaffView
             timer.Stop();
         }
 
-        private void Orderlist_Select(Object o,EventArgs e)
+        private void Orderlist_Select(object o,EventArgs e)
         {
             api = new WebAPI();
             api.ListView(Program.serverUrl + "orderlist/selectstaff", list);
@@ -58,9 +58,8 @@ namespace OBK.Views.StaffView
             list.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             list.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             list.ColumnWidthChanging += List_ColumnWidthChanging;
-            
+            list.ItemCheck += List_ItemCheck;
             //_____________________________________________________________________
-
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(160, 60));
             hashtable.Add("point", new Point(510, 270));
@@ -70,7 +69,13 @@ namespace OBK.Views.StaffView
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btn_click);
             btnOk = draw.getButton1(hashtable, parentForm);
+            api = new WebAPI();
+            api.ListView(Program.serverUrl + "orderlist/selectstaff", list);
+        }
 
+        private void List_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            timer.Stop();
         }
 
         private void List_ColumnWidthChanging(object sender, ColumnWidthChangingEventArgs e)
@@ -81,6 +86,7 @@ namespace OBK.Views.StaffView
 
         private void btn_click(object o, EventArgs a)
         {
+            timer.Start();
             api = new WebAPI();
             bool one = true;
 
