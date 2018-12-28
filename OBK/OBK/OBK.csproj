@@ -192,9 +192,6 @@
     <Compile Include="Modules\AdminLoad.cs" />
     <Compile Include="Modules\DataBase.cs" />
     <Compile Include="Modules\Draw.cs" />
-    <Compile Include="Modules\HintTextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Modules\Load.cs" />
     <Compile Include="Modules\StaffLoad.cs" />
     <Compile Include="Program.cs" />

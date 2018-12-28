@@ -15,7 +15,6 @@ namespace OBK.Views
 {
     class MainView
     {
-        //private MYsql db;
         private Draw draw;
         private Button btn1, btn2, btn3;
         private Form parentForm, tagetForm;
@@ -24,14 +23,11 @@ namespace OBK.Views
         public MainView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }
         private void getView()
         {
-
-
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(150, 300));
             hashtable.Add("point", new Point(10, 10));
@@ -58,7 +54,6 @@ namespace OBK.Views
             hashtable.Add("text", "관리자");
             hashtable.Add("click", (EventHandler)btn3_click);
             btn3 = draw.getButton(hashtable, parentForm);
-
         }
 
         private void btn1_click(object o, EventArgs a)

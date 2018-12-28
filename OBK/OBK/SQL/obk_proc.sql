@@ -182,7 +182,7 @@ end
 DELIMITER \\
 CREATE PROCEDURE p_SoldoutList()
 begin
-   select '',cName,mName from Menu inner join Category on Menu.cNo = Category.cNo where Menu.soldoutYn='Y';
+   select '',cName,mName from Menu inner join Category on Menu.cNo = Category.cNo where Menu.soldoutYn='Y' AND Menu.delYn='N';
 end
 \\
 

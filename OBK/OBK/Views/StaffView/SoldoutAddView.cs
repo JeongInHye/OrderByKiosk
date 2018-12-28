@@ -48,8 +48,8 @@ namespace OBK.Views.StaffView
             hashtable.Add("point", new Point(175, 10));
             hashtable.Add("name", "listMenu");
             listMenu = draw.getListView(hashtable, parentForm);
-            listMenu.Columns.Add("", 50, HorizontalAlignment.Center);
-            listMenu.Columns.Add("메뉴", 440, HorizontalAlignment.Center);
+            listMenu.Columns.Add("", 25, HorizontalAlignment.Center);
+            listMenu.Columns.Add("메뉴", 435, HorizontalAlignment.Center);
             listMenu.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             listMenu.ColumnWidthChanging += ListMenu_ColumnWidthChanging;
 

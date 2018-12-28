@@ -54,7 +54,6 @@ namespace OBK.Modules
                     return null;
             }
         }
-
         private void GetLoginLoad(object sender, EventArgs e)    // LoginForm(로그인)
         {
             parentForm.Size = new Size(400, 500);

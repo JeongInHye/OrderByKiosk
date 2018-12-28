@@ -24,7 +24,6 @@ namespace OBK.Views.AdminView
         public LoginView(Form parentForm)
         {
             this.parentForm = parentForm;
-            //db = new MYsql();
             draw = new Draw();
             getView();
         }
@@ -50,7 +49,7 @@ namespace OBK.Views.AdminView
 
             hashtable = new Hashtable();
             hashtable.Add("width", 170);
-            hashtable.Add("point", new Point(130,150));
+            hashtable.Add("point", new Point(130,130));
             hashtable.Add("name", "textBox");
             hashtable.Add("enabled", true);
             textBox = draw.getTextBox(hashtable, parentForm);
@@ -58,7 +57,7 @@ namespace OBK.Views.AdminView
 
             hashtable = new Hashtable();
             hashtable.Add("width", 50);
-            hashtable.Add("point", new Point(80, 150));
+            hashtable.Add("point", new Point(80, 130));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "label_pw");
             hashtable.Add("text", "PW :");
@@ -69,7 +68,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(90, 220));
+            hashtable.Add("point", new Point(90, 200));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn1");
             hashtable.Add("text", "1");
@@ -79,7 +78,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(90, 280));
+            hashtable.Add("point", new Point(90, 260));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn4");
             hashtable.Add("text", "4");
@@ -89,7 +88,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(90, 340));
+            hashtable.Add("point", new Point(90, 320));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn7");
             hashtable.Add("text", "7");
@@ -99,7 +98,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(90, 400));
+            hashtable.Add("point", new Point(90, 380));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn_clear");
             hashtable.Add("text", "C");
@@ -109,7 +108,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(150, 220));
+            hashtable.Add("point", new Point(150, 200));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn2");
             hashtable.Add("text", "2");
@@ -119,7 +118,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(150, 280));
+            hashtable.Add("point", new Point(150, 260));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn5");
             hashtable.Add("text", "5");
@@ -129,7 +128,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(150, 340));
+            hashtable.Add("point", new Point(150, 320));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn8");
             hashtable.Add("text", "8");
@@ -139,7 +138,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(150, 400));
+            hashtable.Add("point", new Point(150, 380));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn0");
             hashtable.Add("text", "0");
@@ -149,7 +148,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(210, 220));
+            hashtable.Add("point", new Point(210, 200));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn3");
             hashtable.Add("text", "3");
@@ -160,7 +159,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(210, 280));
+            hashtable.Add("point", new Point(210, 260));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn6");
             hashtable.Add("text", "6");
@@ -170,7 +169,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(210, 340));
+            hashtable.Add("point", new Point(210, 320));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn9");
             hashtable.Add("text", "9");
@@ -181,7 +180,7 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 40));
-            hashtable.Add("point", new Point(210, 400));
+            hashtable.Add("point", new Point(210, 380));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn_erase");
             hashtable.Add("text", "←");
@@ -193,15 +192,13 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("font", new Font("맑은 고딕", 12, FontStyle.Bold));
             hashtable.Add("size", new Size(40, 220));
-            hashtable.Add("point", new Point(270, 220));
+            hashtable.Add("point", new Point(270, 200));
             hashtable.Add("color", Color.LightGray);
             hashtable.Add("name", "btn_login");
             hashtable.Add("text", "로\n그\n인");
             hashtable.Add("click", (EventHandler)btn_login_click);
             btn_login = draw.getButton1(hashtable, parentForm);
-
         }
-
         private void btn_login_click(object sender, EventArgs e)
         {
             WebAPI api = new WebAPI();
