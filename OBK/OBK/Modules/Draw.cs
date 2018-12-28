@@ -212,13 +212,19 @@ namespace OBK.Modules
             chartArea.AxisX.MajorGrid.Enabled = false;
             chartArea.AxisY.MajorGrid.Enabled = false;
             chartArea.Name = "ChartArea";
+            chartArea.AxisX.IsLabelAutoFit = true;
+            chartArea.AxisX.LabelAutoFitStyle = LabelAutoFitStyles.WordWrap;
             //chartArea.BackColor = Color.AliceBlue;
             //===================chart==============================
             chart.ChartAreas.Add(chartArea);
             chart.Location = (Point)hashtable["point"];
             chart.Name = hashtable["name"].ToString();
+            
             series.ChartArea = "ChartArea";
             series.Name = "Series";
+            //series.BorderColor = Color.Black;
+            //series.BorderWidth = 1;
+            //series.LabelAngle = 90;
             chart.Series.Add(series);
             chart.Size = (Size)hashtable["size"];
             parentDomain.Controls.Add(chart);

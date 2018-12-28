@@ -30,6 +30,7 @@ namespace OBK.Views.AdminView
         private string cNo;
         private string fileName;
         private string ext;
+        private PictureBox pbImage;
 
         public MenuEditView(Form parentForm)    // 생성자
         {
@@ -148,10 +149,11 @@ namespace OBK.Views.AdminView
             hashtable.Add("name", "txtImg");
             txtImg = draw.getTextBox(hashtable, panelTwo);
             txtImg.ReadOnly = true;
+            txtImg.Visible = false;
 
             hashtable = new Hashtable();
             hashtable.Add("size", new Size(50, 50));
-            hashtable.Add("point", new Point(550, 260));
+            hashtable.Add("point", new Point(420, 265));
             hashtable.Add("color", Color.White);
             hashtable.Add("name", "btnAdd");
             hashtable.Add("text", "");
@@ -208,6 +210,15 @@ namespace OBK.Views.AdminView
             hashtable.Add("font", new Font("맑은 고딕", 15, FontStyle.Regular));
             hashtable.Add("click", (EventHandler)btnEditOk_Click);
             btnEditOk = draw.getButton1(hashtable, panelTwo);
+
+            hashtable = new Hashtable();
+            hashtable.Add("image", null);
+            hashtable.Add("size", new Size(160, 100));
+            hashtable.Add("point", new Point(230, 240));
+            hashtable.Add("color", Color.White);
+            pbImage = draw.getPictureBox(hashtable, panelTwo);
+            pbImage.BorderStyle = BorderStyle.FixedSingle;
+            pbImage.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
 
@@ -243,6 +254,8 @@ namespace OBK.Views.AdminView
             hashtable = new Hashtable();
             hashtable.Add("mName", mName);
             api.MenuEdeitSelect(Program.serverUrl + "Menu/menuEdeitSelect", hashtable, txtMenu, txtPrice, txtImg, cboxHot, cboxSize, cboxShot, cboxWhip);
+            WebClient wc = new WebClient();
+            pbImage.BackgroundImage = Image.FromStream(wc.OpenRead(txtImg.Text));
         }
 
         private void btnImgAdd_Click(object sender, EventArgs e)    // 이미지 로컬에서 불러오기
@@ -255,7 +268,7 @@ namespace OBK.Views.AdminView
                 string filePath = openFile.FileName;
                 txtImg.Text = filePath;
                 image = Image.FromFile(filePath);
-
+                pbImage.BackgroundImage = image;
                 fileName = openFile.SafeFileName;
                 ext = fileName.Substring(fileName.LastIndexOf("."));
 
