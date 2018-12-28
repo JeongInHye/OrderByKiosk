@@ -18,12 +18,27 @@ namespace OBK.Views.StaffView
         private ListView list;
         private Button btnOk;
         private WebAPI api;
-
+        private Timer timer = new Timer();
         public OrderListView(Form parentForm)
         {
             this.parentForm = parentForm;
             draw = new Draw();
             getView();
+            timer.Interval = 5000;
+            timer.Tick += new EventHandler(Orderlist_Select);
+            timer.Start();
+            parentForm.FormClosed += ParentForm_FormClosed;
+        }
+
+        private void ParentForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            timer.Stop();
+        }
+
+        private void Orderlist_Select(Object o,EventArgs e)
+        {
+            api = new WebAPI();
+            api.ListView(Program.serverUrl + "orderlist/selectstaff", list);
         }
 
         private void getView()
@@ -43,8 +58,7 @@ namespace OBK.Views.StaffView
             list.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             list.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             list.ColumnWidthChanging += List_ColumnWidthChanging;
-            api = new WebAPI();
-            api.ListView(Program.serverUrl + "orderlist/selectstaff", list);
+            
             //_____________________________________________________________________
 
             hashtable = new Hashtable();
