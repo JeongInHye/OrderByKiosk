@@ -55,6 +55,7 @@ namespace OBK.Views.StaffView
             list.Columns.Add("샷추가", 108, HorizontalAlignment.Center);
             list.Columns.Add("휘핑", 90, HorizontalAlignment.Center);
             list.Columns.Add("수량", 100, HorizontalAlignment.Center);
+            list.Columns.Add("주문번호기본키", 0, HorizontalAlignment.Center);
             list.Font = new Font("맑은 고딕", 14, FontStyle.Bold);
             list.HeaderStyle = ColumnHeaderStyle.Nonclickable;
             list.ColumnWidthChanging += List_ColumnWidthChanging;
@@ -99,7 +100,7 @@ namespace OBK.Views.StaffView
                         if (list.Items[i].Checked == true)
                         {
                             Hashtable ht = new Hashtable();
-                            ht.Add("oNum", list.Items[i].SubItems[1].Text);
+                            ht.Add("oNo", list.Items[i].SubItems[6].Text);
                             api.Post(Program.serverUrl + "orderlist/comYn", ht);
                             list.Items[i].Remove();
                             if (one)

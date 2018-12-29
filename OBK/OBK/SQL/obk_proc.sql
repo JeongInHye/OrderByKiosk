@@ -65,7 +65,7 @@ end
 DELIMITER \\
 CREATE PROCEDURE p_Orderlist_selectstaff()
 begin
-	select '',o.oNum,m.mName,o.oDegree,o.oSize,o.oShot,o.oCream,o.oCount from Orderlist as o inner join Menu as m on (o.mNo=m.mNo) where orderYn ='Y' and comYn = 'N' order by o.oNum;
+	select '',o.oNum,m.mName,o.oDegree,o.oSize,o.oShot,o.oCream,o.oCount,o.oNo from Orderlist as o inner join Menu as m on (o.mNo=m.mNo) where orderYn ='Y' and comYn = 'N' order by o.oNum;
 end
 \\
 
@@ -191,9 +191,9 @@ call p_SoldoutList;
 /*===============================================================================*/
 
 delimiter \\
-create PROCEDURE p_Staff_ComYn(in _oNum int)
+create PROCEDURE p_Staff_ComYn(in _oNo int)
 BEGIN
-	UPDATE Orderlist SET comYn='Y' WHERE oNum=_oNum;
+	UPDATE Orderlist SET comYn='Y' WHERE oNo=_oNo;
 end
 \\
 /*===============================================================================*/
