@@ -231,8 +231,7 @@ BEGIN
 end
 \\
 
-
-SELECT * FROM Orderlist;
+/*===============================================================================*/
 
 delimiter \\
 create PROCEDURE p_Orderlist_orderYn(IN _oNum int)
@@ -241,7 +240,7 @@ BEGIN
 end
 \\
 
-/*----------------------------------------------------------*/
+/*===============================================================================*/
 delimiter \\
 create PROCEDURE p_Admin_Passwd()
 BEGIN
