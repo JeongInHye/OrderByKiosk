@@ -142,7 +142,7 @@ namespace OBK.Views
                     hashtable = new Hashtable();
                     hashtable.Add("size", new Size(150, 150));
                     hashtable.Add("point", new Point(10, 20));
-                    hashtable.Add("color", Color.AliceBlue);
+                    hashtable.Add("color", Color.White);
                     //=================이미지 넣어줘야하는부분===============
                     hashtable.Add("image", Image.FromStream(wc.OpenRead(jArray[3].ToString())));
                     //=====================================================
