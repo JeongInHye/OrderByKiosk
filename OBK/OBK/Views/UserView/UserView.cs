@@ -232,7 +232,7 @@ namespace OBK.Views
         {
             ListView listview = (ListView)sender;
             SelectedListViewItemCollection col = listview.SelectedItems;
-            selectOrder = col[0].SubItems[6].Text;
+            selectOrder = col[0].SubItems[7].Text;
         }
 
         private void btn_click(object sender, EventArgs e) //카테고리 버튼 클릭 이벤트

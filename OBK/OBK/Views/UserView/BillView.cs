@@ -134,6 +134,7 @@ namespace OBK.Views
         private void btn_click(object o, EventArgs a)
         {
             parentForm.Close();
+            MessageBox.Show("주문이 완료되었습니다.");
         }
 
 
