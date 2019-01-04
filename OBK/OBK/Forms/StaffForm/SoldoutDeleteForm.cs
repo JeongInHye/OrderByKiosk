@@ -1,12 +1,5 @@
-﻿using OBK.Modules;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OBK.Views.StaffView;
+using ObkLibrary;
 using System.Windows.Forms;
 
 namespace OBK.Forms.StaffForm
@@ -17,7 +10,7 @@ namespace OBK.Forms.StaffForm
         {
             InitializeComponent();
             StaffLoad load = new StaffLoad(this);
-            Load += load.GetHandler("SoldoutDelete");
+            Load += (a,b) => { new SoldoutDeleteView(load.GetHandler("SoldoutDelete")); };
         }
     }
 }

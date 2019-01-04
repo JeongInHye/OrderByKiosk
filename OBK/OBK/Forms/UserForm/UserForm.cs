@@ -1,12 +1,5 @@
-﻿using OBK.Modules;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OBK.Views;
+using ObkLibrary;
 using System.Windows.Forms;
 
 namespace OBK.Forms
@@ -17,7 +10,7 @@ namespace OBK.Forms
         {
             InitializeComponent();
             Load load = new Load(this);
-            Load += load.GetHandler("user");
+            Load += (a,b) => { new UserView(load.GetHandler("user")); };
         }
     }
 }

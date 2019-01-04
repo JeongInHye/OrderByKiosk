@@ -1,5 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
@@ -15,9 +14,9 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using static System.Windows.Forms.ListView;
 
-namespace OBK.Modules
+namespace ObkLibrary
 {
-    class WebAPI
+    public class WebAPI
     {
         private Draw draw;
 
@@ -419,7 +418,7 @@ namespace OBK.Modules
 
                     nameValue.Add("mName", btn.Name.Substring(btn.Name.IndexOf("_") + 1));
 
-                    byte[] result2 = wc.UploadValues(Program.serverUrl+"menu/image", "POST", nameValue);
+                    byte[] result2 = wc.UploadValues(Program.serverUrl + "menu/image", "POST", nameValue);
                     string resultStr2 = Encoding.UTF8.GetString(result2);
                     //MessageBox.Show(resultStr2);
                     imgbtn.BackgroundImage = Image.FromStream(wc.OpenRead(resultStr2));

@@ -1,13 +1,5 @@
-﻿using OBK.Modules;
-using OBK.Views;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OBK.Views;
+using ObkLibrary;
 using System.Windows.Forms;
 
 namespace OBK.Forms
@@ -17,8 +9,8 @@ namespace OBK.Forms
         public MenuForm(Form parentForm,int mNo, UserView uv)
         {
             InitializeComponent();
-            Load load = new Load(this,mNo, parentForm,uv);
-            Load += load.GetHandler("menu");
+            Load load = new Load(this);
+            Load += (a,b) => { new MenuView(parentForm,load.GetHandler("menu"), mNo, uv); };
         }
     }
 }

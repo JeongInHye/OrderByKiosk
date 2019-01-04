@@ -1,12 +1,5 @@
-﻿using OBK.Modules;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using OBK.Views.AdminView;
+using ObkLibrary;
 using System.Windows.Forms;
 
 namespace OBK.Forms.AdminForm
@@ -17,7 +10,7 @@ namespace OBK.Forms.AdminForm
         {
             InitializeComponent();
             AdminLoad load = new AdminLoad(this);
-            Load += load.GetHandler("login");
+            Load += (a,b) => { new LoginView(load.GetHandler("login")); };
         }
     }
 }

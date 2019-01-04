@@ -189,11 +189,6 @@
     <Compile Include="Forms\UserForm\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\AdminLoad.cs" />
-    <Compile Include="Modules\DataBase.cs" />
-    <Compile Include="Modules\Draw.cs" />
-    <Compile Include="Modules\Load.cs" />
-    <Compile Include="Modules\StaffLoad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\AdminView\AdminMenuView.cs" />
@@ -260,6 +255,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ObkLibrary\ObkLibrary.csproj">
+      <Project>{e3160be8-e7a7-44cd-a6f8-e200fed277b4}</Project>
+      <Name>ObkLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

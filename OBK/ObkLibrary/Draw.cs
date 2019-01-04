@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,9 +8,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace OBK.Modules
+namespace ObkLibrary
 {
-    class Draw
+    public class Draw
     {
         public Form getMdiForm(Form parentForm, Form tagetForm, Control parentDomain)
         {
@@ -180,7 +179,7 @@ namespace OBK.Modules
             return checkBox;
         }
 
-        public PictureBox getPictureBox(Hashtable hashtable,Control parentDomain)
+        public PictureBox getPictureBox(Hashtable hashtable, Control parentDomain)
         {
             PictureBox pictureBox = new PictureBox();
             pictureBox.BackgroundImage = (Image)hashtable["image"];
@@ -191,7 +190,7 @@ namespace OBK.Modules
             return pictureBox;
         }
 
-        public DateTimePicker GetDateTimePicker(Hashtable hashtable,Control parentDomain)
+        public DateTimePicker GetDateTimePicker(Hashtable hashtable, Control parentDomain)
         {
             DateTimePicker dateTimePicker = new DateTimePicker();
             dateTimePicker.Font = new Font("맑은 고딕", 11);
@@ -203,7 +202,7 @@ namespace OBK.Modules
             return dateTimePicker;
         }
 
-        public Chart getChart(Hashtable hashtable,Control parentDomain)
+        public Chart getChart(Hashtable hashtable, Control parentDomain)
         {
             ChartArea chartArea = new ChartArea();
             Chart chart = new Chart();
@@ -219,7 +218,7 @@ namespace OBK.Modules
             chart.ChartAreas.Add(chartArea);
             chart.Location = (Point)hashtable["point"];
             chart.Name = hashtable["name"].ToString();
-            
+
             series.ChartArea = "ChartArea";
             series.Name = "Series";
             //series.BorderColor = Color.Black;
