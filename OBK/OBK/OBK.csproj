@@ -189,27 +189,9 @@
     <Compile Include="Forms\UserForm\UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Modules\AdminLoad.cs" />
-    <Compile Include="Modules\DataBase.cs" />
-    <Compile Include="Modules\Draw.cs" />
     <Compile Include="Modules\Load.cs" />
-    <Compile Include="Modules\StaffLoad.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\AdminView\AdminMenuView.cs" />
-    <Compile Include="Views\AdminView\IncomeView.cs" />
-    <Compile Include="Views\AdminView\LoginView.cs" />
-    <Compile Include="Views\AdminView\MenuAddView.cs" />
-    <Compile Include="Views\AdminView\MenuDeleteView.cs" />
-    <Compile Include="Views\AdminView\MenuEditView.cs" />
-    <Compile Include="Views\AdminView\MenuIncomeView.cs" />
-    <Compile Include="Views\AdminView\MenuSettingView.cs" />
-    <Compile Include="Views\AdminView\MonthlyView.cs" />
-    <Compile Include="Views\AdminView\SoldoutListView.cs" />
-    <Compile Include="Views\StaffView\OrderListView.cs" />
-    <Compile Include="Views\StaffView\SoldoutAddView.cs" />
-    <Compile Include="Views\StaffView\SoldoutDeleteView.cs" />
-    <Compile Include="Views\StaffView\StaffView.cs" />
     <Compile Include="Views\UserView\BillView.cs" />
     <Compile Include="Views\UserView\ChoiceView.cs" />
     <Compile Include="Views\MainView.cs" />
@@ -254,12 +236,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\attach_image.png" />
-    <Content Include="SQL\obk_proc.sql" />
     <None Include="Resources\logo2.png" />
-    <Content Include="SQL\obkDDL.sql" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OBKLibrary\OBKLibrary.csproj">
+      <Project>{ef71675a-fbda-4da2-9045-8ee786c8c038}</Project>
+      <Name>OBKLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

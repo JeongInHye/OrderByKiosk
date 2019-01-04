@@ -1,5 +1,5 @@
 ﻿using OBK.Forms;
-using OBK.Modules;
+using OBKLibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +20,6 @@ namespace OBK.Views
         private Hashtable hashtable;
         private int cNo;
         private WebAPI api;
-        //private Timer timer = new Timer();
 
         public MenuView(Form parentForm, Form targetForm, int cNo, UserView uv)
         {
@@ -29,19 +28,10 @@ namespace OBK.Views
             this.uv = uv;
             this.cNo = cNo;
             draw = new Draw();
-            //timer.Interval = 5000;
-            //timer.Tick += new EventHandler(getView);
-            //timer.Start();
-            //parentForm.FormClosed += ParentForm_FormClosed;
             getView();
         }
 
-        //private void ParentForm_FormClosed(object sender, FormClosedEventArgs e)
-        //{
-        //    timer.Stop();
-        //}
-
-        private void getView()//(object o, EventArgs e)
+        private void getView()
         {
             api = new WebAPI();
             hashtable = new Hashtable();

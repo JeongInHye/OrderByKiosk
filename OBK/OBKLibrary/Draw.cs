@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -9,9 +8,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace OBK.Modules
+namespace OBKLibrary
 {
-    class Draw
+    public class Draw
     {
         public Form getMdiForm(Form parentForm, Form tagetForm, Control parentDomain)
         {
@@ -32,7 +31,6 @@ namespace OBK.Modules
             panel.BackColor = (Color)hashtable["color"];
             panel.Name = hashtable["name"].ToString();
             panel.Click += (EventHandler)hashtable["click"];
-            //panel.AutoScroll = true;
             parentDomain.Controls.Add(panel);
             return panel;
         }
@@ -103,22 +101,9 @@ namespace OBK.Modules
             textBox.Width = Convert.ToInt32(hashtable["width"].ToString());
             textBox.Location = (Point)hashtable["point"];
             textBox.Name = hashtable["name"].ToString();
-            //textBox.BackColor = (Color)hashtable["color"];
-            //textBox.Enabled = (bool)hashtable["enabled"];
             parentDomain.Controls.Add(textBox);
             return textBox;
         }
-
-        //public TextBox getHintTextBox(Hashtable hashtable, Control parentDomain)
-        //{
-        //    HintTextBox textBox = new HintTextBox(hashtable["hinttext"].ToString());
-        //    textBox.Width = Convert.ToInt32(hashtable["width"].ToString());
-        //    textBox.Location = (Point)hashtable["point"];
-        //    textBox.Name = hashtable["name"].ToString();
-        //    textBox.Font = (Font)hashtable["font"];
-        //    parentDomain.Controls.Add(textBox);
-        //    return textBox;
-        //}
 
         public ComboBox getComboBox(Hashtable hashtable, Control parentDomain)
         {
@@ -129,8 +114,6 @@ namespace OBK.Modules
             comboBox.Location = (Point)hashtable["point"];
             comboBox.Font = (Font)hashtable["font"];
             comboBox.Name = hashtable["name"].ToString();
-            //comboBox.DisplayMember = "value";
-            //comboBox.ValueMember = "Key";
             parentDomain.Controls.Add(comboBox);
             return comboBox;
         }
@@ -176,11 +159,10 @@ namespace OBK.Modules
             checkBox.Text = hashtable["text"].ToString();
             checkBox.Font = new Font("고딕", 15, FontStyle.Bold);
             parentDomain.Controls.Add(checkBox);
-            //checkBox.TabIndex = 
             return checkBox;
         }
 
-        public PictureBox getPictureBox(Hashtable hashtable,Control parentDomain)
+        public PictureBox getPictureBox(Hashtable hashtable, Control parentDomain)
         {
             PictureBox pictureBox = new PictureBox();
             pictureBox.BackgroundImage = (Image)hashtable["image"];
@@ -191,7 +173,7 @@ namespace OBK.Modules
             return pictureBox;
         }
 
-        public DateTimePicker GetDateTimePicker(Hashtable hashtable,Control parentDomain)
+        public DateTimePicker GetDateTimePicker(Hashtable hashtable, Control parentDomain)
         {
             DateTimePicker dateTimePicker = new DateTimePicker();
             dateTimePicker.Font = new Font("맑은 고딕", 11);
@@ -203,7 +185,7 @@ namespace OBK.Modules
             return dateTimePicker;
         }
 
-        public Chart getChart(Hashtable hashtable,Control parentDomain)
+        public Chart getChart(Hashtable hashtable, Control parentDomain)
         {
             ChartArea chartArea = new ChartArea();
             Chart chart = new Chart();
@@ -219,12 +201,9 @@ namespace OBK.Modules
             chart.ChartAreas.Add(chartArea);
             chart.Location = (Point)hashtable["point"];
             chart.Name = hashtable["name"].ToString();
-            
+
             series.ChartArea = "ChartArea";
             series.Name = "Series";
-            //series.BorderColor = Color.Black;
-            //series.BorderWidth = 1;
-            //series.LabelAngle = 90;
             chart.Series.Add(series);
             chart.Size = (Size)hashtable["size"];
             parentDomain.Controls.Add(chart);

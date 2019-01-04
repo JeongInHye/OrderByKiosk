@@ -1,5 +1,5 @@
 ﻿using OBK.Forms;
-using OBK.Modules;
+using OBKLibrary;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -219,14 +219,6 @@ namespace OBK.Views
             pf.ShowDialog();
             tt();
         }
-
-        //private void exit_click(object sender, FormClosedEventArgs e)
-        //{
-        //    parentForm.Visible = false;
-        //    UserForm userForm = new UserForm();
-        //    userForm.StartPosition = FormStartPosition.CenterParent;
-        //    userForm.Show();
-        //}
 
         private void listView_click(object sender, MouseEventArgs e)
         {
