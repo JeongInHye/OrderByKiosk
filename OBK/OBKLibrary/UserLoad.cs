@@ -10,6 +10,44 @@ namespace OBKLibrary
 {
     public static class UserLoad
     {
+        //private Form parentForm;
+        //private Form parent;//mdi를 사용할때 부모폼을 불러오기 위한 변수
+        //private UserView uv;//부모구현 코드 정보 받아오기
+        //private object oDB;
+        //private int cNo = 0;
+        //private string mName = "";
+
+        //public Load(Form parentForm)
+        //{
+        //    this.parentForm = parentForm;
+        //}
+
+        //public Load(Form parentForm, int cNo)
+        //{
+        //    this.parentForm = parentForm;
+        //    this.cNo = cNo;
+        //}
+
+        //public Load(Form parentForm, int cNo, Form parent, UserView uv)
+        //{
+        //    this.parentForm = parentForm;
+        //    this.cNo = cNo;
+        //    this.parent = parent;
+        //    this.uv = uv;
+        //}
+
+        //public Load(Form parentForm, string mName)
+        //{
+        //    this.parentForm = parentForm;
+        //    this.mName = mName;
+        //}
+
+        //public Load(Form parentForm, object oDB)
+        //{
+        //    this.parentForm = parentForm;
+        //    this.oDB = oDB;
+        //}
+
         public static bool GetHandler(Form parentForm, string viewName)
         {
             switch (viewName)
