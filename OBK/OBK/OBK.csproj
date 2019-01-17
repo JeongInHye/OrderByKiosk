@@ -256,11 +256,5 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ObkLibrary\ObkLibrary.csproj">
-      <Project>{e3160be8-e7a7-44cd-a6f8-e200fed277b4}</Project>
-      <Name>ObkLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
