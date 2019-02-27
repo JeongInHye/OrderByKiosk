@@ -261,7 +261,7 @@ namespace OBK.Views.AdminView
                 hashtable.Add("mName", mName);
                 api.MenuEdeitSelect(Program.serverUrl + "Menu/menuEdeitSelect", hashtable, txtMenu, txtPrice, txtImg, cboxHot, cboxSize, cboxShot, cboxWhip);
                 WebClient wc = new WebClient();
-                pbImage.BackgroundImage = Image.FromStream(wc.OpenRead(txtImg.Text));
+                pbImage.BackgroundImage = Image.FromStream(wc.OpenRead(Program.serverUrl+txtImg.Text));
             }
         }
 
@@ -300,7 +300,7 @@ namespace OBK.Views.AdminView
                 if (txtImg.Text.LastIndexOf("/") == -1)
                 {
                     MemoryStream ms = new MemoryStream();
-                    image.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    pbImage.BackgroundImage.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
                     byte[] imgData = ms.ToArray();
 
                     fileData = Convert.ToBase64String(imgData);

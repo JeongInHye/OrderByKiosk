@@ -144,7 +144,7 @@ namespace OBK.Views
                     hashtable.Add("point", new Point(10, 20));
                     hashtable.Add("color", Color.White);
                     //=================이미지 넣어줘야하는부분===============
-                    hashtable.Add("image", Image.FromStream(wc.OpenRead(jArray[3].ToString())));
+                    hashtable.Add("image", Image.FromStream(wc.OpenRead(Program.serverUrl+jArray[3].ToString())));
                     //=====================================================
                     Picture = draw.getPictureBox(hashtable, parentForm);
                     Picture.BackgroundImageLayout = ImageLayout.Stretch;
@@ -294,31 +294,22 @@ namespace OBK.Views
 
         private void Price_Calculate()
         {
-            if (cb_size.SelectedItem.ToString() == "Large(+500원)")
+            if(cb_size != null)
             {
-                count = Convert.ToInt32(lb_count2.Text);
                 price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                price += 500;
-                if (lb_shot2 != null)
-                {
-                    int shot = Convert.ToInt32(lb_shot2.Text);
-                    price += 500 * shot;
+                if (cb_size.SelectedItem.ToString() == "Large(+500원)")
+                { 
+                    price += 500; 
                 }
-                int allprice = (count * price);
-                lb_allprice.Text = "전체금액 : " + allprice + "원";
             }
-            else if(cb_size.SelectedItem.ToString() == "Regular")
+            count = Convert.ToInt32(lb_count2.Text);
+            if (lb_shot2 != null)
             {
-                count = Convert.ToInt32(lb_count2.Text);
-                price = Convert.ToInt32(lb_price.Text.Substring(lb_price.Text.IndexOf(" ") + 1));
-                if(lb_shot2 != null)
-                {
-                    int shot = Convert.ToInt32(lb_shot2.Text);
-                    price += 500 * shot;
-                }
-                int allprice = (count * price);
-                lb_allprice.Text = "전체금액 : " + allprice + "원";
+                int shot = Convert.ToInt32(lb_shot2.Text);
+                price += 500 * shot;
             }
+            int allprice = (count * price);
+            lb_allprice.Text = "전체금액 : " + allprice + "원";
         }
 
         private void Cb_size_SelectedIndexChanged(object sender, EventArgs e)
